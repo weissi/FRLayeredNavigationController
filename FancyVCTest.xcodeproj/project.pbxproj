@@ -1,0 +1,265 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DAC2DA201541840F0064050F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA1F1541840F0064050F /* UIKit.framework */; };
+		DAC2DA221541840F0064050F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA211541840F0064050F /* Foundation.framework */; };
+		DAC2DA241541840F0064050F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA231541840F0064050F /* CoreGraphics.framework */; };
+		DAC2DA2A1541840F0064050F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC2DA281541840F0064050F /* InfoPlist.strings */; };
+		DAC2DA2C1541840F0064050F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA2B1541840F0064050F /* main.m */; };
+		DAC2DA301541840F0064050F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA2F1541840F0064050F /* AppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DAC2DA1B1541840F0064050F /* FancyVCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FancyVCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAC2DA1F1541840F0064050F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DAC2DA211541840F0064050F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DAC2DA231541840F0064050F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DAC2DA271541840F0064050F /* FancyVCTest-Info.plist */ = {isa = PBXFileReference; path = "FancyVCTest-Info.plist"; sourceTree = "<group>"; };
+		DAC2DA291541840F0064050F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAC2DA2B1541840F0064050F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DAC2DA2D1541840F0064050F /* FancyVCTest-Prefix.pch */ = {isa = PBXFileReference; path = "FancyVCTest-Prefix.pch"; sourceTree = "<group>"; };
+		DAC2DA2E1541840F0064050F /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		DAC2DA2F1541840F0064050F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DAC2DA181541840F0064050F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAC2DA201541840F0064050F /* UIKit.framework in Frameworks */,
+				DAC2DA221541840F0064050F /* Foundation.framework in Frameworks */,
+				DAC2DA241541840F0064050F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DAC2DA101541840E0064050F = {
+			isa = PBXGroup;
+			children = (
+				DAC2DA251541840F0064050F /* FancyVCTest */,
+				DAC2DA1E1541840F0064050F /* Frameworks */,
+				DAC2DA1C1541840F0064050F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DAC2DA1C1541840F0064050F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2DA1B1541840F0064050F /* FancyVCTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAC2DA1E1541840F0064050F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2DA1F1541840F0064050F /* UIKit.framework */,
+				DAC2DA211541840F0064050F /* Foundation.framework */,
+				DAC2DA231541840F0064050F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DAC2DA251541840F0064050F /* FancyVCTest */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2DA2E1541840F0064050F /* AppDelegate.h */,
+				DAC2DA2F1541840F0064050F /* AppDelegate.m */,
+				DAC2DA261541840F0064050F /* Supporting Files */,
+			);
+			path = FancyVCTest;
+			sourceTree = "<group>";
+		};
+		DAC2DA261541840F0064050F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2DA271541840F0064050F /* FancyVCTest-Info.plist */,
+				DAC2DA281541840F0064050F /* InfoPlist.strings */,
+				DAC2DA2B1541840F0064050F /* main.m */,
+				DAC2DA2D1541840F0064050F /* FancyVCTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DAC2DA1A1541840F0064050F /* FancyVCTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAC2DA331541840F0064050F /* Build configuration list for PBXNativeTarget "FancyVCTest" */;
+			buildPhases = (
+				DAC2DA171541840F0064050F /* Sources */,
+				DAC2DA181541840F0064050F /* Frameworks */,
+				DAC2DA191541840F0064050F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FancyVCTest;
+			productName = FancyVCTest;
+			productReference = DAC2DA1B1541840F0064050F /* FancyVCTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAC2DA121541840E0064050F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = DAC2DA151541840E0064050F /* Build configuration list for PBXProject "FancyVCTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DAC2DA101541840E0064050F;
+			productRefGroup = DAC2DA1C1541840F0064050F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAC2DA1A1541840F0064050F /* FancyVCTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DAC2DA191541840F0064050F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAC2DA2A1541840F0064050F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DAC2DA171541840F0064050F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAC2DA2C1541840F0064050F /* main.m in Sources */,
+				DAC2DA301541840F0064050F /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DAC2DA281541840F0064050F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC2DA291541840F0064050F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DAC2DA311541840F0064050F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		DAC2DA321541840F0064050F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DAC2DA341541840F0064050F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FancyVCTest/FancyVCTest-Prefix.pch";
+				INFOPLIST_FILE = "FancyVCTest/FancyVCTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DAC2DA351541840F0064050F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FancyVCTest/FancyVCTest-Prefix.pch";
+				INFOPLIST_FILE = "FancyVCTest/FancyVCTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DAC2DA151541840E0064050F /* Build configuration list for PBXProject "FancyVCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAC2DA311541840F0064050F /* Debug */,
+				DAC2DA321541840F0064050F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAC2DA331541840F0064050F /* Build configuration list for PBXNativeTarget "FancyVCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAC2DA341541840F0064050F /* Debug */,
+				DAC2DA351541840F0064050F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DAC2DA121541840E0064050F /* Project object */;
+}
