@@ -3,7 +3,7 @@
 //  FancyVCTest
 //
 //  Created by Johannes Weiß on 4/20/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 factis research GmbH. All rights reserved.
 //
 
 #import "NSViewController+FancyNavigationController.h"

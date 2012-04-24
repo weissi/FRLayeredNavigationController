@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		DA72747F1546BCC600C2F685 /* SampleContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA72747E1546BCC600C2F685 /* SampleContentViewController.m */; };
 		DA7274811546C17B00C2F685 /* mandel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA7274801546C17B00C2F685 /* mandel.jpg */; };
+		DA7274C21546DC7000C2F685 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA211541840F0064050F /* Foundation.framework */; };
+		DA7274C81546DC7000C2F685 /* FancyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7274C71546DC7000C2F685 /* FancyVC.m */; };
+		DA7274CC1546DD7A00C2F685 /* NSViewController+FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */; };
+		DA7274CD1546DD7A00C2F685 /* FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA411541877F0064050F /* FancyNavigationController.m */; };
+		DA7274CE1546DD7A00C2F685 /* FancyChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402815458B3800770319 /* FancyChromeController.m */; };
+		DA7274CF1546DD7A00C2F685 /* FancyChromeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402C15458CD500770319 /* FancyChromeView.m */; };
 		DAB2402915458B3800770319 /* FancyChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402815458B3800770319 /* FancyChromeController.m */; };
 		DAB2402D15458CD500770319 /* FancyChromeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402C15458CD500770319 /* FancyChromeView.m */; };
 		DAC2DA201541840F0064050F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA1F1541840F0064050F /* UIKit.framework */; };
@@ -27,6 +33,10 @@
 		DA72747D1546BCC600C2F685 /* SampleContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleContentViewController.h; sourceTree = "<group>"; };
 		DA72747E1546BCC600C2F685 /* SampleContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleContentViewController.m; sourceTree = "<group>"; };
 		DA7274801546C17B00C2F685 /* mandel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mandel.jpg; sourceTree = "<group>"; };
+		DA7274C11546DC7000C2F685 /* libFancyVC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFancyVC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA7274C51546DC7000C2F685 /* FancyVC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FancyVC-Prefix.pch"; sourceTree = "<group>"; };
+		DA7274C61546DC7000C2F685 /* FancyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FancyVC.h; sourceTree = "<group>"; };
+		DA7274C71546DC7000C2F685 /* FancyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FancyVC.m; sourceTree = "<group>"; };
 		DAB2402715458B3800770319 /* FancyChromeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyChromeController.h; sourceTree = "<group>"; };
 		DAB2402815458B3800770319 /* FancyChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyChromeController.m; sourceTree = "<group>"; };
 		DAB2402B15458CD500770319 /* FancyChromeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyChromeView.h; sourceTree = "<group>"; };
@@ -51,6 +61,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA7274BE1546DC7000C2F685 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7274C21546DC7000C2F685 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAC2DA181541840F0064050F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,11 +95,30 @@
 			name = DemoApp;
 			sourceTree = "<group>";
 		};
+		DA7274C31546DC7000C2F685 /* FancyVC */ = {
+			isa = PBXGroup;
+			children = (
+				DA7274C61546DC7000C2F685 /* FancyVC.h */,
+				DA7274C71546DC7000C2F685 /* FancyVC.m */,
+				DA7274C41546DC7000C2F685 /* Supporting Files */,
+			);
+			path = FancyVC;
+			sourceTree = "<group>";
+		};
+		DA7274C41546DC7000C2F685 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA7274C51546DC7000C2F685 /* FancyVC-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DAC2DA101541840E0064050F = {
 			isa = PBXGroup;
 			children = (
 				DAFC0C6015462FEC0060EF5E /* Resources */,
 				DAC2DA251541840F0064050F /* FancyVCTest */,
+				DA7274C31546DC7000C2F685 /* FancyVC */,
 				DAC2DA1E1541840F0064050F /* Frameworks */,
 				DAC2DA1C1541840F0064050F /* Products */,
 			);
@@ -91,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				DAC2DA1B1541840F0064050F /* FancyVCTest.app */,
+				DA7274C11546DC7000C2F685 /* libFancyVC.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,7 +182,34 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DA7274BF1546DC7000C2F685 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		DA7274C01546DC7000C2F685 /* FancyVC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA7274C91546DC7000C2F685 /* Build configuration list for PBXNativeTarget "FancyVC" */;
+			buildPhases = (
+				DA7274BD1546DC7000C2F685 /* Sources */,
+				DA7274BE1546DC7000C2F685 /* Frameworks */,
+				DA7274BF1546DC7000C2F685 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FancyVC;
+			productName = FancyVC;
+			productReference = DA7274C11546DC7000C2F685 /* libFancyVC.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		DAC2DA1A1541840F0064050F /* FancyVCTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAC2DA331541840F0064050F /* Build configuration list for PBXNativeTarget "FancyVCTest" */;
@@ -183,6 +248,7 @@
 			projectRoot = "";
 			targets = (
 				DAC2DA1A1541840F0064050F /* FancyVCTest */,
+				DA7274C01546DC7000C2F685 /* FancyVC */,
 			);
 		};
 /* End PBXProject section */
@@ -201,6 +267,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA7274BD1546DC7000C2F685 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7274CC1546DD7A00C2F685 /* NSViewController+FancyNavigationController.m in Sources */,
+				DA7274CD1546DD7A00C2F685 /* FancyNavigationController.m in Sources */,
+				DA7274CE1546DD7A00C2F685 /* FancyChromeController.m in Sources */,
+				DA7274CF1546DD7A00C2F685 /* FancyChromeView.m in Sources */,
+				DA7274C81546DC7000C2F685 /* FancyVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAC2DA171541840F0064050F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +308,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DA7274CA1546DC7000C2F685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FancyVC.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FancyVC/FancyVC-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DA7274CB1546DC7000C2F685 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FancyVC.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FancyVC/FancyVC-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		DAC2DA311541840F0064050F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -304,6 +406,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA7274C91546DC7000C2F685 /* Build configuration list for PBXNativeTarget "FancyVC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA7274CA1546DC7000C2F685 /* Debug */,
+				DA7274CB1546DC7000C2F685 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		DAC2DA151541840E0064050F /* Build configuration list for PBXProject "FancyVCTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
