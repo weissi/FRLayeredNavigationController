@@ -191,10 +191,14 @@
     NSInteger i = 0;
     const NSInteger count = [self->viewControllers count];
     for (UIViewController *vc in self->viewControllers) {
+        FancyChromeController *fvc = nil;
+        if ([vc class] == [FancyChromeController class]) {
+            fvc = (FancyChromeController *)vc;
+        }
         CGRect oldFrame = vc.view.frame;
         CGRect newFrame = CGRectMake(i == 0 ? 0 : 300*pow(2,(i-count+1)),
                                      oldFrame.origin.y,
-                                     oldFrame.size.width,
+                                     fvc.leaf ? self.view.bounds.size.width - 300 : oldFrame.size.width,
                                      self.view.bounds.size.height);
         [UIView animateWithDuration:0.3 animations:^{
             vc.view.frame = newFrame;
