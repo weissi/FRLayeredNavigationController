@@ -7,6 +7,7 @@
 //
 
 #import "SampleListViewController.h"
+#import "SampleContentViewController.h"
 
 #import "NSViewController+FancyNavigationController.h"
 @interface SampleListViewController ()
@@ -53,7 +54,7 @@
     if (n < 0) {
         return @"iOS stinkt";
     } else if (n == 0) {
-        return @"foo";
+        return @"foo (CONTENT HERE)";
     } else if (n == 1) {
         return @"bar";
     } else if (n == 2) {
@@ -135,10 +136,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SampleListViewController *svc = [[SampleListViewController alloc] init];
-    svc.title = [NSString stringWithFormat:@"%@ : %@", self.title, [self cellText:indexPath.row]];
+    UIViewController *svc = nil;
+    NSString *title = [NSString stringWithFormat:@"%@ : %@", self.title, [self cellText:indexPath.row]];
     
-    [self.fancyNavigationController pushViewController:svc behind:self animated:YES];
+    if (indexPath.row == 0) {
+        /* push a content view controller */
+        svc = [[SampleContentViewController alloc] init];
+        svc.title = title;
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self leaf:YES animated:YES];
+    } else {
+        /* list */
+        svc = [[SampleListViewController alloc] init];
+        svc.title = title;
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self leaf:NO animated:YES];
+    }
 }
 
 @end

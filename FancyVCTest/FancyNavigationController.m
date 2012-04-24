@@ -50,6 +50,7 @@
     
     UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                             action:@selector(handleGesture:)];
+    panGR.maximumNumberOfTouches = 1;
     [self.view addGestureRecognizer:panGR];
     
     NSBundle *bundle = [NSBundle mainBundle];
@@ -203,10 +204,10 @@
     return;
 }
 
-- (void)pushViewController:(UIViewController *)contentViewController behind:(UIViewController *)anchorViewController animated:(BOOL)animated {
+- (void)pushViewController:(UIViewController *)contentViewController inFrontOf:(UIViewController *)anchorViewController leaf:(BOOL)isLeaf animated:(BOOL)animated {
     NSLog(@"MASTER parent: %@", [self.parentViewController description]);
-    UIViewController *viewController = [[FancyChromeController alloc]
-                                        initWithContentViewController:contentViewController];
+    FancyChromeController *viewController = [[FancyChromeController alloc]
+                                        initWithContentViewController:contentViewController leaf:isLeaf];
     
     {
         UIViewController *vc;
@@ -235,12 +236,15 @@
                                  400);
      */
     
-    CGRect startFrame = CGRectMake(1000, 0, 400, self.view.frame.size.height);
+    CGRect startFrame = CGRectMake(1024,
+                                   0,
+                                   viewController.leaf ? self.view.bounds.size.width - 300 : 400,
+                                   self.view.bounds.size.height);
     
     CGRect newFrame = CGRectMake(300,
                                  0,
-                                 400,
-                                 self.view.bounds.size.height);
+                                 startFrame.size.width,
+                                 startFrame.size.height);
 
     
     [self->viewControllers addObject:viewController];

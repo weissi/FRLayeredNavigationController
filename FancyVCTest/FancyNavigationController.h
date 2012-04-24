@@ -17,7 +17,7 @@
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 - (void)popViewController;
-- (void)pushViewController:(UIViewController *)viewController behind:(UIViewController *)anchorViewController animated:(BOOL)animated;
+- (void)pushViewController:(UIViewController *)viewController inFrontOf:(UIViewController *)anchorViewController leaf:(BOOL)isLeaf animated:(BOOL)animated;
 
 @property (nonatomic, readonly, retain) NSArray *viewControllers;
 

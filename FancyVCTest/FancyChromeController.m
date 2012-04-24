@@ -15,6 +15,7 @@
 @interface FancyChromeController ()
 
 @property (nonatomic, readwrite, retain) UIViewController *contentViewController;
+@property (nonatomic, readwrite, assign) BOOL leaf;
 
 @property (nonatomic, retain) FancyChromeView *chromeView;
 @property (nonatomic, retain) UIView *borderView;
@@ -24,9 +25,10 @@
 
 @implementation FancyChromeController
 
-- (id)initWithContentViewController:(UIViewController *)aContentViewController {
+- (id)initWithContentViewController:(UIViewController *)aContentViewController leaf:(BOOL)isLeaf {
     if ((self = [super init])) {
         self.contentViewController = aContentViewController;
+        self.leaf = isLeaf;
     }
     assert(self.parentViewController == nil);
     
@@ -131,6 +133,7 @@
 }
 
 @synthesize contentViewController;
+@synthesize leaf;
 @synthesize borderView;
 @synthesize contentView;
 @synthesize chromeView;
