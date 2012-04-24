@@ -7,25 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DAB2402915458B3800770319 /* FancyChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402815458B3800770319 /* FancyChromeController.m */; };
+		DAB2402D15458CD500770319 /* FancyChromeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402C15458CD500770319 /* FancyChromeView.m */; };
 		DAC2DA201541840F0064050F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA1F1541840F0064050F /* UIKit.framework */; };
 		DAC2DA221541840F0064050F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA211541840F0064050F /* Foundation.framework */; };
 		DAC2DA241541840F0064050F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA231541840F0064050F /* CoreGraphics.framework */; };
 		DAC2DA2A1541840F0064050F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC2DA281541840F0064050F /* InfoPlist.strings */; };
 		DAC2DA2C1541840F0064050F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA2B1541840F0064050F /* main.m */; };
 		DAC2DA301541840F0064050F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA2F1541840F0064050F /* AppDelegate.m */; };
+		DAC2DA38154184640064050F /* SampleContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA37154184640064050F /* SampleContentViewController.m */; };
+		DAC2DA3F154187380064050F /* NSViewController+FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */; };
+		DAC2DA421541877F0064050F /* FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA411541877F0064050F /* FancyNavigationController.m */; };
+		DAFC0C5E15462FDE0060EF5E /* steel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAFC0C5D15462FDD0060EF5E /* steel.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DAB2402715458B3800770319 /* FancyChromeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyChromeController.h; sourceTree = "<group>"; };
+		DAB2402815458B3800770319 /* FancyChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyChromeController.m; sourceTree = "<group>"; };
+		DAB2402B15458CD500770319 /* FancyChromeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyChromeView.h; sourceTree = "<group>"; };
+		DAB2402C15458CD500770319 /* FancyChromeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyChromeView.m; sourceTree = "<group>"; };
 		DAC2DA1B1541840F0064050F /* FancyVCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FancyVCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC2DA1F1541840F0064050F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DAC2DA211541840F0064050F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DAC2DA231541840F0064050F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		DAC2DA271541840F0064050F /* FancyVCTest-Info.plist */ = {isa = PBXFileReference; path = "FancyVCTest-Info.plist"; sourceTree = "<group>"; };
+		DAC2DA271541840F0064050F /* FancyVCTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FancyVCTest-Info.plist"; sourceTree = "<group>"; };
 		DAC2DA291541840F0064050F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAC2DA2B1541840F0064050F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DAC2DA2D1541840F0064050F /* FancyVCTest-Prefix.pch */ = {isa = PBXFileReference; path = "FancyVCTest-Prefix.pch"; sourceTree = "<group>"; };
-		DAC2DA2E1541840F0064050F /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		DAC2DA2D1541840F0064050F /* FancyVCTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FancyVCTest-Prefix.pch"; sourceTree = "<group>"; };
+		DAC2DA2E1541840F0064050F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DAC2DA2F1541840F0064050F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DAC2DA36154184640064050F /* SampleContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleContentViewController.h; sourceTree = "<group>"; };
+		DAC2DA37154184640064050F /* SampleContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleContentViewController.m; sourceTree = "<group>"; };
+		DAC2DA3D154187380064050F /* NSViewController+FancyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+FancyNavigationController.h"; sourceTree = "<group>"; };
+		DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSViewController+FancyNavigationController.m"; sourceTree = "<group>"; };
+		DAC2DA401541877F0064050F /* FancyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyNavigationController.h; sourceTree = "<group>"; };
+		DAC2DA411541877F0064050F /* FancyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyNavigationController.m; sourceTree = "<group>"; };
+		DAFC0C5D15462FDD0060EF5E /* steel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = steel.png; path = FancyVCTest/steel.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +62,7 @@
 		DAC2DA101541840E0064050F = {
 			isa = PBXGroup;
 			children = (
+				DAFC0C6015462FEC0060EF5E /* Resources */,
 				DAC2DA251541840F0064050F /* FancyVCTest */,
 				DAC2DA1E1541840F0064050F /* Frameworks */,
 				DAC2DA1C1541840F0064050F /* Products */,
@@ -75,6 +93,16 @@
 				DAC2DA2E1541840F0064050F /* AppDelegate.h */,
 				DAC2DA2F1541840F0064050F /* AppDelegate.m */,
 				DAC2DA261541840F0064050F /* Supporting Files */,
+				DAC2DA36154184640064050F /* SampleContentViewController.h */,
+				DAC2DA37154184640064050F /* SampleContentViewController.m */,
+				DAC2DA3D154187380064050F /* NSViewController+FancyNavigationController.h */,
+				DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */,
+				DAC2DA401541877F0064050F /* FancyNavigationController.h */,
+				DAC2DA411541877F0064050F /* FancyNavigationController.m */,
+				DAB2402715458B3800770319 /* FancyChromeController.h */,
+				DAB2402815458B3800770319 /* FancyChromeController.m */,
+				DAB2402B15458CD500770319 /* FancyChromeView.h */,
+				DAB2402C15458CD500770319 /* FancyChromeView.m */,
 			);
 			path = FancyVCTest;
 			sourceTree = "<group>";
@@ -88,6 +116,14 @@
 				DAC2DA2D1541840F0064050F /* FancyVCTest-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DAFC0C6015462FEC0060EF5E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DAFC0C5D15462FDD0060EF5E /* steel.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAC2DA2A1541840F0064050F /* InfoPlist.strings in Resources */,
+				DAFC0C5E15462FDE0060EF5E /* steel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +190,11 @@
 			files = (
 				DAC2DA2C1541840F0064050F /* main.m in Sources */,
 				DAC2DA301541840F0064050F /* AppDelegate.m in Sources */,
+				DAC2DA38154184640064050F /* SampleContentViewController.m in Sources */,
+				DAC2DA3F154187380064050F /* NSViewController+FancyNavigationController.m in Sources */,
+				DAC2DA421541877F0064050F /* FancyNavigationController.m in Sources */,
+				DAB2402915458B3800770319 /* FancyChromeController.m in Sources */,
+				DAB2402D15458CD500770319 /* FancyChromeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +265,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FancyVCTest/FancyVCTest-Prefix.pch";
 				INFOPLIST_FILE = "FancyVCTest/FancyVCTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -234,6 +277,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FancyVCTest/FancyVCTest-Prefix.pch";
 				INFOPLIST_FILE = "FancyVCTest/FancyVCTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -258,6 +302,7 @@
 				DAC2DA351541840F0064050F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

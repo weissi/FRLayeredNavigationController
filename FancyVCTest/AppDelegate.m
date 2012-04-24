@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#import "FancyNavigationController.h"
+#import "SampleContentViewController.h"
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -17,7 +20,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    UIViewController *vc = [[SampleContentViewController alloc] init];
+    FancyNavigationController *fvc = [[FancyNavigationController alloc] initWithRootViewController:vc];
+    
+    self.window.rootViewController = fvc;
+
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
