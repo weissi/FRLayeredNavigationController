@@ -142,6 +142,7 @@
                 poppedFirst = YES;
             }
             
+            if(!poppedFirst) {
             [UIView animateWithDuration:0.5
                                   delay:0
                                 options:UIViewAnimationOptionCurveEaseOut
@@ -153,6 +154,10 @@
                              }
                              completion:^(BOOL finished) {
                              }];
+            } else {
+                [self.view setNeedsLayout];
+            }
+             
             break;
         }
             
@@ -182,13 +187,18 @@
 }
 
 - (void)viewWillLayoutSubviews {
+    NSInteger i = 0;
+    const NSInteger count = [self->viewControllers count];
     for (UIViewController *vc in self->viewControllers) {
         CGRect oldFrame = vc.view.frame;
-        CGRect newFrame = CGRectMake(oldFrame.origin.x,
+        CGRect newFrame = CGRectMake(i == 0 ? 0 : 300*pow(2,(i-count+1)),
                                      oldFrame.origin.y,
                                      oldFrame.size.width,
                                      self.view.bounds.size.height);
-        vc.view.frame = newFrame;
+        [UIView animateWithDuration:0.3 animations:^{
+            vc.view.frame = newFrame;
+        }];
+        i++;
     }
     return;
 }
@@ -227,7 +237,7 @@
     
     CGRect startFrame = CGRectMake(1000, 0, 400, self.view.frame.size.height);
     
-    CGRect newFrame = CGRectMake(100*vcCount,
+    CGRect newFrame = CGRectMake(300,
                                  0,
                                  400,
                                  self.view.bounds.size.height);
@@ -254,7 +264,8 @@
                          viewController.view.frame = newFrame;
                      }
                      completion:^(BOOL finished) {
-                     }];     
+                     }];
+    [self.view setNeedsLayout];
 }
 
 @synthesize viewControllers;

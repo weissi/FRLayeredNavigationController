@@ -15,7 +15,7 @@
 		DAC2DA2A1541840F0064050F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC2DA281541840F0064050F /* InfoPlist.strings */; };
 		DAC2DA2C1541840F0064050F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA2B1541840F0064050F /* main.m */; };
 		DAC2DA301541840F0064050F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA2F1541840F0064050F /* AppDelegate.m */; };
-		DAC2DA38154184640064050F /* SampleContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA37154184640064050F /* SampleContentViewController.m */; };
+		DAC2DA38154184640064050F /* SampleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA37154184640064050F /* SampleListViewController.m */; };
 		DAC2DA3F154187380064050F /* NSViewController+FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */; };
 		DAC2DA421541877F0064050F /* FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA411541877F0064050F /* FancyNavigationController.m */; };
 		DAFC0C5E15462FDE0060EF5E /* steel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAFC0C5D15462FDD0060EF5E /* steel.png */; };
@@ -36,8 +36,8 @@
 		DAC2DA2D1541840F0064050F /* FancyVCTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FancyVCTest-Prefix.pch"; sourceTree = "<group>"; };
 		DAC2DA2E1541840F0064050F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DAC2DA2F1541840F0064050F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DAC2DA36154184640064050F /* SampleContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleContentViewController.h; sourceTree = "<group>"; };
-		DAC2DA37154184640064050F /* SampleContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleContentViewController.m; sourceTree = "<group>"; };
+		DAC2DA36154184640064050F /* SampleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SampleListViewController.h; sourceTree = "<group>"; };
+		DAC2DA37154184640064050F /* SampleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleListViewController.m; sourceTree = "<group>"; };
 		DAC2DA3D154187380064050F /* NSViewController+FancyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+FancyNavigationController.h"; sourceTree = "<group>"; };
 		DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSViewController+FancyNavigationController.m"; sourceTree = "<group>"; };
 		DAC2DA401541877F0064050F /* FancyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyNavigationController.h; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 				DAC2DA2E1541840F0064050F /* AppDelegate.h */,
 				DAC2DA2F1541840F0064050F /* AppDelegate.m */,
 				DAC2DA261541840F0064050F /* Supporting Files */,
-				DAC2DA36154184640064050F /* SampleContentViewController.h */,
-				DAC2DA37154184640064050F /* SampleContentViewController.m */,
+				DAC2DA36154184640064050F /* SampleListViewController.h */,
+				DAC2DA37154184640064050F /* SampleListViewController.m */,
 				DAC2DA3D154187380064050F /* NSViewController+FancyNavigationController.h */,
 				DAC2DA3E154187380064050F /* NSViewController+FancyNavigationController.m */,
 				DAC2DA401541877F0064050F /* FancyNavigationController.h */,
@@ -190,7 +190,7 @@
 			files = (
 				DAC2DA2C1541840F0064050F /* main.m in Sources */,
 				DAC2DA301541840F0064050F /* AppDelegate.m in Sources */,
-				DAC2DA38154184640064050F /* SampleContentViewController.m in Sources */,
+				DAC2DA38154184640064050F /* SampleListViewController.m in Sources */,
 				DAC2DA3F154187380064050F /* NSViewController+FancyNavigationController.m in Sources */,
 				DAC2DA421541877F0064050F /* FancyNavigationController.m in Sources */,
 				DAB2402915458B3800770319 /* FancyChromeController.m in Sources */,

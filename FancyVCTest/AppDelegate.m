@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "FancyNavigationController.h"
-#import "SampleContentViewController.h"
+#import "SampleListViewController.h"
 
 @implementation AppDelegate
 
@@ -22,7 +22,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     
-    UIViewController *vc = [[SampleContentViewController alloc] init];
+    UIViewController *vc = [[SampleListViewController alloc] init];
     FancyNavigationController *fvc = [[FancyNavigationController alloc] initWithRootViewController:vc];
     
     self.window.rootViewController = fvc;
