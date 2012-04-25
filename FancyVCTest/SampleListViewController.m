@@ -10,6 +10,7 @@
 #import "SampleContentViewController.h"
 
 #import "UIViewController+FancyNavigationController.h"
+
 @interface SampleListViewController ()
 
 @end
