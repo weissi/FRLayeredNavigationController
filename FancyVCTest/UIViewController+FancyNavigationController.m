@@ -14,12 +14,10 @@
     UIViewController *here = self;
     
     while (here != nil) {
-        NSLog(@"walking up, currently at %@", [[here class] description]);
         if([here class] == [FancyNavigationController class]) {
             return (FancyNavigationController *)here;
         }
-        NSLog(@"my class: %@, parent class: %@", [[here class] description], [[self.parentViewController class] description]);
-        //NSAssert(here != self.parentViewController, @"VC is parent of itself!");
+
         here = here.parentViewController;
     }
     
