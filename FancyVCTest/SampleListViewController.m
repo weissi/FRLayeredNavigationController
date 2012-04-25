@@ -9,7 +9,7 @@
 #import "SampleListViewController.h"
 #import "SampleContentViewController.h"
 
-#import "NSViewController+FancyNavigationController.h"
+#import "UIViewController+FancyNavigationController.h"
 @interface SampleListViewController ()
 
 @end
