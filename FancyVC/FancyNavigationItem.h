@@ -12,8 +12,10 @@
 
 @interface FancyNavigationItem : NSObject {
     CGPoint initialViewPosition;
+    CGPoint currentViewPosition;
 }
 
 @property (nonatomic, readwrite, assign) CGPoint initialViewPosition;
+@property (nonatomic, readwrite, assign) CGPoint currentViewPosition;
 
 @end

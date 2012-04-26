@@ -55,15 +55,27 @@
     if (n < 0) {
         return @"iOS stinkt";
     } else if (n == 0) {
-        return @"foo (CONTENT HERE)";
+        return @"content (ANIMATION)";
     } else if (n == 1) {
-        return @"bar";
+        return @"content (NO ANIMATION)";
     } else if (n == 2) {
+        return @"pop to root vc (ANIMATION)";
+    } else if (n == 3) {
+        return @"pop to root vc (NO ANIMATION)";
+    } else if (n == 4) {
+        return @"pop VC (ANIMATION)";
+    } else if (n == 5) {
+        return @"pop VC (NO ANIMATION)";
+    } else if (n == 6) {
+        return @"foo";
+    } else if (n == 7) {
+        return @"bar";
+    } else if (n == 8) {
         return @"buz";
     } else {
         NSMutableString *s = [[NSMutableString alloc] initWithCapacity:n];
         [s appendString:@"q"];
-        for (int i=2; i<n; i++) {
+        for (int i=8; i<n; i++) {
             [s appendString:@"u"];
         }
         [s appendString:@"x"];
@@ -78,7 +90,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 100;
+    return 106;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,12 +156,26 @@
         /* push a content view controller */
         svc = [[SampleContentViewController alloc] init];
         svc.title = title;
-        [self.fancyNavigationController pushViewController:svc inFrontOf:self leaf:YES animated:YES];
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:YES];
+    } else if (indexPath.row == 1) {
+        /* push a content view controller */
+        svc = [[SampleContentViewController alloc] init];
+        svc.title = title;
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:NO];
+    } else if (indexPath.row == 2) {
+        [self.fancyNavigationController popToRootViewControllerAnimated:YES];
+    } else if (indexPath.row == 3) {
+        [self.fancyNavigationController popToRootViewControllerAnimated:NO];
+    
+    } else if (indexPath.row == 4) {
+        [self.fancyNavigationController popViewControllerAnimated:YES];
+    } else if (indexPath.row == 5) {
+        [self.fancyNavigationController popViewControllerAnimated:NO];
     } else {
         /* list */
         svc = [[SampleListViewController alloc] init];
         svc.title = title;
-        [self.fancyNavigationController pushViewController:svc inFrontOf:self leaf:NO animated:YES];
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:NO animated:YES];
     }
 }
 

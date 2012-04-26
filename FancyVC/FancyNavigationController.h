@@ -8,16 +8,31 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FancyNavigationItem.h"
+
 @interface FancyNavigationController : UIViewController {
     NSMutableArray *viewControllers;
-    CGRect savedFirstFrame;
-    CGRect savedSecondFrame;
-    BOOL firstAndSecondBound;
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
-- (void)popViewController;
-- (void)pushViewController:(UIViewController *)viewController inFrontOf:(UIViewController *)anchorViewController leaf:(BOOL)isLeaf animated:(BOOL)animated;
+
+- (void)popViewControllerAnimated:(BOOL)animated;
+
+- (void)popToRootViewControllerAnimated:(BOOL)animated;
+
+- (void)popToViewController:(UIViewController *)vc animated:(BOOL)animated;
+
+- (void)pushViewController:(UIViewController *)viewController
+                 inFrontOf:(UIViewController *)anchorViewController
+              maximumWidth:(BOOL)maxWidth
+                  animated:(BOOL)animated;
+
+- (void)pushViewController:(UIViewController *)viewController
+                 inFrontOf:(UIViewController *)anchorViewController
+              maximumWidth:(BOOL)maxWidth
+                  animated:(BOOL)animated
+             configuration:(void (^)(FancyNavigationItem *item))configuration;
+
 
 @property (nonatomic, readonly, retain) NSArray *viewControllers;
 

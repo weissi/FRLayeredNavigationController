@@ -14,5 +14,4 @@
 @property (nonatomic, readonly, retain) FancyNavigationController *fancyNavigationController;
 @property (nonatomic, readonly, retain) FancyNavigationItem *fancyNavigationItem;
 
-
 @end

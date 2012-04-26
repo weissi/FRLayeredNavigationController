@@ -11,5 +11,6 @@
 @implementation FancyNavigationItem
 
 @synthesize initialViewPosition;
+@synthesize currentViewPosition;
 
 @end
