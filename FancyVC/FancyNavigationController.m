@@ -24,11 +24,13 @@
 
 @interface FancyNavigationController ()
 
+@property (nonatomic, readwrite, retain) UIPanGestureRecognizer *panGR;
+
 @end
 
 @implementation FancyNavigationController
 
-#pragma mark - Initialization
+#pragma mark - Initialization/dealloc
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
     self = [super init];
@@ -36,6 +38,10 @@
         self->viewControllers = [[NSMutableArray alloc] initWithObjects:rootViewController, nil];
     }
     return self;    
+}
+
+- (void)dealloc {
+    self.panGR.delegate = nil;
 }
 
 
@@ -59,10 +65,11 @@
 {
     [super viewDidLoad];
     
-    UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self
+    self.panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                             action:@selector(handleGesture:)];
-    panGR.maximumNumberOfTouches = 1;
-    [self.view addGestureRecognizer:panGR];
+    self.panGR.maximumNumberOfTouches = 1;
+    self.panGR.delegate = self;
+    [self.view addGestureRecognizer:self.panGR];
     
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"steel" ofType:@"png"];
@@ -148,6 +155,14 @@
         default:
             break;
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UISlider class]]) {
+        // prevent recognizing touches on the slider
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - internal methods
@@ -272,6 +287,11 @@
 {
     UIViewController *vc = [self->viewControllers lastObject];
     
+    if ([self->viewControllers count] == 1) {
+        /* don't remove root view controller */
+        return;
+    }
+    
     [vc willMoveToParentViewController:nil];
     [self->viewControllers removeObject:vc];
     
@@ -300,6 +320,11 @@
                 break;
             }
         
+        if ([self->viewControllers count] == 1) {
+            /* don't remove root view controller */
+            return;
+        }
+        
         [self popViewControllerAnimated:animated];
     }
 }
@@ -316,7 +341,8 @@
              configuration:(void (^)(FancyNavigationItem *item))configuration
 {
     FancyChromeController *viewController = [[FancyChromeController alloc]
-                                        initWithContentViewController:contentViewController leaf:maxWidth];
+                                                   initWithContentViewController:contentViewController leaf:maxWidth];
+    const FancyNavigationItem *navItem = viewController.fancyNavigationItem;
     
     [self popToViewController:anchorViewController animated:animated];
     
@@ -324,11 +350,13 @@
 
     CGRect startFrame = CGRectMake(1024,
                                    0,
-                                   viewController.leaf ? self.view.bounds.size.width - vcCount * 44 : 400,
+                                   viewController.leaf ? self.view.bounds.size.width - vcCount * 64 : 400,
                                    self.view.bounds.size.height);
     
-    viewController.fancyNavigationItem.initialViewPosition = CGPointMake(vcCount * 44, 0);
-    viewController.fancyNavigationItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
+    navItem.initialViewPosition = CGPointMake(vcCount * 64, 0);
+    navItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
+    navItem.titleView = nil;
+    navItem.title = nil;
     
     configuration(viewController.fancyNavigationItem);
     
@@ -338,12 +366,6 @@
                                  startFrame.size.height);
     
     [self->viewControllers addObject:viewController];
-    
-    NSAssert(self.parentViewController == nil, @"NavVC.parent != nil");
-    NSAssert(viewController.parentViewController == nil, @"VC.parent != nil");
-    NSAssert([self class] == [FancyNavigationController class], @"NavVC wrong class");
-    NSAssert([viewController class] == [FancyChromeController class], @"VC wrong class");
-
     [self addChildViewController:viewController];
     
     viewController.view.frame = startFrame;
@@ -379,5 +401,6 @@
 #pragma mark - properties
 
 @synthesize viewControllers;
+@synthesize panGR;
 
 @end

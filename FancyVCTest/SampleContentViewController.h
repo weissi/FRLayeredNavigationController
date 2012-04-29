@@ -24,4 +24,6 @@
     UIScrollView *scrollView;
 }
 
+- (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sc;
+
 @end

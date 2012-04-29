@@ -21,29 +21,31 @@
 
 @interface FancyChromeView ()
 
-@property (nonatomic, readwrite, retain) UILabel *titleLabel;
-
 @end
 
 @implementation FancyChromeView
 
-- (id)initWithFrame:(CGRect)frame
+-(id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
     self = [super initWithFrame:frame];
     if (self) {
         self->_savedGradient = nil;
         self.backgroundColor = [UIColor clearColor];
         
-        self.titleLabel = [[UILabel alloc] init];
-        
-        self.titleLabel.textColor = [UIColor darkGrayColor];
-        self.titleLabel.backgroundColor = [UIColor clearColor];
-        self.titleLabel.shadowColor = [UIColor whiteColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:24];
-        self.titleLabel.text = @"n/a";
-        self.titleLabel.textAlignment = UITextAlignmentCenter;
-        
-        [self addSubview:self.titleLabel];
+        if (titleView == nil) {
+            UILabel *titleLabel = [[UILabel alloc] init];
+            
+            titleLabel.textColor = [UIColor darkGrayColor];
+            titleLabel.backgroundColor = [UIColor clearColor];
+            titleLabel.shadowColor = [UIColor whiteColor];
+            titleLabel.font = [UIFont boldSystemFontOfSize:22];
+            titleLabel.text = titleText;
+            titleLabel.textAlignment = UITextAlignmentCenter;
+            
+            [self addSubview:titleLabel];
+        } else {
+            [self addSubview:titleView];
+        }
     }
     return self;
 }
@@ -56,12 +58,19 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect titleLabelFrame = CGRectMake(20,
-                                        20, 
-                                        self.bounds.size.width-40,
-                                        self.bounds.size.height-40);
+    CGRect titleFrameMax = CGRectMake(5,
+                                   0, 
+                                   self.bounds.size.width-10,
+                                   self.bounds.size.height);
+    UIView *titleView = [self.subviews objectAtIndex:0];
+
+    CGSize titleFittingSize = [titleView sizeThatFits:titleFrameMax.size];
+    CGRect titleFrame = CGRectMake(MAX((titleFrameMax.size.width - titleFittingSize.width)/2, titleFrameMax.origin.x),
+                                   MAX((titleFrameMax.size.height - titleFittingSize.height)/2, titleFrameMax.origin.y),
+                                   MIN(titleFittingSize.width, titleFrameMax.size.width),
+                                   MIN(titleFittingSize.height, titleFrameMax.size.height));        
     
-    self.titleLabel.frame = titleLabelFrame;
+    titleView.frame = titleFrame;
 }
 
 - (CGGradientRef)gradient {
@@ -102,7 +111,5 @@
     
     CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
 }
-
-@synthesize titleLabel;
 
 @end

@@ -63,6 +63,9 @@
     self.scrollView.zoomScale = .37;
     
     [self.view addSubview:self.scrollView];
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, 10, 400, 40)];
+    [self.view addSubview:slider];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -93,6 +96,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+- (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sc
+{
+    NSLog(@"SC changed");
 }
 
 @synthesize imageView;

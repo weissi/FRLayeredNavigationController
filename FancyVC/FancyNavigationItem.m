@@ -23,5 +23,7 @@
 
 @synthesize initialViewPosition;
 @synthesize currentViewPosition;
+@synthesize title;
+@synthesize titleView;
 
 @end

@@ -167,7 +167,19 @@
         /* push a content view controller */
         svc = [[SampleContentViewController alloc] init];
         svc.title = title;
-        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:YES];
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:YES configuration:^(FancyNavigationItem *item) {
+            UISegmentedControl *segControl = [[UISegmentedControl alloc]
+                                              initWithItems:[NSArray
+                                                             arrayWithObjects:@"foo", @"bar", @"buz", nil]];
+            segControl.segmentedControlStyle = UISegmentedControlStyleBar;
+            segControl.selectedSegmentIndex = 0;
+            
+            [segControl addTarget:svc
+                           action:@selector(indexDidChangeForSegmentedControl:)
+                 forControlEvents:UIControlEventValueChanged];
+            
+            item.titleView = segControl;
+        }];
     } else if (indexPath.row == 1) {
         /* push a content view controller */
         svc = [[SampleContentViewController alloc] init];
@@ -186,7 +198,10 @@
         /* list */
         svc = [[SampleListViewController alloc] init];
         svc.title = title;
-        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:NO animated:YES];
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:NO animated:YES configuration:^(FancyNavigationItem *item) {
+            item.title = title;
+            return;
+        }];
     }
 }
 

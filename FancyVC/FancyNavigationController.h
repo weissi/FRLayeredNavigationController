@@ -21,8 +21,9 @@
 
 #import "FancyNavigationItem.h"
 
-@interface FancyNavigationController : UIViewController {
+@interface FancyNavigationController : UIViewController<UIGestureRecognizerDelegate> {
     NSMutableArray *viewControllers;
+    UIPanGestureRecognizer *panGR;
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;

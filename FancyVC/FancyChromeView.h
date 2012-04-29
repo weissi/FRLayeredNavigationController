@@ -21,10 +21,8 @@
 
 @interface FancyChromeView : UIView {
     CGGradientRef _savedGradient;
-    
-    UILabel *titleLabel;
 }
 
-@property (nonatomic, readonly, retain) UILabel *titleLabel;
+-(id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText;
 
 @end
