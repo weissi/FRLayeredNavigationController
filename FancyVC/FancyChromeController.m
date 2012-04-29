@@ -65,21 +65,31 @@
 }
 
 - (void)doViewLayout {
-    CGRect chromeFrame = CGRectMake(0,
-                                    0,
-                                    self.view.bounds.size.width,
-                                    44);
-    CGRect borderFrame = CGRectMake(0,
-                                    44,
-                                    self.view.bounds.size.width,
-                                    self.view.bounds.size.height-44);
-    CGRect contentFrame = CGRectMake(1,
-                                     45,
-                                     self.view.bounds.size.width-2,
-                                     self.view.bounds.size.height-46);
+    CGRect contentFrame = CGRectZero;
     
-    self.borderView.frame = borderFrame;
-    self.chromeView.frame = chromeFrame;
+    if (self.fancyNavigationItem.hasChrome) {
+        CGRect chromeFrame = CGRectMake(0,
+                                        0,
+                                        self.view.bounds.size.width,
+                                        44);
+        CGRect borderFrame = CGRectMake(0,
+                                        44,
+                                        self.view.bounds.size.width,
+                                        self.view.bounds.size.height-44);
+        contentFrame = CGRectMake(1,
+                                  45,
+                                  self.view.bounds.size.width-2,
+                                  self.view.bounds.size.height-46);
+        self.borderView.frame = borderFrame;
+        self.chromeView.frame = chromeFrame;
+    } else {
+        contentFrame = CGRectMake(0,
+                                         0,
+                                         self.view.bounds.size.width,
+                                         self.view.bounds.size.height);
+    }
+    
+    
     self.contentView.frame = contentFrame;
 }
 
@@ -101,16 +111,18 @@
         
         self.contentView = self.contentViewController.view;
         
-        self.chromeView = [[FancyChromeView alloc] initWithFrame:CGRectZero
-                                                       titleView:navItem.titleView
-                                                           title:navItem.title == nil ?
-                           self.contentViewController.title : navItem.title];
-        
-        self.borderView = [[UIView alloc] init];
-        self.borderView.backgroundColor = [UIColor colorWithWhite:236.0f/255.0f alpha:1];
-        
-        [self.view addSubview:self.chromeView];
-        [self.view addSubview:self.borderView];
+        if (self.fancyNavigationItem.hasChrome) {
+            self.chromeView = [[FancyChromeView alloc] initWithFrame:CGRectZero
+                                                           titleView:navItem.titleView
+                                                               title:navItem.title == nil ?
+                               self.contentViewController.title : navItem.title];
+            
+            self.borderView = [[UIView alloc] init];
+            self.borderView.backgroundColor = [UIColor colorWithWhite:236.0f/255.0f alpha:1];
+            
+            [self.view addSubview:self.chromeView];
+            [self.view addSubview:self.borderView];
+        }
         [self.view addSubview:self.contentView];
         
         [self doViewLayout];

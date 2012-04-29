@@ -28,6 +28,7 @@
     UIView *titleView;
     CGFloat width;
     CGFloat nextItemDistance;
+    BOOL hasChrome;
 }
 
 @property (nonatomic, readwrite, assign) CGPoint initialViewPosition;
@@ -36,5 +37,6 @@
 @property (nonatomic, readwrite, retain) UIView *titleView;
 @property (nonatomic, readwrite, assign) CGFloat width;
 @property (nonatomic, readwrite, assign) CGFloat nextItemDistance;
+@property (nonatomic, readwrite, assign) BOOL hasChrome;
 
 @end

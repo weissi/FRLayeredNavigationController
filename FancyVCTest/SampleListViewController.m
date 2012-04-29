@@ -68,7 +68,7 @@
     } else if (n == 0) {
         return @"content (ANIMATION)";
     } else if (n == 1) {
-        return @"content (NO ANIMATION)";
+        return @"content chromeless (NO ANIMATION)";
     } else if (n == 2) {
         return @"pop to root vc (ANIMATION)";
     } else if (n == 3) {
@@ -184,7 +184,9 @@
         /* push a content view controller */
         svc = [[SampleContentViewController alloc] init];
         svc.title = title;
-        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:NO];
+        [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:NO configuration:^(FancyNavigationItem *item) {
+            item.hasChrome = NO;
+        }];
     } else if (indexPath.row == 2) {
         [self.fancyNavigationController popToRootViewControllerAnimated:YES];
     } else if (indexPath.row == 3) {

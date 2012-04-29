@@ -43,6 +43,7 @@
         self->viewControllers = [[NSMutableArray alloc] initWithObjects:fancyRC, nil];
         fancyRC.fancyNavigationItem.nextItemDistance = kFancyNavigationControllerStandardDistance;
         fancyRC.fancyNavigationItem.width = kFancyNavigationControllerStandardWidth;
+        fancyRC.fancyNavigationItem.hasChrome = NO;
     }
     return self;    
 }
@@ -357,6 +358,7 @@
     navItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
     navItem.titleView = nil;
     navItem.title = nil;
+    navItem.hasChrome = YES;
     
     configuration(viewController.fancyNavigationItem);
     

@@ -27,5 +27,6 @@
 @synthesize titleView;
 @synthesize width;
 @synthesize nextItemDistance;
+@synthesize hasChrome;
 
 @end
