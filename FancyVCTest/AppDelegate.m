@@ -37,6 +37,10 @@
     FancyNavigationController *fvc = [[FancyNavigationController alloc] initWithRootViewController:vc];
     
     self.window.rootViewController = fvc;
+    
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"steel" ofType:@"png"];
+    fvc.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:path]];
 
     [self.window makeKeyAndVisible];
 
