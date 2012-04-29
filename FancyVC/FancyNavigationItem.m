@@ -26,5 +26,6 @@
 @synthesize title;
 @synthesize titleView;
 @synthesize width;
+@synthesize nextItemDistance;
 
 @end

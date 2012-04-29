@@ -27,6 +27,7 @@
     NSString *title;
     UIView *titleView;
     CGFloat width;
+    CGFloat nextItemDistance;
 }
 
 @property (nonatomic, readwrite, assign) CGPoint initialViewPosition;
@@ -34,5 +35,6 @@
 @property (nonatomic, readwrite, retain) NSString *title;
 @property (nonatomic, readwrite, retain) UIView *titleView;
 @property (nonatomic, readwrite, assign) CGFloat width;
+@property (nonatomic, readwrite, assign) CGFloat nextItemDistance;
 
 @end

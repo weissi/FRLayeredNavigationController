@@ -19,6 +19,7 @@
 
 #import "FancyNavigationController.h"
 #import "FancyChromeController.h"
+#import "UIViewController+FancyNavigationController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -343,12 +344,18 @@
     FancyChromeController *viewController = [[FancyChromeController alloc]
                                                    initWithContentViewController:contentViewController leaf:maxWidth];
     const FancyNavigationItem *navItem = viewController.fancyNavigationItem;
+    const FancyNavigationItem *parentNavItem = anchorViewController.fancyNavigationItem;
     
     [self popToViewController:anchorViewController animated:animated];
     
+    CGFloat dist = parentNavItem.nextItemDistance;
+    CGFloat porigin = anchorViewController.fancyNavigationItem.initialViewPosition.x;
+    
+    CGFloat x = porigin + (dist > 0 ? dist : 66);
+    
     NSUInteger vcCount = [self->viewControllers count];
     
-    navItem.initialViewPosition = CGPointMake(vcCount * 64, 0);
+    navItem.initialViewPosition = CGPointMake(x, 0);
     navItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
     navItem.titleView = nil;
     navItem.title = nil;

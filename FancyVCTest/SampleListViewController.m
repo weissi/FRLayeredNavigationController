@@ -200,6 +200,7 @@
         svc.title = title;
         [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:NO animated:YES configuration:^(FancyNavigationItem *item) {
             item.width = (arc4random() % 200) + 200;
+            item.nextItemDistance = (arc4random() % 100) + 40;
             item.title = [NSString stringWithFormat:@"%@ (%f)", title, item.width];;
             return;
         }];
