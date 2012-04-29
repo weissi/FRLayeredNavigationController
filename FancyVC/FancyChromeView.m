@@ -40,7 +40,10 @@
             titleLabel.textAlignment = UITextAlignmentCenter;
             titleLabel.font = [UIFont boldSystemFontOfSize:20.5];
             titleLabel.shadowColor = [UIColor whiteColor];
-            titleLabel.textColor =[UIColor colorWithRed:111.0f/255.0f green:118.0f/255.0f blue:126.0f/255.0f alpha:1.0f];
+            titleLabel.textColor = [UIColor colorWithRed:111.0f/255.0f
+                                                   green:118.0f/255.0f
+                                                    blue:126.0f/255.0f
+                                                   alpha:1.0f];
 
             [self addSubview:titleLabel];
         } else {
