@@ -199,7 +199,8 @@
         svc = [[SampleListViewController alloc] init];
         svc.title = title;
         [self.fancyNavigationController pushViewController:svc inFrontOf:self maximumWidth:NO animated:YES configuration:^(FancyNavigationItem *item) {
-            item.title = title;
+            item.width = (arc4random() % 200) + 200;
+            item.title = [NSString stringWithFormat:@"%@ (%f)", title, item.width];;
             return;
         }];
     }

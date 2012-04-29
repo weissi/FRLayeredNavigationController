@@ -347,11 +347,6 @@
     [self popToViewController:anchorViewController animated:animated];
     
     NSUInteger vcCount = [self->viewControllers count];
-
-    CGRect startFrame = CGRectMake(1024,
-                                   0,
-                                   viewController.leaf ? self.view.bounds.size.width - vcCount * 64 : 400,
-                                   self.view.bounds.size.height);
     
     navItem.initialViewPosition = CGPointMake(vcCount * 64, 0);
     navItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
@@ -359,6 +354,18 @@
     navItem.title = nil;
     
     configuration(viewController.fancyNavigationItem);
+    
+    CGFloat width;
+    if (navItem.width > 0) {
+        width = navItem.width;
+    } else {
+        width = viewController.leaf ? self.view.bounds.size.width - vcCount * 64 : 400;
+    }
+    
+    CGRect startFrame = CGRectMake(1024,
+                                   0,
+                                   width,
+                                   self.view.bounds.size.height);
     
     CGRect newFrame = CGRectMake(viewController.fancyNavigationItem.initialViewPosition.x,
                                  viewController.fancyNavigationItem.initialViewPosition.y,

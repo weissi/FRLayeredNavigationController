@@ -26,11 +26,13 @@
     CGPoint currentViewPosition;
     NSString *title;
     UIView *titleView;
+    CGFloat width;
 }
 
 @property (nonatomic, readwrite, assign) CGPoint initialViewPosition;
 @property (nonatomic, readwrite, assign) CGPoint currentViewPosition;
 @property (nonatomic, readwrite, retain) NSString *title;
 @property (nonatomic, readwrite, retain) UIView *titleView;
+@property (nonatomic, readwrite, assign) CGFloat width;
 
 @end

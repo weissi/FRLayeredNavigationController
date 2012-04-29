@@ -25,5 +25,6 @@
 @synthesize currentViewPosition;
 @synthesize title;
 @synthesize titleView;
+@synthesize width;
 
 @end
