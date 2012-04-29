@@ -39,7 +39,10 @@
 {
     self = [super init];
     if (self) {
-        self->viewControllers = [[NSMutableArray alloc] initWithObjects:rootViewController, nil];
+        FancyChromeController *fancyRC = [[FancyChromeController alloc] initWithContentViewController:rootViewController leaf:NO];
+        self->viewControllers = [[NSMutableArray alloc] initWithObjects:fancyRC, nil];
+        fancyRC.fancyNavigationItem.nextItemDistance = kFancyNavigationControllerStandardDistance;
+        fancyRC.fancyNavigationItem.width = kFancyNavigationControllerStandardWidth;
     }
     return self;    
 }
@@ -58,7 +61,7 @@
     [self addChildViewController:rootViewController];
     
     self.view = [[UIView alloc] init];
-    CGRect rootViewFrame = CGRectMake(0, 0, kFancyNavigationControllerStandardWidth, self.view.bounds.size.height);
+    CGRect rootViewFrame = CGRectMake(0, 0, rootViewController.fancyNavigationItem.width, self.view.bounds.size.height);
     rootViewController.view.frame = rootViewFrame;
     rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:rootViewController.view];
@@ -69,8 +72,7 @@
 {
     [super viewDidLoad];
     
-    self.panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                            action:@selector(handleGesture:)];
+    self.panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     self.panGR.maximumNumberOfTouches = 1;
     self.panGR.delegate = self;
     [self.view addGestureRecognizer:self.panGR];
