@@ -116,10 +116,11 @@
             const NSInteger startVcIdx = [self->viewControllers count]-1;
             const UIViewController *startVc = [self->viewControllers objectAtIndex:startVcIdx];
             
-            [self blaWithGestureRecognizer:gestureRecognizer
-                     onViewControllerIndex:startVcIdx
-                                withParent:-1
-                             parentLastPos:CGPointZero];
+            [self moveViewControllerIndex:startVcIdx
+                    withGestureRecognizer:gestureRecognizer
+                          withParentIndex:-1
+                       parentLastPosition:CGPointZero
+                      descendentOfTouched:NO];
             [gestureRecognizer setTranslation:CGPointZero inView:startVc.view];
             break;
         }
@@ -127,7 +128,7 @@
         case UIGestureRecognizerStateEnded: {
             //NSLog(@"UIGestureRecognizerStateEnded");
             [UIView animateWithDuration:0.2 animations:^{
-                [self fixUpWithGestureRecognizer:gestureRecognizer];
+                [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
             }];
             
             break;
@@ -140,7 +141,7 @@
 
 #pragma mark - internal methods
 
-- (void)fixUpWithGestureRecognizer:(UIPanGestureRecognizer *)g
+- (void)moveToSnappingPointsWithGestureRecognizer:(UIPanGestureRecognizer *)g
 {
     FancyChromeController *last = nil;
     CGFloat xTranslation = 0;
@@ -150,14 +151,15 @@
         const CGPoint myInitPos = vc.fancyNavigationItem.initialViewPosition;
         const CGSize mySize = vc.view.frame.size;
         
-//        const CGPoint touchTranslation = 
-        
-        if (xTranslation == 0 && myPos.x != myInitPos.x) { // && myPos.x != last.view.frame.origin.x + last.view.frame.size.width) {
-            //if (myPos.x < last.view.frame.origin.x + (last.view.frame.size.width/2)) {
-            if ([g velocityInView:vc.view].x < 0) {
-                xTranslation = myInitPos.x - myPos.x;
+        const CGFloat curDiff = myPos.x - last.view.frame.origin.x;
+        const CGFloat initDiff = myInitPos.x - last.fancyNavigationItem.initialViewPosition.x;
+        const CGFloat maxDiff = last.view.frame.size.width;
+                
+        if (xTranslation == 0 && (curDiff != initDiff && curDiff != maxDiff)) {
+            if ([g velocityInView:vc.view].x > 0) {
+                xTranslation = maxDiff - curDiff;
             } else {
-                xTranslation = last.view.frame.origin.x + last.view.frame.size.width - myPos.x;
+                xTranslation = initDiff - curDiff;
                 
             }
         }
@@ -168,8 +170,11 @@
     }
 }
 
-
-- (void)blaWithGestureRecognizer:(UIPanGestureRecognizer *)g onViewControllerIndex:(NSInteger)myIndex withParent:(NSInteger)parentIndex parentLastPos:(CGPoint)parentOldPos
+- (void)moveViewControllerIndex:(NSInteger)myIndex
+          withGestureRecognizer:(UIPanGestureRecognizer *)g
+                withParentIndex:(NSInteger)parentIndex
+             parentLastPosition:(CGPoint)parentOldPos
+            descendentOfTouched:(BOOL)descendentOfTouched
 {
     if (myIndex == 0) {
         return;
@@ -181,6 +186,8 @@
     const CGPoint myPos = me.view.frame.origin;
     const CGPoint parentPos = parent.view.frame.origin;
     const CGSize mySize = me.view.frame.size;
+    const CGPoint myInitPos = me.fancyNavigationItem.initialViewPosition;
+    const CGPoint parentInitPos = parent.fancyNavigationItem.initialViewPosition;
     
     const CGFloat myWidth = mySize.width;
     
@@ -188,7 +195,7 @@
     
     CGPoint myNewPos = myPos;
     
-    if (parentIndex < 0) {
+    if (parentIndex < 0 || !descendentOfTouched) {
         CGPoint touchTranslation = [g translationInView:me.view];
         CGPoint translation;
         if (myPos.x + touchTranslation.x < me.fancyNavigationItem.initialViewPosition.x) {
@@ -198,24 +205,42 @@
         }
         myNewPos = CGPointMake(myPos.x + translation.x, myPos.y);
     } else {
-        if (parentOldPos.x >= myPos.x) {
+        const CGFloat minDiff = parentInitPos.x - myInitPos.x;
+        
+        if (parentOldPos.x >= myPos.x + myWidth || parentPos.x >= myPos.x + myWidth) {
+            /* if snapped to parent's right border, move with parent */
             myNewPos = CGPointMake(parentPos.x - myWidth, myPos.y);
+        }
+
+        if (parentPos.x - myNewPos.x <= minDiff) {
+            /* at least minDiff difference between parent and me */
+            myNewPos = CGPointMake(parentPos.x - minDiff, myPos.y);
             
         }
-        
-        if (parentPos.x >= myPos.x + myWidth) {
-            // too far on the right, move, too 
-            myNewPos = CGPointMake(parentPos.x - myWidth, myPos.y);
-        }
-        
-        if (myNewPos.x < me.fancyNavigationItem.initialViewPosition.x) {
-            myNewPos = me.fancyNavigationItem.initialViewPosition;
-        }
+    }
+    
+    if (parentIndex >= 0 && myNewPos.x < myInitPos.x) {
+        /* don't move past the left snapping point */
+        myNewPos = myInitPos;
     }
     
     me.view.frame = CGRectMake(myNewPos.x, myNewPos.y, mySize.width, mySize.height);
     
-    [self blaWithGestureRecognizer:g onViewControllerIndex:myIndex-1 withParent:myIndex parentLastPos:myOldPos];
+    UIView *touchedView = [g.view hitTest:[g locationInView:g.view] withEvent:nil];
+    
+    if (!descendentOfTouched && [touchedView isDescendantOfView:me.view]) {
+        [self moveViewControllerIndex:myIndex-1
+                withGestureRecognizer:g
+                      withParentIndex:myIndex
+                   parentLastPosition:myOldPos
+                  descendentOfTouched:YES];
+    } else {
+        [self moveViewControllerIndex:myIndex-1
+                withGestureRecognizer:g 
+                      withParentIndex:myIndex
+                   parentLastPosition:myOldPos
+                  descendentOfTouched:descendentOfTouched];
+    }
 }
 
 
@@ -235,8 +260,6 @@
 - (void)popViewControllerAnimated:(BOOL)animated
 {
     UIViewController *vc = [self->viewControllers lastObject];
-    
-    NSLog(@"popping VC %@", [vc description]);
     
     [vc willMoveToParentViewController:nil];
     [self->viewControllers removeObject:vc];
@@ -281,14 +304,12 @@
                   animated:(BOOL)animated
              configuration:(void (^)(FancyNavigationItem *item))configuration
 {
-    NSLog(@"MASTER parent: %@", [self.parentViewController description]);
     FancyChromeController *viewController = [[FancyChromeController alloc]
                                         initWithContentViewController:contentViewController leaf:maxWidth];
     
     [self popToViewController:anchorViewController animated:animated];
     
     NSUInteger vcCount = [self->viewControllers count];
-    NSLog(@"pushing, having %u vcs", vcCount);
 
     CGRect startFrame = CGRectMake(1024,
                                    0,
