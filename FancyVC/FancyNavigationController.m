@@ -23,6 +23,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#define kFancyNavigationControllerStandardDistance ((float)64)
+#define kFancyNavigationControllerStandardWidth ((float)400)
+
 @interface FancyNavigationController ()
 
 @property (nonatomic, readwrite, retain) UIPanGestureRecognizer *panGR;
@@ -55,7 +58,7 @@
     [self addChildViewController:rootViewController];
     
     self.view = [[UIView alloc] init];
-    CGRect rootViewFrame = CGRectMake(0, 0, 400, self.view.bounds.size.height);
+    CGRect rootViewFrame = CGRectMake(0, 0, kFancyNavigationControllerStandardWidth, self.view.bounds.size.height);
     rootViewController.view.frame = rootViewFrame;
     rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:rootViewController.view];
@@ -348,14 +351,11 @@
     
     [self popToViewController:anchorViewController animated:animated];
     
-    CGFloat dist = parentNavItem.nextItemDistance;
-    CGFloat porigin = anchorViewController.fancyNavigationItem.initialViewPosition.x;
+    CGFloat anchorOriginX = anchorViewController.fancyNavigationItem.initialViewPosition.x;
+    CGFloat originX = anchorOriginX + (parentNavItem.nextItemDistance > 0 ? parentNavItem.nextItemDistance :
+                                                                            kFancyNavigationControllerStandardDistance);
     
-    CGFloat x = porigin + (dist > 0 ? dist : 66);
-    
-    NSUInteger vcCount = [self->viewControllers count];
-    
-    navItem.initialViewPosition = CGPointMake(x, 0);
+    navItem.initialViewPosition = CGPointMake(originX, 0);
     navItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
     navItem.titleView = nil;
     navItem.title = nil;
@@ -366,7 +366,7 @@
     if (navItem.width > 0) {
         width = navItem.width;
     } else {
-        width = viewController.leaf ? self.view.bounds.size.width - vcCount * 64 : 400;
+        width = viewController.leaf ? self.view.bounds.size.width - originX : kFancyNavigationControllerStandardWidth;
     }
     
     CGRect startFrame = CGRectMake(1024,
