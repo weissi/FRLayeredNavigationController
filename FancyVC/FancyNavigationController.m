@@ -74,10 +74,6 @@
     self.panGR.maximumNumberOfTouches = 1;
     self.panGR.delegate = self;
     [self.view addGestureRecognizer:self.panGR];
-    
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *path = [bundle pathForResource:@"steel" ofType:@"png"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:path]];
 }
 
 - (void)viewWillLayoutSubviews
