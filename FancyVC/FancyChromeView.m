@@ -35,13 +35,13 @@
         if (titleView == nil) {
             UILabel *titleLabel = [[UILabel alloc] init];
             
-            titleLabel.textColor = [UIColor darkGrayColor];
             titleLabel.backgroundColor = [UIColor clearColor];
-            titleLabel.shadowColor = [UIColor whiteColor];
-            titleLabel.font = [UIFont boldSystemFontOfSize:22];
             titleLabel.text = titleText;
             titleLabel.textAlignment = UITextAlignmentCenter;
-            
+            titleLabel.font = [UIFont boldSystemFontOfSize:20.5];
+            titleLabel.shadowColor = [UIColor whiteColor];
+            titleLabel.textColor =[UIColor colorWithRed:111.0f/255.0f green:118.0f/255.0f blue:126.0f/255.0f alpha:1.0f];
+
             [self addSubview:titleLabel];
         } else {
             [self addSubview:titleView];
@@ -75,14 +75,14 @@
 
 - (CGGradientRef)gradient {
     if (NULL == _savedGradient) {
-        CGFloat colors[6] = {
-            138.0f / 255.0f, 1.0f,
-            162.0f / 255.0f, 1.0f,
-            236.0f / 255.0f, 1.0f
+        CGFloat colors[12] = {
+            244.0/255.0, 245.0/255.0, 247.0/255.0, 1.0,
+            223.0/255.0, 225.0/255.0, 230.0/255.0, 1.0,
+            167.0/244.0, 171.0/255.0, 184.0/255.0, 1.0,
         };
         CGFloat locations[3] = { 0.05f, 0.45f, 0.95f };
         
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         
         _savedGradient = CGGradientCreateWithColorComponents(colorSpace,
                                                              colors,
