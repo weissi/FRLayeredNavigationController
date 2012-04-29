@@ -24,6 +24,9 @@
 		DA7274CD1546DD7A00C2F685 /* FancyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2DA411541877F0064050F /* FancyNavigationController.m */; };
 		DA7274CE1546DD7A00C2F685 /* FancyChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402815458B3800770319 /* FancyChromeController.m */; };
 		DA7274CF1546DD7A00C2F685 /* FancyChromeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2402C15458CD500770319 /* FancyChromeView.m */; };
+		DAA1B7E5154D515E00ABE368 /* COPYING.LESSER in Resources */ = {isa = PBXBuildFile; fileRef = DAA1B7E4154D515E00ABE368 /* COPYING.LESSER */; };
+		DAA1B7E8154D518A00ABE368 /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = DAA1B7E7154D518A00ABE368 /* AUTHORS */; };
+		DAA1B7EA154D521900ABE368 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = DAA1B7E9154D521900ABE368 /* COPYING */; };
 		DAC2DA201541840F0064050F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA1F1541840F0064050F /* UIKit.framework */; };
 		DAC2DA221541840F0064050F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA211541840F0064050F /* Foundation.framework */; };
 		DAC2DA241541840F0064050F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2DA231541840F0064050F /* CoreGraphics.framework */; };
@@ -44,6 +47,9 @@
 		DA7274C51546DC7000C2F685 /* FancyVC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FancyVC-Prefix.pch"; sourceTree = "<group>"; };
 		DA7274C61546DC7000C2F685 /* FancyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FancyVC.h; sourceTree = "<group>"; };
 		DA7274C71546DC7000C2F685 /* FancyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FancyVC.m; sourceTree = "<group>"; };
+		DAA1B7E4154D515E00ABE368 /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
+		DAA1B7E7154D518A00ABE368 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		DAA1B7E9154D521900ABE368 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		DAB2402715458B3800770319 /* FancyChromeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FancyChromeController.h; path = FancyVC/FancyChromeController.h; sourceTree = SOURCE_ROOT; };
 		DAB2402815458B3800770319 /* FancyChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FancyChromeController.m; path = FancyVC/FancyChromeController.m; sourceTree = SOURCE_ROOT; };
 		DAB2402B15458CD500770319 /* FancyChromeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FancyChromeView.h; path = FancyVC/FancyChromeView.h; sourceTree = SOURCE_ROOT; };
@@ -134,6 +140,9 @@
 		DAC2DA101541840E0064050F = {
 			isa = PBXGroup;
 			children = (
+				DAA1B7E4154D515E00ABE368 /* COPYING.LESSER */,
+				DAA1B7E9154D521900ABE368 /* COPYING */,
+				DAA1B7E7154D518A00ABE368 /* AUTHORS */,
 				DAFC0C6015462FEC0060EF5E /* Resources */,
 				DAC2DA251541840F0064050F /* FancyVCTest */,
 				DA7274C31546DC7000C2F685 /* FancyVC */,
@@ -277,6 +286,9 @@
 				DAC2DA2A1541840F0064050F /* InfoPlist.strings in Resources */,
 				DAFC0C5E15462FDE0060EF5E /* steel.png in Resources */,
 				DA7274811546C17B00C2F685 /* mandel.jpg in Resources */,
+				DAA1B7E5154D515E00ABE368 /* COPYING.LESSER in Resources */,
+				DAA1B7E8154D518A00ABE368 /* AUTHORS in Resources */,
+				DAA1B7EA154D521900ABE368 /* COPYING in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
