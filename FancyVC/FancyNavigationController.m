@@ -79,24 +79,21 @@
     [self.view addGestureRecognizer:self.panGR];
 }
 
-- (void)viewWillLayoutSubviews
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    NSInteger i = 0;
-    for (UIViewController *vc in self->viewControllers) {
-        FancyChromeController *fvc = nil;
-        if ([vc class] == [FancyChromeController class]) {
-            fvc = (FancyChromeController *)vc;
+    NSLog(@"ORIENTATION");
+    for (FancyChromeController *vc in self->viewControllers) {
+        CGRect f = vc.view.frame;
+        f.origin = vc.fancyNavigationItem.currentViewPosition;
+        
+        if (vc.leaf) {
+            f.size.width = self.view.bounds.size.width - vc.fancyNavigationItem.initialViewPosition.x;
+            vc.fancyNavigationItem.width = f.size.width;
         }
-        CGRect oldFrame = vc.view.frame;
-        const CGFloat newX = fvc == nil ? 0 : fvc.fancyNavigationItem.currentViewPosition.x;
-        CGRect newFrame = CGRectMake(newX,
-                                     fvc == nil ? 0 : fvc.fancyNavigationItem.currentViewPosition.y,
-                                     fvc.leaf ? self.view.bounds.size.width - newX : oldFrame.size.width,
-                                     self.view.bounds.size.height);
-        [UIView animateWithDuration:0.3 animations:^{
-            vc.view.frame = newFrame;
-        }];
-        i++;
+        
+        f.size.height = self.view.bounds.size.height;
+        
+        vc.view.frame = f;
     }
     return;
 }
@@ -170,33 +167,67 @@
 
 #pragma mark - internal methods
 
-- (void)moveToSnappingPointsWithGestureRecognizer:(UIPanGestureRecognizer *)g
-{
++ (void)viewController:(FancyChromeController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
+    CGRect f = vc.view.frame;
+    CGFloat xTranslation;
+    const CGPoint initPos = vc.fancyNavigationItem.initialViewPosition;
+    
+    if (f.origin.x < initPos.x && origXTranslation < 0) {
+        /* if view already left from left bound and still moving left, half moving speed */
+        xTranslation = origXTranslation / 2;
+    } else {
+        xTranslation = origXTranslation;
+    }
+    
+    if (f.origin.x + xTranslation < initPos.x) {
+        if (bounded) {
+            f.origin.x = initPos.x;
+            if (xTranslation > 0) {
+                f.origin.x += xTranslation;
+            }
+            vc.fancyNavigationItem.currentViewPosition = f.origin;
+            vc.view.frame = f;
+            return;
+        } else {
+            f.origin.x += xTranslation;
+            vc.fancyNavigationItem.currentViewPosition = initPos;
+            vc.view.frame = f;
+        }
+    } else {
+        f.origin.x += xTranslation;
+        vc.fancyNavigationItem.currentViewPosition = f.origin;
+        vc.view.frame = f;
+        return;
+    }
+}
+
+- (void)viewControllersToSnappingPointsExpand:(BOOL)expand {
     FancyChromeController *last = nil;
     CGFloat xTranslation = 0;
     
     for (FancyChromeController *vc in self->viewControllers) {
         const CGPoint myPos = vc.view.frame.origin;
         const CGPoint myInitPos = vc.fancyNavigationItem.initialViewPosition;
-        const CGSize mySize = vc.view.frame.size;
         
         const CGFloat curDiff = myPos.x - last.view.frame.origin.x;
         const CGFloat initDiff = myInitPos.x - last.fancyNavigationItem.initialViewPosition.x;
         const CGFloat maxDiff = last.view.frame.size.width;
-                
+        
         if (xTranslation == 0 && (curDiff != initDiff && curDiff != maxDiff)) {
-            if ([g velocityInView:vc.view].x > 0) {
+            if (expand) {
                 xTranslation = maxDiff - curDiff;
             } else {
                 xTranslation = initDiff - curDiff;
-                
             }
         }
-        
-        vc.view.frame = CGRectMake(myPos.x + xTranslation, myPos.y, mySize.width, mySize.height);
+        [FancyNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
         last = vc;
-        vc.fancyNavigationItem.currentViewPosition = CGPointMake(vc.view.frame.origin.x, vc.view.frame.origin.y);
     }
+}
+
+- (void)moveToSnappingPointsWithGestureRecognizer:(UIPanGestureRecognizer *)g
+{
+    [self viewControllersToSnappingPointsExpand:[g velocityInView:self.view].x > 0];
 }
 
 - (void)moveViewControllerIndex:(NSInteger)myIndex
@@ -209,51 +240,42 @@
         return;
     }
     
-    const FancyChromeController *me = [self.viewControllers objectAtIndex:myIndex];
+    FancyChromeController *me = [self.viewControllers objectAtIndex:myIndex];
     const FancyChromeController *parent = parentIndex < 0 ? nil : [self.viewControllers objectAtIndex:myIndex+1];
     
-    const CGPoint myPos = me.view.frame.origin;
-    const CGPoint parentPos = parent.view.frame.origin;
-    const CGSize mySize = me.view.frame.size;
+    const CGPoint myPos = me.fancyNavigationItem.currentViewPosition;
+    const CGPoint parentPos = parent.fancyNavigationItem.currentViewPosition;
     const CGPoint myInitPos = me.fancyNavigationItem.initialViewPosition;
     const CGPoint parentInitPos = parent.fancyNavigationItem.initialViewPosition;
-    
-    const CGFloat myWidth = mySize.width;
-    
+    const CGFloat myWidth = me.view.frame.size.width;
     const CGPoint myOldPos = myPos;
     
     CGPoint myNewPos = myPos;
     
+    CGFloat xTranslation = 0;
+    BOOL bounded = YES; //parentIndex >= 0;
+    
     if (parentIndex < 0 || !descendentOfTouched) {
-        CGPoint touchTranslation = [g translationInView:me.view];
-        CGPoint translation;
-        if (myPos.x + touchTranslation.x < me.fancyNavigationItem.initialViewPosition.x) {
-            translation = CGPointMake(touchTranslation.x / 2, 0);
-        } else {
-            translation = touchTranslation;
-        }
-        myNewPos = CGPointMake(myPos.x + translation.x, myPos.y);
+        xTranslation = [g translationInView:me.view].x;
     } else {
+        CGFloat newX = myPos.x;
         const CGFloat minDiff = parentInitPos.x - myInitPos.x;
         
         if (parentOldPos.x >= myPos.x + myWidth || parentPos.x >= myPos.x + myWidth) {
             /* if snapped to parent's right border, move with parent */
-            myNewPos = CGPointMake(parentPos.x - myWidth, myPos.y);
+            newX = parentPos.x - myWidth;
         }
 
         if (parentPos.x - myNewPos.x <= minDiff) {
             /* at least minDiff difference between parent and me */
-            myNewPos = CGPointMake(parentPos.x - minDiff, myPos.y);
+            newX = parentPos.x - minDiff;
             
         }
+        
+        xTranslation = newX - myPos.x;
     }
     
-    if (parentIndex >= 0 && myNewPos.x < myInitPos.x) {
-        /* don't move past the left snapping point */
-        myNewPos = myInitPos;
-    }
-    
-    me.view.frame = CGRectMake(myNewPos.x, myNewPos.y, mySize.width, mySize.height);
+    [FancyNavigationController viewController:me xTranslation:xTranslation bounded:bounded];
     
     UIView *touchedView = [g.view hitTest:[g locationInView:g.view] withEvent:nil];
     
@@ -272,15 +294,33 @@
     }
 }
 
-
-- (void)compactViewPositions
+- (CGFloat)savePlaceWanted:(CGFloat)pointsWanted;
 {
-    for (UIViewController *vc in self->viewControllers) {
-        if ([vc class] == [FancyChromeController class]) {
-            FancyChromeController *fvc = (FancyChromeController *)vc;
-            fvc.fancyNavigationItem.currentViewPosition = fvc.fancyNavigationItem.initialViewPosition;
+    CGFloat xTranslation = 0;
+    if (pointsWanted <= 0) {
+        return 0;
+    }
+    
+    for (FancyChromeController *vc in self->viewControllers) {
+        const CGFloat initX = vc.fancyNavigationItem.initialViewPosition.x;
+        const CGFloat currentX = vc.fancyNavigationItem.currentViewPosition.x;
+        
+        if (initX < currentX + xTranslation) {
+            xTranslation += initX - (currentX + xTranslation);
+        }
+        
+        if (abs(xTranslation) >= pointsWanted) {
+            break;
         }
     }
+    
+    for (FancyChromeController *vc in self->viewControllers) {
+        if (vc == [self->viewControllers lastObject]) {
+            break;
+        }
+        [FancyNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
+    }
+    return abs(xTranslation);
 }
 
 
@@ -343,60 +383,66 @@
                   animated:(BOOL)animated
              configuration:(void (^)(FancyNavigationItem *item))configuration
 {
-    FancyChromeController *viewController = [[FancyChromeController alloc]
+    FancyChromeController *newVC = [[FancyChromeController alloc]
                                                    initWithContentViewController:contentViewController leaf:maxWidth];
-    const FancyNavigationItem *navItem = viewController.fancyNavigationItem;
+    const FancyNavigationItem *navItem = newVC.fancyNavigationItem;
     const FancyNavigationItem *parentNavItem = anchorViewController.fancyNavigationItem;
     
     [self popToViewController:anchorViewController animated:animated];
     
-    CGFloat anchorOriginX = anchorViewController.fancyNavigationItem.initialViewPosition.x;
-    CGFloat originX = anchorOriginX + (parentNavItem.nextItemDistance > 0 ? parentNavItem.nextItemDistance :
+    CGFloat anchorInitX = anchorViewController.fancyNavigationItem.initialViewPosition.x;
+    CGFloat anchorCurrentX = anchorViewController.fancyNavigationItem.currentViewPosition.x;
+    CGFloat anchorWidth = anchorViewController.view.frame.size.width;
+    CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance > 0 ? parentNavItem.nextItemDistance :
                                                                             kFancyNavigationControllerStandardDistance);
     
-    navItem.initialViewPosition = CGPointMake(originX, 0);
-    navItem.currentViewPosition = viewController.fancyNavigationItem.initialViewPosition;
+    navItem.initialViewPosition = CGPointMake(initX, 0);
+    navItem.currentViewPosition = CGPointMake(anchorCurrentX + anchorWidth, 0);
     navItem.titleView = nil;
     navItem.title = nil;
     navItem.hasChrome = YES;
     
-    configuration(viewController.fancyNavigationItem);
+    configuration(newVC.fancyNavigationItem);
     
     CGFloat width;
     if (navItem.width > 0) {
         width = navItem.width;
     } else {
-        width = viewController.leaf ? self.view.bounds.size.width - originX : kFancyNavigationControllerStandardWidth;
+        width = newVC.leaf ? self.view.bounds.size.width - initX : kFancyNavigationControllerStandardWidth;
     }
     
-    CGRect startFrame = CGRectMake(1024,
+    CGRect newFrame = CGRectMake(newVC.fancyNavigationItem.currentViewPosition.x,
+                                 newVC.fancyNavigationItem.currentViewPosition.y,
+                                 width,
+                                 self.view.bounds.size.height);
+    CGRect startFrame = CGRectMake(MAX(1024, newFrame.origin.x),
                                    0,
-                                   width,
-                                   self.view.bounds.size.height);
+                                   newFrame.size.width,
+                                   newFrame.size.height);
     
-    CGRect newFrame = CGRectMake(viewController.fancyNavigationItem.initialViewPosition.x,
-                                 viewController.fancyNavigationItem.initialViewPosition.y,
-                                 startFrame.size.width,
-                                 startFrame.size.height);
+
+    [self->viewControllers addObject:newVC];
+    [self addChildViewController:newVC];
     
-    [self->viewControllers addObject:viewController];
-    [self addChildViewController:viewController];
+    [self.view addSubview:newVC.view];
+    [newVC didMoveToParentViewController:self];
     
-    viewController.view.frame = startFrame;
-    
-    [self.view addSubview:viewController.view];
-    [viewController didMoveToParentViewController:self];
+    newVC.view.frame = startFrame;
     
     [UIView animateWithDuration:animated ? 0.5 : 0
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         viewController.view.frame = newFrame;
+                         CGFloat saved = [self savePlaceWanted:newFrame.origin.x+width-self.view.bounds.size.width];
+                         newVC.view.frame = CGRectMake(newFrame.origin.x - saved,
+                                                                newFrame.origin.y,
+                                                                newFrame.size.width,
+                                                                newFrame.size.height);
+                         newVC.fancyNavigationItem.currentViewPosition = newVC.view.frame.origin;
+
                      }
                      completion:^(BOOL finished) {
                      }];
-    [self compactViewPositions];
-    [self.view setNeedsLayout];
 }
 
 - (void)pushViewController:(UIViewController *)contentViewController
