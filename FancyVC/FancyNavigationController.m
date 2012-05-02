@@ -37,6 +37,14 @@
 #pragma mark - Initialization/dealloc
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
+    return [self initWithRootViewController:rootViewController configuration:^(FancyNavigationItem *item) {
+        /* nothing */
+    }];
+}
+    
+    - (id)initWithRootViewController:(UIViewController *)rootViewController
+configuration:(void (^)(FancyNavigationItem *item))configuration
+    {
     self = [super init];
     if (self) {
         FancyChromeController *fancyRC = [[FancyChromeController alloc] initWithContentViewController:rootViewController leaf:NO];
@@ -44,6 +52,7 @@
         fancyRC.fancyNavigationItem.nextItemDistance = kFancyNavigationControllerStandardDistance;
         fancyRC.fancyNavigationItem.width = kFancyNavigationControllerStandardWidth;
         fancyRC.fancyNavigationItem.hasChrome = NO;
+        configuration(fancyRC.fancyNavigationItem);
     }
     return self;    
 }

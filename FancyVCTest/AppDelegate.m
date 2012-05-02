@@ -34,7 +34,11 @@
     
     
     UIViewController *vc = [[SampleListViewController alloc] init];
-    FancyNavigationController *fvc = [[FancyNavigationController alloc] initWithRootViewController:vc];
+    FancyNavigationController *fvc = [[FancyNavigationController alloc] initWithRootViewController:vc
+                                      configuration:^(FancyNavigationItem *item) {
+                                          item.width = 600;
+                                          item.nextItemDistance = 2;
+                                      }];
     
     self.window.rootViewController = fvc;
     
