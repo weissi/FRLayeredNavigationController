@@ -21,6 +21,7 @@
 
 #import "FancyNavigationController.h"
 #import "SampleListViewController.h"
+#import "UIViewController+FancyNavigationController.h"
 
 @implementation AppDelegate
 

@@ -29,6 +29,7 @@
 @interface FancyNavigationController ()
 
 @property (nonatomic, readwrite, retain) UIPanGestureRecognizer *panGR;
+@property (nonatomic, readwrite, retain) UIView *firstTouchedView;
 
 @end
 
@@ -126,6 +127,9 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
 
 - (void)handleGesture:(UIPanGestureRecognizer *)gestureRecognizer
 {
+    UIView *touchedView = [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
+                                                withEvent:nil];
+    
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStatePossible: {
             //NSLog(@"UIGestureRecognizerStatePossible");
@@ -134,6 +138,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
             
         case UIGestureRecognizerStateBegan: {
             //NSLog(@"UIGestureRecognizerStateBegan");
+            self.firstTouchedView = touchedView;
             break;
         }
             
@@ -157,6 +162,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
             [UIView animateWithDuration:0.2 animations:^{
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
             }];
+            self.firstTouchedView = nil;
             
             break;
         }
@@ -177,36 +183,41 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
 #pragma mark - internal methods
 
 + (void)viewController:(FancyChromeController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
-    CGRect f = vc.view.frame;
-    CGFloat xTranslation;
+    //CGFloat xTranslation;
     const CGPoint initPos = vc.fancyNavigationItem.initialViewPosition;
+    FancyNavigationItem *navItem = vc.fancyNavigationItem;
     
-    if (f.origin.x < initPos.x && origXTranslation < 0) {
-        /* if view already left from left bound and still moving left, half moving speed */
-        xTranslation = origXTranslation / 2;
-    } else {
-        xTranslation = origXTranslation;
-    }
-    
-    if (f.origin.x + xTranslation < initPos.x) {
-        if (bounded) {
+    if (bounded) {
+        /* apply translation to fancy item position first and then apply to view */
+        CGRect f = vc.view.frame;
+        f.origin = navItem.currentViewPosition;
+        f.origin.x += origXTranslation;
+
+        if (f.origin.x <= initPos.x) {
             f.origin.x = initPos.x;
-            if (xTranslation > 0) {
-                f.origin.x += xTranslation;
-            }
-            vc.fancyNavigationItem.currentViewPosition = f.origin;
-            vc.view.frame = f;
-            return;
-        } else {
-            f.origin.x += xTranslation;
-            vc.fancyNavigationItem.currentViewPosition = initPos;
-            vc.view.frame = f;
         }
-    } else {
-        f.origin.x += xTranslation;
-        vc.fancyNavigationItem.currentViewPosition = f.origin;
+        
         vc.view.frame = f;
-        return;
+        navItem.currentViewPosition = f.origin;
+    } else {
+        CGRect f = vc.view.frame;
+        CGFloat xTranslation;
+        if (f.origin.x < initPos.x && origXTranslation < 0) {
+            /* if view already left from left bound and still moving left, half moving speed */
+            xTranslation = origXTranslation / 2;
+        } else {
+            xTranslation = origXTranslation;
+        }
+        
+        f.origin.x += xTranslation;
+
+        /* apply translation to frame first */
+        if (f.origin.x <= initPos.x) {
+            navItem.currentViewPosition = initPos;
+        } else {
+            navItem.currentViewPosition = f.origin;
+        }
+        vc.view.frame = f;
     }
 }
 
@@ -215,10 +226,10 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
     CGFloat xTranslation = 0;
     
     for (FancyChromeController *vc in self->viewControllers) {
-        const CGPoint myPos = vc.view.frame.origin;
+        const CGPoint myPos = vc.fancyNavigationItem.currentViewPosition;
         const CGPoint myInitPos = vc.fancyNavigationItem.initialViewPosition;
         
-        const CGFloat curDiff = myPos.x - last.view.frame.origin.x;
+        const CGFloat curDiff = myPos.x - last.fancyNavigationItem.currentViewPosition.x;
         const CGFloat initDiff = myInitPos.x - last.fancyNavigationItem.initialViewPosition.x;
         const CGFloat maxDiff = last.view.frame.size.width;
         
@@ -262,7 +273,6 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
     CGPoint myNewPos = myPos;
     
     CGFloat xTranslation = 0;
-    BOOL bounded = YES; //parentIndex >= 0;
     
     if (parentIndex < 0 || !descendentOfTouched) {
         xTranslation = [g translationInView:me.view].x;
@@ -284,9 +294,11 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
         xTranslation = newX - myPos.x;
     }
     
-    [FancyNavigationController viewController:me xTranslation:xTranslation bounded:bounded];
-    
     UIView *touchedView = [g.view hitTest:[g locationInView:g.view] withEvent:nil];
+    
+    [FancyNavigationController viewController:me
+                                 xTranslation:xTranslation
+                                      bounded:![self.firstTouchedView isDescendantOfView:me.view]];
     
     if (!descendentOfTouched && [touchedView isDescendantOfView:me.view]) {
         [self moveViewControllerIndex:myIndex-1
@@ -471,5 +483,6 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
 
 @synthesize viewControllers;
 @synthesize panGR;
+@synthesize firstTouchedView;
 
 @end
