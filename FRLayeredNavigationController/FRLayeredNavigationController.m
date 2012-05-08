@@ -1,58 +1,58 @@
-/*     This file is part of FancyVC.
+/*     This file is part of FRLayeredNavigationController.
  *
- * FancyVC is free software: you can redistribute it and/or modify
+ * FRLayeredNavigationController is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * FancyVC is distributed in the hope that it will be useful,
+ * FRLayeredNavigationController is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with FancyVC.  If not, see <http://www.gnu.org/licenses/>.
+ * along with FRLayeredNavigationController.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
  *  Copyright (c) 2012, Johannes Weiß <weiss@tux4u.de> for factis research GmbH.
  */
 
-#import "FancyNavigationController.h"
-#import "FancyChromeController.h"
-#import "UIViewController+FancyNavigationController.h"
+#import "FRLayeredNavigationController.h"
+#import "FRLayerController.h"
+#import "UIViewController+FRLayeredNavigationController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-#define kFancyNavigationControllerStandardDistance ((float)64)
-#define kFancyNavigationControllerStandardWidth ((float)400)
+#define kFRLayeredNavigationControllerStandardDistance ((float)64)
+#define kFRLayeredNavigationControllerStandardWidth ((float)400)
 
-@interface FancyNavigationController ()
+@interface FRLayeredNavigationController ()
 
 @property (nonatomic, readwrite, retain) UIPanGestureRecognizer *panGR;
 
 @end
 
-@implementation FancyNavigationController
+@implementation FRLayeredNavigationController
 
 #pragma mark - Initialization/dealloc
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
-    return [self initWithRootViewController:rootViewController configuration:^(FancyNavigationItem *item) {
+    return [self initWithRootViewController:rootViewController configuration:^(FRLayeredNavigationItem *item) {
         /* nothing */
     }];
 }
     
     - (id)initWithRootViewController:(UIViewController *)rootViewController
-configuration:(void (^)(FancyNavigationItem *item))configuration
+configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     {
     self = [super init];
     if (self) {
-        FancyChromeController *fancyRC = [[FancyChromeController alloc] initWithContentViewController:rootViewController leaf:NO];
-        self->viewControllers = [[NSMutableArray alloc] initWithObjects:fancyRC, nil];
-        fancyRC.fancyNavigationItem.nextItemDistance = kFancyNavigationControllerStandardDistance;
-        fancyRC.fancyNavigationItem.width = kFancyNavigationControllerStandardWidth;
-        fancyRC.fancyNavigationItem.hasChrome = NO;
-        configuration(fancyRC.fancyNavigationItem);
+        FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController leaf:NO];
+        self->viewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
+        layeredRC.layeredNavigationItem.nextItemDistance = kFRLayeredNavigationControllerStandardDistance;
+        layeredRC.layeredNavigationItem.width = kFRLayeredNavigationControllerStandardWidth;
+        layeredRC.layeredNavigationItem.hasChrome = NO;
+        configuration(layeredRC.layeredNavigationItem);
     }
     return self;    
 }
@@ -71,7 +71,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
     [self addChildViewController:rootViewController];
     
     self.view = [[UIView alloc] init];
-    CGRect rootViewFrame = CGRectMake(0, 0, rootViewController.fancyNavigationItem.width, self.view.bounds.size.height);
+    CGRect rootViewFrame = CGRectMake(0, 0, rootViewController.layeredNavigationItem.width, self.view.bounds.size.height);
     rootViewController.view.frame = rootViewFrame;
     rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:rootViewController.view];
@@ -91,13 +91,13 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
     NSLog(@"ORIENTATION");
-    for (FancyChromeController *vc in self->viewControllers) {
+    for (FRLayerController *vc in self->viewControllers) {
         CGRect f = vc.view.frame;
-        f.origin = vc.fancyNavigationItem.currentViewPosition;
+        f.origin = vc.layeredNavigationItem.currentViewPosition;
         
         if (vc.leaf) {
-            f.size.width = self.view.bounds.size.width - vc.fancyNavigationItem.initialViewPosition.x;
-            vc.fancyNavigationItem.width = f.size.width;
+            f.size.width = self.view.bounds.size.width - vc.layeredNavigationItem.initialViewPosition.x;
+            vc.layeredNavigationItem.width = f.size.width;
         }
         
         f.size.height = self.view.bounds.size.height;
@@ -176,10 +176,10 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
 
 #pragma mark - internal methods
 
-+ (void)viewController:(FancyChromeController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
++ (void)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
     CGRect f = vc.view.frame;
     CGFloat xTranslation;
-    const CGPoint initPos = vc.fancyNavigationItem.initialViewPosition;
+    const CGPoint initPos = vc.layeredNavigationItem.initialViewPosition;
     
     if (f.origin.x < initPos.x && origXTranslation < 0) {
         /* if view already left from left bound and still moving left, half moving speed */
@@ -194,32 +194,32 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
             if (xTranslation > 0) {
                 f.origin.x += xTranslation;
             }
-            vc.fancyNavigationItem.currentViewPosition = f.origin;
+            vc.layeredNavigationItem.currentViewPosition = f.origin;
             vc.view.frame = f;
             return;
         } else {
             f.origin.x += xTranslation;
-            vc.fancyNavigationItem.currentViewPosition = initPos;
+            vc.layeredNavigationItem.currentViewPosition = initPos;
             vc.view.frame = f;
         }
     } else {
         f.origin.x += xTranslation;
-        vc.fancyNavigationItem.currentViewPosition = f.origin;
+        vc.layeredNavigationItem.currentViewPosition = f.origin;
         vc.view.frame = f;
         return;
     }
 }
 
 - (void)viewControllersToSnappingPointsExpand:(BOOL)expand {
-    FancyChromeController *last = nil;
+    FRLayerController *last = nil;
     CGFloat xTranslation = 0;
     
-    for (FancyChromeController *vc in self->viewControllers) {
+    for (FRLayerController *vc in self->viewControllers) {
         const CGPoint myPos = vc.view.frame.origin;
-        const CGPoint myInitPos = vc.fancyNavigationItem.initialViewPosition;
+        const CGPoint myInitPos = vc.layeredNavigationItem.initialViewPosition;
         
         const CGFloat curDiff = myPos.x - last.view.frame.origin.x;
-        const CGFloat initDiff = myInitPos.x - last.fancyNavigationItem.initialViewPosition.x;
+        const CGFloat initDiff = myInitPos.x - last.layeredNavigationItem.initialViewPosition.x;
         const CGFloat maxDiff = last.view.frame.size.width;
         
         if (xTranslation == 0 && (curDiff != initDiff && curDiff != maxDiff)) {
@@ -229,7 +229,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
                 xTranslation = initDiff - curDiff;
             }
         }
-        [FancyNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
+        [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
         last = vc;
     }
 }
@@ -249,13 +249,13 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
         return;
     }
     
-    FancyChromeController *me = [self.viewControllers objectAtIndex:myIndex];
-    const FancyChromeController *parent = parentIndex < 0 ? nil : [self.viewControllers objectAtIndex:myIndex+1];
+    FRLayerController *me = [self.viewControllers objectAtIndex:myIndex];
+    const FRLayerController *parent = parentIndex < 0 ? nil : [self.viewControllers objectAtIndex:myIndex+1];
     
-    const CGPoint myPos = me.fancyNavigationItem.currentViewPosition;
-    const CGPoint parentPos = parent.fancyNavigationItem.currentViewPosition;
-    const CGPoint myInitPos = me.fancyNavigationItem.initialViewPosition;
-    const CGPoint parentInitPos = parent.fancyNavigationItem.initialViewPosition;
+    const CGPoint myPos = me.layeredNavigationItem.currentViewPosition;
+    const CGPoint parentPos = parent.layeredNavigationItem.currentViewPosition;
+    const CGPoint myInitPos = me.layeredNavigationItem.initialViewPosition;
+    const CGPoint parentInitPos = parent.layeredNavigationItem.initialViewPosition;
     const CGFloat myWidth = me.view.frame.size.width;
     const CGPoint myOldPos = myPos;
     
@@ -284,7 +284,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
         xTranslation = newX - myPos.x;
     }
     
-    [FancyNavigationController viewController:me xTranslation:xTranslation bounded:bounded];
+    [FRLayeredNavigationController viewController:me xTranslation:xTranslation bounded:bounded];
     
     UIView *touchedView = [g.view hitTest:[g locationInView:g.view] withEvent:nil];
     
@@ -310,9 +310,9 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
         return 0;
     }
     
-    for (FancyChromeController *vc in self->viewControllers) {
-        const CGFloat initX = vc.fancyNavigationItem.initialViewPosition.x;
-        const CGFloat currentX = vc.fancyNavigationItem.currentViewPosition.x;
+    for (FRLayerController *vc in self->viewControllers) {
+        const CGFloat initX = vc.layeredNavigationItem.initialViewPosition.x;
+        const CGFloat currentX = vc.layeredNavigationItem.currentViewPosition.x;
         
         if (initX < currentX + xTranslation) {
             xTranslation += initX - (currentX + xTranslation);
@@ -323,11 +323,11 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
         }
     }
     
-    for (FancyChromeController *vc in self->viewControllers) {
+    for (FRLayerController *vc in self->viewControllers) {
         if (vc == [self->viewControllers lastObject]) {
             break;
         }
-        [FancyNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
+        [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
     }
     return abs(xTranslation);
 }
@@ -365,9 +365,9 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
     UIViewController *currentVc;
 
     while ((currentVc = [self->viewControllers lastObject])) {
-        if (([currentVc class] == [FancyChromeController class] &&
-             ((FancyChromeController*)currentVc).contentViewController == vc) ||
-            ([currentVc class] != [FancyChromeController class] &&
+        if (([currentVc class] == [FRLayerController class] &&
+             ((FRLayerController*)currentVc).contentViewController == vc) ||
+            ([currentVc class] != [FRLayerController class] &&
              currentVc == vc)) {
                 break;
             }
@@ -390,20 +390,20 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
                   animated:(BOOL)animated
-             configuration:(void (^)(FancyNavigationItem *item))configuration
+             configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
-    FancyChromeController *newVC = [[FancyChromeController alloc]
+    FRLayerController *newVC = [[FRLayerController alloc]
                                                    initWithContentViewController:contentViewController leaf:maxWidth];
-    const FancyNavigationItem *navItem = newVC.fancyNavigationItem;
-    const FancyNavigationItem *parentNavItem = anchorViewController.fancyNavigationItem;
+    const FRLayeredNavigationItem *navItem = newVC.layeredNavigationItem;
+    const FRLayeredNavigationItem *parentNavItem = anchorViewController.layeredNavigationItem;
     
     [self popToViewController:anchorViewController animated:animated];
     
-    CGFloat anchorInitX = anchorViewController.fancyNavigationItem.initialViewPosition.x;
-    CGFloat anchorCurrentX = anchorViewController.fancyNavigationItem.currentViewPosition.x;
+    CGFloat anchorInitX = anchorViewController.layeredNavigationItem.initialViewPosition.x;
+    CGFloat anchorCurrentX = anchorViewController.layeredNavigationItem.currentViewPosition.x;
     CGFloat anchorWidth = anchorViewController.view.frame.size.width;
     CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance > 0 ? parentNavItem.nextItemDistance :
-                                                                            kFancyNavigationControllerStandardDistance);
+                                                                            kFRLayeredNavigationControllerStandardDistance);
     
     navItem.initialViewPosition = CGPointMake(initX, 0);
     navItem.currentViewPosition = CGPointMake(anchorCurrentX + anchorWidth, 0);
@@ -411,17 +411,17 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
     navItem.title = nil;
     navItem.hasChrome = YES;
     
-    configuration(newVC.fancyNavigationItem);
+    configuration(newVC.layeredNavigationItem);
     
     CGFloat width;
     if (navItem.width > 0) {
         width = navItem.width;
     } else {
-        width = newVC.leaf ? self.view.bounds.size.width - initX : kFancyNavigationControllerStandardWidth;
+        width = newVC.leaf ? self.view.bounds.size.width - initX : kFRLayeredNavigationControllerStandardWidth;
     }
     
-    CGRect newFrame = CGRectMake(newVC.fancyNavigationItem.currentViewPosition.x,
-                                 newVC.fancyNavigationItem.currentViewPosition.y,
+    CGRect newFrame = CGRectMake(newVC.layeredNavigationItem.currentViewPosition.x,
+                                 newVC.layeredNavigationItem.currentViewPosition.y,
                                  width,
                                  self.view.bounds.size.height);
     CGRect startFrame = CGRectMake(MAX(1024, newFrame.origin.x),
@@ -447,7 +447,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
                                                                 newFrame.origin.y,
                                                                 newFrame.size.width,
                                                                 newFrame.size.height);
-                         newVC.fancyNavigationItem.currentViewPosition = newVC.view.frame.origin;
+                         newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
 
                      }
                      completion:^(BOOL finished) {
@@ -463,7 +463,7 @@ configuration:(void (^)(FancyNavigationItem *item))configuration
                    inFrontOf:anchorViewController
                 maximumWidth:maxWidth
                     animated:animated
-               configuration:^(FancyNavigationItem *item) {
+               configuration:^(FRLayeredNavigationItem *item) {
                }];
 }
 

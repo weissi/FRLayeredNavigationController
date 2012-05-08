@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DA4FACCA15591AB300D85A7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC915591AB300D85A7E /* Foundation.framework */; };
+		DA4FACF415591B6700D85A7E /* FRLayerChromeView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4FACEA15591B6700D85A7E /* FRLayerChromeView.h */; };
+		DA4FACF515591B6700D85A7E /* FRLayerChromeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACEB15591B6700D85A7E /* FRLayerChromeView.m */; };
+		DA4FACF615591B6700D85A7E /* FRLayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4FACEC15591B6700D85A7E /* FRLayerController.h */; };
+		DA4FACF715591B6700D85A7E /* FRLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACED15591B6700D85A7E /* FRLayerController.m */; };
+		DA4FACF815591B6700D85A7E /* FRLayeredNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4FACEE15591B6700D85A7E /* FRLayeredNavigationController.h */; };
+		DA4FACF915591B6700D85A7E /* FRLayeredNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACEF15591B6700D85A7E /* FRLayeredNavigationController.m */; };
+		DA4FACFA15591B6700D85A7E /* FRLayeredNavigationItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4FACF015591B6700D85A7E /* FRLayeredNavigationItem.h */; };
+		DA4FACFB15591B6700D85A7E /* FRLayeredNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACF115591B6700D85A7E /* FRLayeredNavigationItem.m */; };
+		DA4FACFC15591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4FACF215591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h */; };
+		DA4FAD0515591BD500D85A7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FAD0415591BD500D85A7E /* UIKit.framework */; };
+		DA4FAD0615591BD500D85A7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC915591AB300D85A7E /* Foundation.framework */; };
+		DA4FAD0815591BD500D85A7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FAD0715591BD500D85A7E /* CoreGraphics.framework */; };
+		DA4FAD0E15591BD500D85A7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD0C15591BD500D85A7E /* InfoPlist.strings */; };
+		DA4FAD2115591C4100D85A7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FAD1915591C4100D85A7E /* AppDelegate.m */; };
+		DA4FAD2215591C4100D85A7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FAD1A15591C4100D85A7E /* main.m */; };
+		DA4FAD2315591C4100D85A7E /* mandel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD1B15591C4100D85A7E /* mandel.jpg */; };
+		DA4FAD2415591C4100D85A7E /* SampleContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FAD1D15591C4100D85A7E /* SampleContentViewController.m */; };
+		DA4FAD2515591C4100D85A7E /* SampleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FAD1F15591C4100D85A7E /* SampleListViewController.m */; };
+		DA4FAD2615591C4100D85A7E /* steel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2015591C4100D85A7E /* steel.png */; };
+		DA4FAD2B15591C6E00D85A7E /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2715591C6E00D85A7E /* AUTHORS */; };
+		DA4FAD2C15591C6E00D85A7E /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2815591C6E00D85A7E /* COPYING */; };
+		DA4FAD2D15591C6E00D85A7E /* COPYING.LESSER in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */; };
+		DA4FAD2E15591C6E00D85A7E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2A15591C6E00D85A7E /* README.md */; };
+		DA5B059B155923D000C93809 /* libFRLayeredNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */; };
+		DA5B05A21559267000C93809 /* FRLayeredNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5B05A11559267000C93809 /* FRLayeredNavigation.h */; };
+		DA5B05A41559296E00C93809 /* UIViewController+FRLayeredNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA5B05A51559298A00C93809 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA4FACBD15591AB300D85A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA4FACC515591AB300D85A7E;
+			remoteInfo = FRLayeredNavigationController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRLayeredNavigationController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4FACC915591AB300D85A7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DA4FACCD15591AB300D85A7E /* FRLayeredNavigationController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRLayeredNavigationController-Prefix.pch"; sourceTree = "<group>"; };
+		DA4FACEA15591B6700D85A7E /* FRLayerChromeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayerChromeView.h; sourceTree = "<group>"; };
+		DA4FACEB15591B6700D85A7E /* FRLayerChromeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLayerChromeView.m; sourceTree = "<group>"; };
+		DA4FACEC15591B6700D85A7E /* FRLayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FRLayerController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		DA4FACED15591B6700D85A7E /* FRLayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FRLayerController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA4FACEE15591B6700D85A7E /* FRLayeredNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FRLayeredNavigationController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		DA4FACEF15591B6700D85A7E /* FRLayeredNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FRLayeredNavigationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA4FACF015591B6700D85A7E /* FRLayeredNavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayeredNavigationItem.h; sourceTree = "<group>"; };
+		DA4FACF115591B6700D85A7E /* FRLayeredNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLayeredNavigationItem.m; sourceTree = "<group>"; };
+		DA4FACF215591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIViewController+FRLayeredNavigationController.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIViewController+FRLayeredNavigationController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA4FAD0215591BD500D85A7E /* FRLayeredNavigationControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FRLayeredNavigationControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4FAD0415591BD500D85A7E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DA4FAD0715591BD500D85A7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DA4FAD0B15591BD500D85A7E /* FRLayeredNavigationControllerDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FRLayeredNavigationControllerDemo-Info.plist"; sourceTree = "<group>"; };
+		DA4FAD0D15591BD500D85A7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA4FAD1115591BD500D85A7E /* FRLayeredNavigationControllerDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRLayeredNavigationControllerDemo-Prefix.pch"; sourceTree = "<group>"; };
+		DA4FAD1815591C4100D85A7E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DA4FAD1915591C4100D85A7E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA4FAD1A15591C4100D85A7E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DA4FAD1B15591C4100D85A7E /* mandel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mandel.jpg; sourceTree = "<group>"; };
+		DA4FAD1C15591C4100D85A7E /* SampleContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleContentViewController.h; sourceTree = "<group>"; };
+		DA4FAD1D15591C4100D85A7E /* SampleContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SampleContentViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA4FAD1E15591C4100D85A7E /* SampleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleListViewController.h; sourceTree = "<group>"; };
+		DA4FAD1F15591C4100D85A7E /* SampleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SampleListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA4FAD2015591C4100D85A7E /* steel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steel.png; sourceTree = "<group>"; };
+		DA4FAD2715591C6E00D85A7E /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		DA4FAD2815591C6E00D85A7E /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
+		DA4FAD2A15591C6E00D85A7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		DA5B05A11559267000C93809 /* FRLayeredNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayeredNavigation.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DA4FACC315591AB300D85A7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA4FACCA15591AB300D85A7E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA4FACFF15591BD500D85A7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA5B059B155923D000C93809 /* libFRLayeredNavigationController.a in Frameworks */,
+				DA4FAD0515591BD500D85A7E /* UIKit.framework in Frameworks */,
+				DA4FAD0615591BD500D85A7E /* Foundation.framework in Frameworks */,
+				DA4FAD0815591BD500D85A7E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DA4FACBB15591AB300D85A7E = {
+			isa = PBXGroup;
+			children = (
+				DA4FAD2715591C6E00D85A7E /* AUTHORS */,
+				DA4FAD2815591C6E00D85A7E /* COPYING */,
+				DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */,
+				DA4FAD2A15591C6E00D85A7E /* README.md */,
+				DA4FACCB15591AB300D85A7E /* FRLayeredNavigationController */,
+				DA4FAD0915591BD500D85A7E /* FRLayeredNavigationControllerDemo */,
+				DA4FACC815591AB300D85A7E /* Frameworks */,
+				DA4FACC715591AB300D85A7E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA4FACC715591AB300D85A7E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */,
+				DA4FAD0215591BD500D85A7E /* FRLayeredNavigationControllerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DA4FACC815591AB300D85A7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA4FACC915591AB300D85A7E /* Foundation.framework */,
+				DA4FAD0415591BD500D85A7E /* UIKit.framework */,
+				DA4FAD0715591BD500D85A7E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA4FACCB15591AB300D85A7E /* FRLayeredNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				DA4FACEA15591B6700D85A7E /* FRLayerChromeView.h */,
+				DA4FACEB15591B6700D85A7E /* FRLayerChromeView.m */,
+				DA4FACEC15591B6700D85A7E /* FRLayerController.h */,
+				DA4FACED15591B6700D85A7E /* FRLayerController.m */,
+				DA4FACEE15591B6700D85A7E /* FRLayeredNavigationController.h */,
+				DA4FACEF15591B6700D85A7E /* FRLayeredNavigationController.m */,
+				DA4FACF015591B6700D85A7E /* FRLayeredNavigationItem.h */,
+				DA4FACF115591B6700D85A7E /* FRLayeredNavigationItem.m */,
+				DA4FACF215591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h */,
+				DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */,
+				DA4FACCC15591AB300D85A7E /* Supporting Files */,
+				DA5B05A11559267000C93809 /* FRLayeredNavigation.h */,
+			);
+			path = FRLayeredNavigationController;
+			sourceTree = "<group>";
+		};
+		DA4FACCC15591AB300D85A7E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA4FACCD15591AB300D85A7E /* FRLayeredNavigationController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA4FAD0915591BD500D85A7E /* FRLayeredNavigationControllerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DA4FAD1815591C4100D85A7E /* AppDelegate.h */,
+				DA4FAD1915591C4100D85A7E /* AppDelegate.m */,
+				DA4FAD1A15591C4100D85A7E /* main.m */,
+				DA4FAD1B15591C4100D85A7E /* mandel.jpg */,
+				DA4FAD1C15591C4100D85A7E /* SampleContentViewController.h */,
+				DA4FAD1D15591C4100D85A7E /* SampleContentViewController.m */,
+				DA4FAD1E15591C4100D85A7E /* SampleListViewController.h */,
+				DA4FAD1F15591C4100D85A7E /* SampleListViewController.m */,
+				DA4FAD2015591C4100D85A7E /* steel.png */,
+				DA4FAD0A15591BD500D85A7E /* Supporting Files */,
+			);
+			path = FRLayeredNavigationControllerDemo;
+			sourceTree = "<group>";
+		};
+		DA4FAD0A15591BD500D85A7E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA4FAD0B15591BD500D85A7E /* FRLayeredNavigationControllerDemo-Info.plist */,
+				DA4FAD0C15591BD500D85A7E /* InfoPlist.strings */,
+				DA4FAD1115591BD500D85A7E /* FRLayeredNavigationControllerDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DA4FACC415591AB300D85A7E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA4FACF415591B6700D85A7E /* FRLayerChromeView.h in Headers */,
+				DA4FACF615591B6700D85A7E /* FRLayerController.h in Headers */,
+				DA4FACF815591B6700D85A7E /* FRLayeredNavigationController.h in Headers */,
+				DA4FACFA15591B6700D85A7E /* FRLayeredNavigationItem.h in Headers */,
+				DA4FACFC15591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h in Headers */,
+				DA5B05A21559267000C93809 /* FRLayeredNavigation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DA4FACC515591AB300D85A7E /* FRLayeredNavigationController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA4FACD315591AB300D85A7E /* Build configuration list for PBXNativeTarget "FRLayeredNavigationController" */;
+			buildPhases = (
+				DA4FACC215591AB300D85A7E /* Sources */,
+				DA4FACC315591AB300D85A7E /* Frameworks */,
+				DA4FACC415591AB300D85A7E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FRLayeredNavigationController;
+			productName = FRLayeredNavigationController;
+			productReference = DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DA4FAD0115591BD500D85A7E /* FRLayeredNavigationControllerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA4FAD1515591BD500D85A7E /* Build configuration list for PBXNativeTarget "FRLayeredNavigationControllerDemo" */;
+			buildPhases = (
+				DA4FACFE15591BD500D85A7E /* Sources */,
+				DA4FACFF15591BD500D85A7E /* Frameworks */,
+				DA4FAD0015591BD500D85A7E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA5B05A61559298A00C93809 /* PBXTargetDependency */,
+			);
+			name = FRLayeredNavigationControllerDemo;
+			productName = FRLayeredNavigationControllerDemo;
+			productReference = DA4FAD0215591BD500D85A7E /* FRLayeredNavigationControllerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DA4FACBD15591AB300D85A7E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = DA4FACC015591AB300D85A7E /* Build configuration list for PBXProject "FRLayeredNavigationController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DA4FACBB15591AB300D85A7E;
+			productRefGroup = DA4FACC715591AB300D85A7E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DA4FACC515591AB300D85A7E /* FRLayeredNavigationController */,
+				DA4FAD0115591BD500D85A7E /* FRLayeredNavigationControllerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA4FAD0015591BD500D85A7E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA4FAD0E15591BD500D85A7E /* InfoPlist.strings in Resources */,
+				DA4FAD2315591C4100D85A7E /* mandel.jpg in Resources */,
+				DA4FAD2615591C4100D85A7E /* steel.png in Resources */,
+				DA4FAD2B15591C6E00D85A7E /* AUTHORS in Resources */,
+				DA4FAD2C15591C6E00D85A7E /* COPYING in Resources */,
+				DA4FAD2D15591C6E00D85A7E /* COPYING.LESSER in Resources */,
+				DA4FAD2E15591C6E00D85A7E /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA4FACC215591AB300D85A7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA5B05A41559296E00C93809 /* UIViewController+FRLayeredNavigationController.m in Sources */,
+				DA4FACF515591B6700D85A7E /* FRLayerChromeView.m in Sources */,
+				DA4FACF715591B6700D85A7E /* FRLayerController.m in Sources */,
+				DA4FACF915591B6700D85A7E /* FRLayeredNavigationController.m in Sources */,
+				DA4FACFB15591B6700D85A7E /* FRLayeredNavigationItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA4FACFE15591BD500D85A7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA4FAD2115591C4100D85A7E /* AppDelegate.m in Sources */,
+				DA4FAD2215591C4100D85A7E /* main.m in Sources */,
+				DA4FAD2415591C4100D85A7E /* SampleContentViewController.m in Sources */,
+				DA4FAD2515591C4100D85A7E /* SampleListViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA5B05A61559298A00C93809 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA4FACC515591AB300D85A7E /* FRLayeredNavigationController */;
+			targetProxy = DA5B05A51559298A00C93809 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA4FAD0C15591BD500D85A7E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA4FAD0D15591BD500D85A7E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DA4FACD115591AB300D85A7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DA4FACD215591AB300D85A7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DA4FACD415591AB300D85A7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FRLayeredNavigationController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRLayeredNavigationController/FRLayeredNavigationController-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DA4FACD515591AB300D85A7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FRLayeredNavigationController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRLayeredNavigationController/FRLayeredNavigationController-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DA4FAD1615591BD500D85A7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Prefix.pch";
+				INFOPLIST_FILE = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DA4FAD1715591BD500D85A7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Prefix.pch";
+				INFOPLIST_FILE = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DA4FACC015591AB300D85A7E /* Build configuration list for PBXProject "FRLayeredNavigationController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA4FACD115591AB300D85A7E /* Debug */,
+				DA4FACD215591AB300D85A7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA4FACD315591AB300D85A7E /* Build configuration list for PBXNativeTarget "FRLayeredNavigationController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA4FACD415591AB300D85A7E /* Debug */,
+				DA4FACD515591AB300D85A7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA4FAD1515591BD500D85A7E /* Build configuration list for PBXNativeTarget "FRLayeredNavigationControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA4FAD1615591BD500D85A7E /* Debug */,
+				DA4FAD1715591BD500D85A7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DA4FACBD15591AB300D85A7E /* Project object */;
+}
