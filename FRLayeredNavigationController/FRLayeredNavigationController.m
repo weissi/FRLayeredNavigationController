@@ -297,7 +297,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     
     [FRLayeredNavigationController viewController:me
                                      xTranslation:xTranslation
-                                          bounded: /* YES]; */ ![self.firstTouchedView isDescendantOfView:me.view]];
+                                          bounded:YES];  /* ![self.firstTouchedView isDescendantOfView:me.view]]; */
     
     if (!descendentOfTouched && [touchedView isDescendantOfView:me.view]) {
         [self moveViewControllerIndex:myIndex-1
