@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 
 #import "FRLayeredNavigationItem.h"
+#import "Utils.h"
 
 @interface FRLayeredNavigationController : UIViewController<UIGestureRecognizerDelegate> {
     UIView *firstTouchedView;

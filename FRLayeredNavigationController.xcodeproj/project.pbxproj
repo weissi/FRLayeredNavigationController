@@ -34,6 +34,8 @@
 		DA5B059B155923D000C93809 /* libFRLayeredNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */; };
 		DA5B05A21559267000C93809 /* FRLayeredNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5B05A11559267000C93809 /* FRLayeredNavigation.h */; };
 		DA5B05A41559296E00C93809 /* UIViewController+FRLayeredNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */; };
+		DAAB20B0155D27A700C5CAA5 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = DAAB20AE155D27A700C5CAA5 /* Utils.h */; };
+		DAAB20B1155D27A700C5CAA5 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAB20AF155D27A700C5CAA5 /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
 		DA4FAD2A15591C6E00D85A7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DA5B05A11559267000C93809 /* FRLayeredNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayeredNavigation.h; sourceTree = "<group>"; };
+		DAAB20AE155D27A700C5CAA5 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		DAAB20AF155D27A700C5CAA5 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 		DA4FACCB15591AB300D85A7E /* FRLayeredNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				DAAB20AE155D27A700C5CAA5 /* Utils.h */,
+				DAAB20AF155D27A700C5CAA5 /* Utils.m */,
 				DA4FACEA15591B6700D85A7E /* FRLayerChromeView.h */,
 				DA4FACEB15591B6700D85A7E /* FRLayerChromeView.m */,
 				DA4FACEC15591B6700D85A7E /* FRLayerController.h */,
@@ -205,6 +211,7 @@
 				DA4FACFA15591B6700D85A7E /* FRLayeredNavigationItem.h in Headers */,
 				DA4FACFC15591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h in Headers */,
 				DA5B05A21559267000C93809 /* FRLayeredNavigation.h in Headers */,
+				DAAB20B0155D27A700C5CAA5 /* Utils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +306,7 @@
 				DA4FACF715591B6700D85A7E /* FRLayerController.m in Sources */,
 				DA4FACF915591B6700D85A7E /* FRLayeredNavigationController.m in Sources */,
 				DA4FACFB15591B6700D85A7E /* FRLayeredNavigationItem.m in Sources */,
+				DAAB20B1155D27A700C5CAA5 /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +416,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
@@ -422,6 +434,10 @@
 				GCC_PREFIX_HEADER = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "FRLayeredNavigationControllerDemo/FRLayeredNavigationControllerDemo-Info.plist";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;

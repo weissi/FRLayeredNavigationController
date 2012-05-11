@@ -36,8 +36,8 @@
     UIViewController *vc = [[SampleListViewController alloc] init];
     FRLayeredNavigationController *fvc = [[FRLayeredNavigationController alloc] initWithRootViewController:vc
                                       configuration:^(FRLayeredNavigationItem *item) {
-                                          item.width = 600;
-                                          item.nextItemDistance = 2;
+                                          item.width = 200; //600;
+                                          item.nextItemDistance = 64; //2;
                                       }];
     
     self.window.rootViewController = fvc;

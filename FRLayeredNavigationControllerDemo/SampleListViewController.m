@@ -205,12 +205,16 @@
         svc = [[SampleListViewController alloc] init];
         svc.title = title;
         [self.layeredNavigationController pushViewController:svc inFrontOf:self maximumWidth:NO animated:YES configuration:^(FRLayeredNavigationItem *item) {
+            /*
             item.width = (arc4random() % 200) + 200;
             if (indexPath.row == 6) {
                 item.nextItemDistance = 2;
             } else {
                 item.nextItemDistance = (arc4random() % 100) + 40;
             }
+             */
+            item.width = 200;
+            item.nextItemDistance = 64;
             item.title = [NSString stringWithFormat:@"%@ (%f)", title, item.width];;
             return;
         }];
