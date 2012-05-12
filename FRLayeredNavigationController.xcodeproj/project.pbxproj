@@ -35,6 +35,9 @@
 		DA5B05A41559296E00C93809 /* UIViewController+FRLayeredNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */; };
 		DAAB20B0155D27A700C5CAA5 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = DAAB20AE155D27A700C5CAA5 /* Utils.h */; };
 		DAAB20B1155D27A700C5CAA5 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAB20AF155D27A700C5CAA5 /* Utils.m */; };
+		DAB8C67E155E8F6A00340CB7 /* FRLayeredNavigationItem+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */; };
+		DAB8C686155E93E700340CB7 /* FRLayerController+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB8C684155E93E700340CB7 /* FRLayerController+Protected.h */; };
+		DAB8C68C155E9DEE00340CB7 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB8C68B155E9DEE00340CB7 /* back.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,9 @@
 		DA5B05A11559267000C93809 /* FRLayeredNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayeredNavigation.h; sourceTree = "<group>"; };
 		DAAB20AE155D27A700C5CAA5 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		DAAB20AF155D27A700C5CAA5 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FRLayeredNavigationItem+Protected.h"; sourceTree = "<group>"; };
+		DAB8C684155E93E700340CB7 /* FRLayerController+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FRLayerController+Protected.h"; sourceTree = "<group>"; };
+		DAB8C68B155E9DEE00340CB7 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,10 +155,12 @@
 				DA4FACEB15591B6700D85A7E /* FRLayerChromeView.m */,
 				DA4FACEC15591B6700D85A7E /* FRLayerController.h */,
 				DA4FACED15591B6700D85A7E /* FRLayerController.m */,
+				DAB8C684155E93E700340CB7 /* FRLayerController+Protected.h */,
 				DA4FACEE15591B6700D85A7E /* FRLayeredNavigationController.h */,
 				DA4FACEF15591B6700D85A7E /* FRLayeredNavigationController.m */,
 				DA4FACF015591B6700D85A7E /* FRLayeredNavigationItem.h */,
 				DA4FACF115591B6700D85A7E /* FRLayeredNavigationItem.m */,
+				DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */,
 				DA4FACF215591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h */,
 				DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */,
 				DA4FACCC15591AB300D85A7E /* Supporting Files */,
@@ -172,6 +180,7 @@
 		DA4FAD0915591BD500D85A7E /* FRLayeredNavigationControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DAB8C68B155E9DEE00340CB7 /* back.png */,
 				DA4FAD1815591C4100D85A7E /* AppDelegate.h */,
 				DA4FAD1915591C4100D85A7E /* AppDelegate.m */,
 				DA4FAD1A15591C4100D85A7E /* main.m */,
@@ -209,6 +218,8 @@
 				DA4FACFC15591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h in Headers */,
 				DA5B05A21559267000C93809 /* FRLayeredNavigation.h in Headers */,
 				DAAB20B0155D27A700C5CAA5 /* Utils.h in Headers */,
+				DAB8C67E155E8F6A00340CB7 /* FRLayeredNavigationItem+Protected.h in Headers */,
+				DAB8C686155E93E700340CB7 /* FRLayerController+Protected.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +298,7 @@
 				DA4FAD2C15591C6E00D85A7E /* COPYING in Resources */,
 				DA4FAD2D15591C6E00D85A7E /* COPYING.LESSER in Resources */,
 				DA4FAD2E15591C6E00D85A7E /* README.md in Resources */,
+				DAB8C68C155E9DEE00340CB7 /* back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

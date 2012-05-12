@@ -30,11 +30,15 @@
 
 @implementation SampleContentViewController
 
+- (void)hooray
+{
+    NSLog(@"hooray");
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
     }
     return self;
 }
@@ -70,6 +74,22 @@
 
 - (void)viewWillLayoutSubviews {
     scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.layeredNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                    initWithImage:[UIImage imageNamed:@"back.png"]
+                                                    style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(hooray)];
+    self.layeredNavigationItem.leftBarButtonItem.style = UIBarButtonItemStyleBordered;
+    self.layeredNavigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                     initWithImage:[UIImage imageNamed:@"back.png"]
+                                                     style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(hooray)];
+    self.layeredNavigationItem.rightBarButtonItem.style = UIBarButtonItemStyleBordered;
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {

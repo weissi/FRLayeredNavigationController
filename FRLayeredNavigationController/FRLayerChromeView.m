@@ -32,6 +32,9 @@
         _savedGradient = nil;
         self.backgroundColor = [UIColor clearColor];
         
+        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
+        [self addSubview:_toolbar];
+        
         if (titleView == nil) {
             UILabel *titleLabel = [[UILabel alloc] init];
             
@@ -44,11 +47,13 @@
                                                    green:118.0f/255.0f
                                                     blue:126.0f/255.0f
                                                    alpha:1.0f];
-
-            [self addSubview:titleLabel];
+            
+            self.titleView = titleLabel;
         } else {
-            [self addSubview:titleView];
+            self.titleView = titleView;
         }
+        [self addSubview:self.titleView];
+        [self manageToolbar];
     }
     return self;
 }
@@ -58,22 +63,56 @@
     self->_savedGradient = NULL;
 }
 
+- (void)manageToolbar
+{
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:nil
+                                                                                   action:nil];
+
+    if (self.leftBarButtonItem != nil && self.rightBarButtonItem != nil) {
+        [self.toolbar setItems:[NSArray arrayWithObjects:_leftBarButtonItem, flexibleSpace, _rightBarButtonItem, nil]];
+    } else if(self.leftBarButtonItem != nil && self.rightBarButtonItem == nil) {
+        [self.toolbar setItems:[NSArray arrayWithObject:_leftBarButtonItem]];
+    } else {
+        [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, _rightBarButtonItem, nil]];
+    }
+    
+    [self setNeedsLayout];
+}
+
+- (void)setLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem
+{
+    _leftBarButtonItem = leftBarButtonItem;
+    [self manageToolbar];
+}
+
+- (void)setRightBarButtonItem:(UIBarButtonItem *)rightBarButtonItem
+{
+    _rightBarButtonItem = rightBarButtonItem;
+    [self manageToolbar];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect titleFrameMax = CGRectMake(5,
-                                   0, 
-                                   self.bounds.size.width-10,
-                                   self.bounds.size.height);
-    UIView *titleView = [self.subviews objectAtIndex:0];
-
-    CGSize titleFittingSize = [titleView sizeThatFits:titleFrameMax.size];
-    CGRect titleFrame = CGRectMake(MAX((titleFrameMax.size.width - titleFittingSize.width)/2, titleFrameMax.origin.x),
-                                   MAX((titleFrameMax.size.height - titleFittingSize.height)/2, titleFrameMax.origin.y),
-                                   MIN(titleFittingSize.width, titleFrameMax.size.width),
-                                   MIN(titleFittingSize.height, titleFrameMax.size.height));        
+    CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?44:0) + (self.rightBarButtonItem!=nil?44:0);
     
-    titleView.frame = titleFrame;
+    self.toolbar.frame = CGRectMake(5, 0, self.bounds.size.width-10, self.bounds.size.height);
+    
+    CGRect headerMiddleFrame = CGRectMake(5 + (barButtonItemsSpace/2),
+                                          0, 
+                                          self.bounds.size.width-10-barButtonItemsSpace,
+                                          self.bounds.size.height);
+    
+    CGSize titleFittingSize = [self.titleView sizeThatFits:headerMiddleFrame.size];
+    CGRect titleFrame = CGRectMake(MAX((headerMiddleFrame.size.width - titleFittingSize.width)/2,
+                                       headerMiddleFrame.origin.x),
+                                   MAX((headerMiddleFrame.size.height - titleFittingSize.height)/2,
+                                       headerMiddleFrame.origin.y),
+                                   MIN(titleFittingSize.width, headerMiddleFrame.size.width),
+                                   MIN(titleFittingSize.height, headerMiddleFrame.size.height));        
+    
+    self.titleView.frame = titleFrame;
 }
 
 - (CGGradientRef)gradient {
@@ -114,5 +153,10 @@
     
     CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
 }
+
+@synthesize leftBarButtonItem = _leftBarButtonItem;
+@synthesize rightBarButtonItem = _rightBarButtonItem;
+@synthesize toolbar = _toolbar;
+@synthesize titleView = _titleView;
 
 @end

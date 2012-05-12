@@ -18,15 +18,46 @@
  */
 
 #import "FRLayeredNavigationItem.h"
+#import "FRLayerController+Protected.h"
+#import "FRLayerController.h"
+#import "FRLayerChromeView.h"
+
+@interface FRLayeredNavigationItem ()
+
+@property (nonatomic, readwrite, weak) FRLayerController *layerController;
+
+@end
 
 @implementation FRLayeredNavigationItem
 
-@synthesize initialViewPosition;
-@synthesize currentViewPosition;
-@synthesize title;
-@synthesize titleView;
-@synthesize width;
-@synthesize nextItemDistance;
-@synthesize hasChrome;
+- (void)setLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem
+{
+    self.layerController.chromeView.leftBarButtonItem = leftBarButtonItem;
+}
+
+- (UIBarButtonItem *)leftBarButtonItem
+{
+    return self.layerController.chromeView.leftBarButtonItem;
+}
+
+- (void)setRightBarButtonItem:(UIBarButtonItem *)rightBarButtonItem
+{
+    self.layerController.chromeView.rightBarButtonItem = rightBarButtonItem;
+}
+
+- (UIBarButtonItem *)rightBarButtonItem
+{
+    return self.layerController.chromeView.rightBarButtonItem;
+}
+
+
+@synthesize initialViewPosition = _initialViewPosition;
+@synthesize currentViewPosition = _currentViewPosition;
+@synthesize title = _title;
+@synthesize titleView = _titleView;
+@synthesize width = _width;
+@synthesize nextItemDistance = _nextItemDistance;
+@synthesize hasChrome = _hasChrome;
+@synthesize layerController = _layerController;
 
 @end

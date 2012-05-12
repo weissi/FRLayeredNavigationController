@@ -19,8 +19,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FRLayeredNavigationItem.h"
 #import "Utils.h"
+
+@class FRLayeredNavigationItem;
 
 @interface FRLayeredNavigationController : UIViewController<UIGestureRecognizerDelegate> {
     @private

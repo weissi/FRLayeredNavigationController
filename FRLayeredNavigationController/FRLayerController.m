@@ -18,8 +18,9 @@
  */
 
 #import "FRLayerController.h"
-
 #import "FRLayerChromeView.h"
+#import "FRLayeredNavigation.h"
+#import "FRLayeredNavigationItem+Protected.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -40,12 +41,18 @@
 - (id)initWithContentViewController:(UIViewController *)vc maximumWidth:(BOOL)maxWidth {
     if ((self = [super init])) {
         _layeredNavigationItem = [[FRLayeredNavigationItem alloc] init];
+        _layeredNavigationItem.layerController = self;
         _contentViewController = vc;
         _maximumWidth = maxWidth;
     }
     assert(self.parentViewController == nil);
 
     return self;
+}
+
+- (void)dealloc
+{
+    self.layeredNavigationItem.layerController = nil;
 }
 
 - (void)loadView {

@@ -55,6 +55,27 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)hooray
+{
+    NSLog(@"hooray");
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.layeredNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                    initWithImage:[UIImage imageNamed:@"back.png"]
+                                                    style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(hooray)];
+    self.layeredNavigationItem.leftBarButtonItem.style = UIBarButtonItemStyleBordered;
+    self.layeredNavigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                     initWithImage:[UIImage imageNamed:@"back.png"]
+                                                     style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(hooray)];
+    self.layeredNavigationItem.rightBarButtonItem.style = UIBarButtonItemStyleBordered;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;

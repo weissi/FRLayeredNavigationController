@@ -19,6 +19,7 @@
 
 #import "FRLayeredNavigationController.h"
 #import "FRLayerController.h"
+#import "FRLayeredNavigationItem.h"
 #import "UIViewController+FRLayeredNavigationController.h"
 
 #import <QuartzCore/QuartzCore.h>

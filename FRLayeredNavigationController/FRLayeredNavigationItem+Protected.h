@@ -17,27 +17,12 @@
  *  Copyright (c) 2012, Johannes Weiß <weiss@tux4u.de> for factis research GmbH.
  */
 
-#import <UIKit/UIKit.h>
+#import "FRLayeredNavigationItem.h"
 
-@class FRLayerChromeView;
-@class FRLayeredNavigationItem;
+@class FRLayerController;
 
-@interface FRLayerController : UIViewController {
-    @private
-    FRLayeredNavigationItem *_layeredNavigationItem;
-    
-    BOOL _maximumWidth;
-    
-    FRLayerChromeView *_chromeView;
-    UIView *_borderView;
-    
-    UIViewController *_contentViewController;
-}
+@interface FRLayeredNavigationItem (Protected)
 
-- (id)initWithContentViewController:(UIViewController *)contentViewController maximumWidth:(BOOL)maxWidth;
-
-@property (nonatomic, readonly, strong) FRLayeredNavigationItem *layeredNavigationItem;
-@property (nonatomic, readonly, strong) UIViewController *contentViewController;
-@property (nonatomic, readonly) BOOL maximumWidth;
+@property (nonatomic, readwrite, weak) FRLayerController *layerController;
 
 @end

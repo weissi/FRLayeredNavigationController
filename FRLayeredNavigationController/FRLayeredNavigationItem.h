@@ -21,15 +21,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class FRLayerController;
+
 @interface FRLayeredNavigationItem : NSObject {
     @private
-    CGPoint initialViewPosition;
-    CGPoint currentViewPosition;
-    NSString *title;
-    UIView *titleView;
-    CGFloat width;
-    CGFloat nextItemDistance;
-    BOOL hasChrome;
+    CGPoint _initialViewPosition;
+    CGPoint _currentViewPosition;
+    NSString *_title;
+    UIView *_titleView;
+    CGFloat _width;
+    CGFloat _nextItemDistance;
+    BOOL _hasChrome;
+    FRLayerController __weak * _layerController;
 }
 
 @property (nonatomic, readwrite) CGPoint initialViewPosition;
@@ -39,5 +42,7 @@
 @property (nonatomic, readwrite) CGFloat width;
 @property (nonatomic, readwrite) CGFloat nextItemDistance;
 @property (nonatomic, readwrite) BOOL hasChrome;
+@property (nonatomic, strong) UIBarButtonItem *leftBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 
 @end
