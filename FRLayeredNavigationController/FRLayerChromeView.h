@@ -20,7 +20,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FRLayerChromeView : UIView {
-    CGGradientRef _savedGradient;
     UIToolbar *_toolbar;
     UIBarButtonItem *_leftBarButtonItem;
     UIBarButtonItem *_rightBarButtonItem;

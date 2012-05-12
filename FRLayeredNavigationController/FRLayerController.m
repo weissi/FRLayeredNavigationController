@@ -24,6 +24,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#define FRLayerChromeHeight ((CGFloat)44)
+
 @interface FRLayerController ()
 
 @property (nonatomic, readwrite, strong) UIViewController *contentViewController;
@@ -78,22 +80,22 @@
         CGRect chromeFrame = CGRectMake(0,
                                         0,
                                         self.view.bounds.size.width,
-                                        44);
+                                        FRLayerChromeHeight);
         CGRect borderFrame = CGRectMake(0,
-                                        44,
+                                        FRLayerChromeHeight,
                                         self.view.bounds.size.width,
-                                        self.view.bounds.size.height-44);
+                                        self.view.bounds.size.height-FRLayerChromeHeight);
         contentFrame = CGRectMake(1,
-                                  45,
+                                  FRLayerChromeHeight + 1,
                                   self.view.bounds.size.width-2,
-                                  self.view.bounds.size.height-46);
+                                  self.view.bounds.size.height-FRLayerChromeHeight-2);
         self.borderView.frame = borderFrame;
         self.chromeView.frame = chromeFrame;
     } else {
         contentFrame = CGRectMake(0,
-                                         0,
-                                         self.view.bounds.size.width,
-                                         self.view.bounds.size.height);
+                                  0,
+                                  self.view.bounds.size.width,
+                                  self.view.bounds.size.height);
     }
     
     
