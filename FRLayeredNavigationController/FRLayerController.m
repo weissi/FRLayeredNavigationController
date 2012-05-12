@@ -25,23 +25,23 @@
 
 @interface FRLayerController ()
 
-@property (nonatomic, readwrite, retain) UIViewController *contentViewController;
-@property (nonatomic, readwrite, retain) FRLayeredNavigationItem *layeredNavigationItem;
-@property (nonatomic, readwrite, assign) BOOL leaf;
+@property (nonatomic, readwrite, strong) UIViewController *contentViewController;
+@property (nonatomic, readwrite, strong) FRLayeredNavigationItem *layeredNavigationItem;
+@property (nonatomic, readwrite) BOOL maximumWidth;
 
-@property (nonatomic, retain) FRLayerChromeView *chromeView;
-@property (nonatomic, retain) UIView *borderView;
-@property (nonatomic, retain) UIView *contentView;
+@property (nonatomic, strong) FRLayerChromeView *chromeView;
+@property (nonatomic, strong) UIView *borderView;
+@property (nonatomic, strong) UIView *contentView;
 
 @end
 
 @implementation FRLayerController
 
-- (id)initWithContentViewController:(UIViewController *)aContentViewController leaf:(BOOL)isLeaf {
+- (id)initWithContentViewController:(UIViewController *)vc maximumWidth:(BOOL)maxWidth {
     if ((self = [super init])) {
-        self.contentViewController = aContentViewController;
-        self.layeredNavigationItem = [[FRLayeredNavigationItem alloc] init];
-        self.leaf = isLeaf;
+        _layeredNavigationItem = [[FRLayeredNavigationItem alloc] init];
+        _contentViewController = vc;
+        _maximumWidth = maxWidth;
     }
     assert(self.parentViewController == nil);
 
@@ -160,11 +160,11 @@
 	return YES;
 }
 
-@synthesize contentViewController;
-@synthesize leaf;
-@synthesize borderView;
-@synthesize contentView;
-@synthesize chromeView;
-@synthesize layeredNavigationItem;
+@synthesize contentViewController = _contentViewController;
+@synthesize maximumWidth = _maximumWidth;
+@synthesize borderView = _borderView;
+@synthesize contentView = _contentView;
+@synthesize chromeView = _chromeView;
+@synthesize layeredNavigationItem = _layeredNavigationItem;
 
 @end

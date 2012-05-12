@@ -23,8 +23,8 @@
 
 @interface SampleContentViewController ()
 
-@property (nonatomic, readwrite, retain) UIImageView *imageView;
-@property (nonatomic, readwrite, retain) UIScrollView *scrollView;
+@property (nonatomic, readwrite, strong) UIImageView *imageView;
+@property (nonatomic, readwrite, strong) UIScrollView *scrollView;
 
 @end
 

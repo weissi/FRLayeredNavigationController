@@ -22,6 +22,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FRLayeredNavigationItem : NSObject {
+    @private
     CGPoint initialViewPosition;
     CGPoint currentViewPosition;
     NSString *title;
@@ -31,12 +32,12 @@
     BOOL hasChrome;
 }
 
-@property (nonatomic, readwrite, assign) CGPoint initialViewPosition;
-@property (nonatomic, readwrite, assign) CGPoint currentViewPosition;
-@property (nonatomic, readwrite, retain) NSString *title;
-@property (nonatomic, readwrite, retain) UIView *titleView;
-@property (nonatomic, readwrite, assign) CGFloat width;
-@property (nonatomic, readwrite, assign) CGFloat nextItemDistance;
-@property (nonatomic, readwrite, assign) BOOL hasChrome;
+@property (nonatomic, readwrite) CGPoint initialViewPosition;
+@property (nonatomic, readwrite) CGPoint currentViewPosition;
+@property (nonatomic, readwrite, strong) NSString *title;
+@property (nonatomic, readwrite, strong) UIView *titleView;
+@property (nonatomic, readwrite) CGFloat width;
+@property (nonatomic, readwrite) CGFloat nextItemDistance;
+@property (nonatomic, readwrite) BOOL hasChrome;
 
 @end

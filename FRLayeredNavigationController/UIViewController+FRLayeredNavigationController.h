@@ -21,7 +21,7 @@
 
 @interface UIViewController (FRLayeredNavigationController)
 
-@property (nonatomic, readonly, retain) FRLayeredNavigationController *layeredNavigationController;
-@property (nonatomic, readonly, retain) FRLayeredNavigationItem *layeredNavigationItem;
+@property (nonatomic, readonly, strong) FRLayeredNavigationController *layeredNavigationController;
+@property (nonatomic, readonly, strong) FRLayeredNavigationItem *layeredNavigationItem;
 
 @end

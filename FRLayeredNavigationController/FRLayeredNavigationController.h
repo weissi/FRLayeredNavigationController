@@ -23,9 +23,10 @@
 #import "Utils.h"
 
 @interface FRLayeredNavigationController : UIViewController<UIGestureRecognizerDelegate> {
-    UIView *firstTouchedView;
-    NSMutableArray *viewControllers;
-    UIPanGestureRecognizer *panGR;
+    @private
+    UIView *_firstTouchedView;
+    NSMutableArray *_viewControllers;
+    UIPanGestureRecognizer *_panGR;
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
@@ -49,8 +50,5 @@
               maximumWidth:(BOOL)maxWidth
                   animated:(BOOL)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration;
-
-
-@property (nonatomic, readonly, retain) NSArray *viewControllers;
 
 @end

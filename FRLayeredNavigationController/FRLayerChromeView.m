@@ -29,7 +29,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self->_savedGradient = nil;
+        _savedGradient = nil;
         self.backgroundColor = [UIColor clearColor];
         
         if (titleView == nil) {

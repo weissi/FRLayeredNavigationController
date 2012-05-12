@@ -23,20 +23,21 @@
 #import "FRLayeredNavigationItem.h"
 
 @interface FRLayerController : UIViewController {
-    UIViewController *contentViewController;
-    FRLayeredNavigationItem *layeredNavigationItem;
+    @private
+    FRLayeredNavigationItem *_layeredNavigationItem;
     
-    BOOL leaf;
+    BOOL _maximumWidth;
     
-    FRLayerChromeView *chromeView;
-    UIView *borderView;
-    UIView *contentView;
+    FRLayerChromeView *_chromeView;
+    UIView *_borderView;
+    
+    UIViewController *_contentViewController;
 }
 
-- (id)initWithContentViewController:(UIViewController *)contentViewController leaf:(BOOL)isLeaf;
+- (id)initWithContentViewController:(UIViewController *)contentViewController maximumWidth:(BOOL)maxWidth;
 
-@property (nonatomic, readonly, retain) FRLayeredNavigationItem *layeredNavigationItem;
-@property (nonatomic, readonly, retain) UIViewController *contentViewController;
-@property (nonatomic, readonly, assign) BOOL leaf;
+@property (nonatomic, readonly, strong) FRLayeredNavigationItem *layeredNavigationItem;
+@property (nonatomic, readonly, strong) UIViewController *contentViewController;
+@property (nonatomic, readonly) BOOL maximumWidth;
 
 @end
