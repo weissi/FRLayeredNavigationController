@@ -41,10 +41,7 @@
                                       }];
     
     self.window.rootViewController = fvc;
-    
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *path = [bundle pathForResource:@"steel" ofType:@"png"];
-    fvc.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:path]];
+    fvc.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 
     [self.window makeKeyAndVisible];
 
