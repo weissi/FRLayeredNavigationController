@@ -27,7 +27,6 @@
 #define FRLayeredNavigationControllerStandardDistance ((float)64)
 #define FRLayeredNavigationControllerStandardWidth ((float)400)
 #define FRLayeredNavigationControllerSnappingVelocityThreshold ((float)100)
-#define NoVcOutOfBounds ((NSInteger)-1)
 
 typedef enum {
     SnappingPointsMethodNearest,
@@ -38,9 +37,9 @@ typedef enum {
 @interface FRLayeredNavigationController ()
 
 @property (nonatomic, readwrite, strong) UIPanGestureRecognizer *panGR;
-@property (nonatomic, readwrite, strong) UIView *firstTouchedView;
 @property (nonatomic, readwrite, strong) NSMutableArray *viewControllers;
-@property (nonatomic, readwrite) NSInteger outOfBoundsViewControllerIndex;
+@property (nonatomic, readwrite, weak) UIViewController *outOfBoundsViewController;
+@property (nonatomic, readwrite, weak) UIView *firstTouchedView;
 
 @end
 
@@ -65,7 +64,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
         configuration(layeredRC.layeredNavigationItem);
-        _outOfBoundsViewControllerIndex = NoVcOutOfBounds;
+        _outOfBoundsViewController = nil;
     }
     return self;    
 }
@@ -159,11 +158,15 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
             const NSInteger startVcIdx = [self.viewControllers count]-1;
             const UIViewController *startVc = [self.viewControllers objectAtIndex:startVcIdx];
             
+            [self moveViewControllersXTranslation:[gestureRecognizer translationInView:self.view].x];
+            
+            /*
             [self moveViewControllersStartIndex:startVcIdx
                     xTranslation:[gestureRecognizer translationInView:self.view].x
                           withParentIndex:-1
                        parentLastPosition:CGPointZero
                       descendentOfTouched:NO];
+             */
             [gestureRecognizer setTranslation:CGPointZero inView:startVc.view];
             break;
         }
@@ -301,94 +304,89 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     [self viewControllersToSnappingPointsMethod:method];
 }
 
-- (void)moveViewControllersStartIndex:(NSInteger)myIndex
-                         xTranslation:(CGFloat)xTranslationGesture
-                      withParentIndex:(NSInteger)parentIndex
-                   parentLastPosition:(CGPoint)parentOldPos
-                  descendentOfTouched:(BOOL)descendentOfTouched
+- (void)moveViewControllersXTranslation:(CGFloat)xTranslationGesture
 {
-    if (myIndex == 0) {
-        return;
-    }
+    FRLayeredNavigationItem *parentNavItem = nil;
+    CGPoint parentOldPos = CGPointZero;
+    BOOL descendentOfTouched = NO;
+    FRLayerController *rootVC = [self.viewControllers objectAtIndex:0];
     
-    FRLayerController *me = [self.viewControllers objectAtIndex:myIndex];
-    const FRLayerController *parent = parentIndex < 0 ? nil : [self.viewControllers objectAtIndex:myIndex+1];
-    
-    const CGPoint myPos = me.layeredNavigationItem.currentViewPosition;
-    const CGPoint parentPos = parent.layeredNavigationItem.currentViewPosition;
-    const CGPoint myInitPos = me.layeredNavigationItem.initialViewPosition;
-    const CGPoint parentInitPos = parent.layeredNavigationItem.initialViewPosition;
-    const CGFloat myWidth = me.view.frame.size.width;
-    const CGPoint myOldPos = myPos;
-    
-    CGPoint myNewPos = myPos;
-    
-    CGFloat xTranslation = 0;
-    
-    if (parentIndex < 0 || !descendentOfTouched) {
-        xTranslation = xTranslationGesture;
-    } else {
-        CGFloat newX = myPos.x;
-        const CGFloat minDiff = parentInitPos.x - myInitPos.x;
-        
-        if (parentOldPos.x >= myPos.x + myWidth || parentPos.x >= myPos.x + myWidth) {
-            /* if snapped to parent's right border, move with parent */
-            newX = parentPos.x - myWidth;
+    for (FRLayerController *me in [self.viewControllers reverseObjectEnumerator]) {
+        if (rootVC == me) {
+            break;
         }
+        FRLayeredNavigationItem *meNavItem = me.layeredNavigationItem;
+        
+        const CGPoint myPos = meNavItem.currentViewPosition;
+        const CGPoint myInitPos = meNavItem.initialViewPosition;
+        const CGFloat myWidth = me.view.frame.size.width;
+        CGPoint myNewPos = myPos;
 
-        if (parentPos.x - myNewPos.x <= minDiff) {
-            /* at least minDiff difference between parent and me */
-            newX = parentPos.x - minDiff;
+        const CGPoint myOldPos = myPos;
+        const CGPoint parentPos = parentNavItem.currentViewPosition;
+        const CGPoint parentInitPos = parentNavItem.initialViewPosition;
+        
+        CGFloat xTranslation = 0;
+        
+        if (parentNavItem == nil || !descendentOfTouched) {
+            xTranslation = xTranslationGesture;
+        } else {
+            CGFloat newX = myPos.x;
+            const CGFloat minDiff = parentInitPos.x - myInitPos.x;
             
+            if (parentOldPos.x >= myPos.x + myWidth || parentPos.x >= myPos.x + myWidth) {
+                /* if snapped to parent's right border, move with parent */
+                newX = parentPos.x - myWidth;
+            }
+            
+            if (parentPos.x - myNewPos.x <= minDiff) {
+                /* at least minDiff difference between parent and me */
+                newX = parentPos.x - minDiff;
+                
+            }
+            
+            xTranslation = newX - myPos.x;
         }
         
-        xTranslation = newX - myPos.x;
-    }
-    
-    const BOOL isTouchedView = !descendentOfTouched && [self.firstTouchedView isDescendantOfView:me.view];
-    
-    if (self.outOfBoundsViewControllerIndex == NoVcOutOfBounds || 
-        self.outOfBoundsViewControllerIndex == myIndex ||
-        xTranslationGesture < 0) {
-        const BOOL boundedMove = !isTouchedView;
-
-        /*
-         * IF no view controller is out of bounds (too far on the left)
-         * OR if me who is out of bounds
-         * OR the translation goes to the left again
-         * THEN: apply the translation
-         */
-        const BOOL outOfBoundsMove = [FRLayeredNavigationController viewController:me
-                                                                      xTranslation:xTranslation
-                                                                           bounded:boundedMove];
-        if (outOfBoundsMove) {
-            /* this move was out of bounds */
-            self.outOfBoundsViewControllerIndex = myIndex;
-        } else if(!outOfBoundsMove && self.outOfBoundsViewControllerIndex == myIndex) {
-            /* I have been moved out of bounds some time ago but now I'm back in the bounds :-), so:
-             * - no one can be out of bounds now
-             * - I have to be reset to my initial position
-             * - discard the rest of the translation
+        const BOOL isTouchedView = !descendentOfTouched && [self.firstTouchedView isDescendantOfView:me.view];
+        
+        if (self.outOfBoundsViewController == nil || 
+            self.outOfBoundsViewController == me ||
+            xTranslationGesture < 0) {
+            const BOOL boundedMove = !isTouchedView;
+            
+            /*
+             * IF no view controller is out of bounds (too far on the left)
+             * OR if me who is out of bounds
+             * OR the translation goes to the left again
+             * THEN: apply the translation
              */
-            self.outOfBoundsViewControllerIndex = NoVcOutOfBounds;
-            [FRLayeredNavigationController viewControllerToInitialPosition:me];
-            return; /* this discard the rest of the translation (i.e. stops the recursion) */
+            const BOOL outOfBoundsMove = [FRLayeredNavigationController viewController:me
+                                                                          xTranslation:xTranslation
+                                                                               bounded:boundedMove];
+            if (outOfBoundsMove) {
+                /* this move was out of bounds */
+                self.outOfBoundsViewController = me;
+            } else if(!outOfBoundsMove && self.outOfBoundsViewController == me) {
+                /* I have been moved out of bounds some time ago but now I'm back in the bounds :-), so:
+                 * - no one can be out of bounds now
+                 * - I have to be reset to my initial position
+                 * - discard the rest of the translation
+                 */
+                self.outOfBoundsViewController = nil;
+                [FRLayeredNavigationController viewControllerToInitialPosition:me];
+                break; /* this discards the rest of the translation (i.e. stops the loop) */
+            }
         }
-    }
-    
-    if (isTouchedView) {
-        NSAssert(!descendentOfTouched, @"cannot be descendent of touched AND touched view");
-        [self moveViewControllersStartIndex:myIndex-1
-                xTranslation:xTranslationGesture
-                      withParentIndex:myIndex
-                   parentLastPosition:myOldPos
-                  descendentOfTouched:YES];
-    } else {
-        [self moveViewControllersStartIndex:myIndex-1
-                xTranslation:xTranslationGesture
-                      withParentIndex:myIndex
-                   parentLastPosition:myOldPos
-                  descendentOfTouched:descendentOfTouched];
+        
+        if (isTouchedView) {
+            NSAssert(!descendentOfTouched, @"cannot be descendent of touched AND touched view");
+            descendentOfTouched = YES;
+        }
+        
+        /* initialize next iteration */
+        parentNavItem = meNavItem;
+        parentOldPos = myOldPos;
     }
 }
 
@@ -561,6 +559,6 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 @synthesize viewControllers = _viewControllers;
 @synthesize panGR = _panGR;
 @synthesize firstTouchedView = _firstTouchedView;
-@synthesize outOfBoundsViewControllerIndex = _outOfBoundsViewControllerIndex;
+@synthesize outOfBoundsViewController = _outOfBoundsViewController;
 
 @end

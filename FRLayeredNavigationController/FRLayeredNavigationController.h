@@ -25,10 +25,10 @@
 
 @interface FRLayeredNavigationController : UIViewController<UIGestureRecognizerDelegate> {
     @private
-    UIView *_firstTouchedView;
+    UIView * __weak _firstTouchedView;
     NSMutableArray *_viewControllers;
     UIPanGestureRecognizer *_panGR;
-    NSInteger _outOfBoundsViewControllerIndex;
+    UIViewController * __weak _outOfBoundsViewController;
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
