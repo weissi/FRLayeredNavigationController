@@ -24,14 +24,23 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define kFRLayeredNavigationControllerStandardDistance ((float)64)
-#define kFRLayeredNavigationControllerStandardWidth ((float)400)
+#define FRLayeredNavigationControllerStandardDistance ((float)64)
+#define FRLayeredNavigationControllerStandardWidth ((float)400)
+#define FRLayeredNavigationControllerSnappingVelocityThreshold ((float)100)
+#define NoVcOutOfBounds ((NSInteger)-1)
+
+typedef enum {
+    SnappingPointsMethodNearest,
+    SnappingPointsMethodCompact,
+    SnappingPointsMehtodExpand
+} SnappingPointsMethod;
 
 @interface FRLayeredNavigationController ()
 
 @property (nonatomic, readwrite, strong) UIPanGestureRecognizer *panGR;
 @property (nonatomic, readwrite, strong) UIView *firstTouchedView;
 @property (nonatomic, readwrite, strong) NSMutableArray *viewControllers;
+@property (nonatomic, readwrite) NSInteger outOfBoundsViewControllerIndex;
 
 @end
 
@@ -52,10 +61,11 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     if (self) {
         FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController maximumWidth:NO];
         _viewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
-        layeredRC.layeredNavigationItem.nextItemDistance = kFRLayeredNavigationControllerStandardDistance;
-        layeredRC.layeredNavigationItem.width = kFRLayeredNavigationControllerStandardWidth;
+        layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
+        layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
         configuration(layeredRC.layeredNavigationItem);
+        _outOfBoundsViewControllerIndex = NoVcOutOfBounds;
     }
     return self;    
 }
@@ -129,9 +139,6 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)handleGesture:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    UIView *touchedView = [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
-                                                withEvent:nil];
-    
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStatePossible: {
             //NSLog(@"UIGestureRecognizerStatePossible");
@@ -140,6 +147,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
             
         case UIGestureRecognizerStateBegan: {
             //NSLog(@"UIGestureRecognizerStateBegan");
+            UIView *touchedView = [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
+                                                        withEvent:nil];
             self.firstTouchedView = touchedView;
             break;
         }
@@ -150,8 +159,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
             const NSInteger startVcIdx = [self.viewControllers count]-1;
             const UIViewController *startVc = [self.viewControllers objectAtIndex:startVcIdx];
             
-            [self moveViewControllerIndex:startVcIdx
-                    withGestureRecognizer:gestureRecognizer
+            [self moveViewControllersStartIndex:startVcIdx
+                    xTranslation:[gestureRecognizer translationInView:self.view].x
                           withParentIndex:-1
                        parentLastPosition:CGPointZero
                       descendentOfTouched:NO];
@@ -161,9 +170,11 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
             
         case UIGestureRecognizerStateEnded: {
             //NSLog(@"UIGestureRecognizerStateEnded");
+
             [UIView animateWithDuration:0.2 animations:^{
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
             }];
+
             self.firstTouchedView = nil;
             
             break;
@@ -184,7 +195,17 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 #pragma mark - internal methods
 
-+ (void)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
++ (void)viewControllerToInitialPosition:(FRLayerController *)vc
+{
+    const CGPoint initPos = vc.layeredNavigationItem.initialViewPosition;
+    CGRect f = vc.view.frame;
+    f.origin = initPos;
+    vc.layeredNavigationItem.currentViewPosition = initPos;
+    vc.view.frame = f;
+}
+
++ (BOOL)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
+    BOOL didMoveOutOfBounds = NO;
     const FRLayeredNavigationItem *navItem = vc.layeredNavigationItem;
     const CGPoint initPos = navItem.initialViewPosition;
     
@@ -214,15 +235,17 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
         /* apply translation to frame first */
         if (f.origin.x <= initPos.x) {
+            didMoveOutOfBounds = YES;
             navItem.currentViewPosition = initPos;
         } else {
             navItem.currentViewPosition = f.origin;
         }
         vc.view.frame = f;
     }
+    return didMoveOutOfBounds;
 }
 
-- (void)viewControllersToSnappingPointsExpand:(BOOL)expand {
+- (void)viewControllersToSnappingPointsMethod:(SnappingPointsMethod)method {
     FRLayerController *last = nil;
     CGFloat xTranslation = 0;
     
@@ -235,10 +258,25 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         const CGFloat maxDiff = last.view.frame.size.width;
         
         if (xTranslation == 0 && (CGFloatNotEqual(curDiff, initDiff) && CGFloatNotEqual(curDiff, maxDiff))) {
-            if (expand) {
-                xTranslation = maxDiff - curDiff;
-            } else {
-                xTranslation = initDiff - curDiff;
+            switch (method) {
+                case SnappingPointsMethodNearest: {
+                    if ((curDiff - initDiff) > (maxDiff - curDiff)) {
+                        /* right snapping point is nearest */
+                        xTranslation = maxDiff - curDiff;
+                    } else {
+                        /* left snapping point is nearest */
+                        xTranslation = initDiff - curDiff;
+                    }
+                    break;
+                }
+                case SnappingPointsMethodCompact: {
+                    xTranslation = initDiff - curDiff;
+                    break;
+                }
+                case SnappingPointsMehtodExpand: {
+                    xTranslation = maxDiff - curDiff;
+                    break;
+                }
             }
         }
         [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
@@ -248,14 +286,26 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)moveToSnappingPointsWithGestureRecognizer:(UIPanGestureRecognizer *)g
 {
-    [self viewControllersToSnappingPointsExpand:[g velocityInView:self.view].x > 0];
+    const CGFloat velocity = [g velocityInView:self.view].x;
+    SnappingPointsMethod method;
+    
+    if (abs(velocity) > FRLayeredNavigationControllerSnappingVelocityThreshold) {
+        if (velocity > 0) {
+            method = SnappingPointsMehtodExpand;
+        } else {
+            method = SnappingPointsMethodCompact;
+        }
+    } else {
+        method = SnappingPointsMethodNearest;
+    }
+    [self viewControllersToSnappingPointsMethod:method];
 }
 
-- (void)moveViewControllerIndex:(NSInteger)myIndex
-          withGestureRecognizer:(UIPanGestureRecognizer *)g
-                withParentIndex:(NSInteger)parentIndex
-             parentLastPosition:(CGPoint)parentOldPos
-            descendentOfTouched:(BOOL)descendentOfTouched
+- (void)moveViewControllersStartIndex:(NSInteger)myIndex
+                         xTranslation:(CGFloat)xTranslationGesture
+                      withParentIndex:(NSInteger)parentIndex
+                   parentLastPosition:(CGPoint)parentOldPos
+                  descendentOfTouched:(BOOL)descendentOfTouched
 {
     if (myIndex == 0) {
         return;
@@ -276,7 +326,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     CGFloat xTranslation = 0;
     
     if (parentIndex < 0 || !descendentOfTouched) {
-        xTranslation = [g translationInView:me.view].x;
+        xTranslation = xTranslationGesture;
     } else {
         CGFloat newX = myPos.x;
         const CGFloat minDiff = parentInitPos.x - myInitPos.x;
@@ -295,21 +345,47 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         xTranslation = newX - myPos.x;
     }
     
-    UIView *touchedView = [g.view hitTest:[g locationInView:g.view] withEvent:nil];
+    const BOOL isTouchedView = !descendentOfTouched && [self.firstTouchedView isDescendantOfView:me.view];
     
-    [FRLayeredNavigationController viewController:me
-                                     xTranslation:xTranslation
-                                          bounded:YES];  /* ![self.firstTouchedView isDescendantOfView:me.view]]; */
+    if (self.outOfBoundsViewControllerIndex == NoVcOutOfBounds || 
+        self.outOfBoundsViewControllerIndex == myIndex ||
+        xTranslationGesture < 0) {
+        const BOOL boundedMove = !isTouchedView;
+
+        /*
+         * IF no view controller is out of bounds (too far on the left)
+         * OR if me who is out of bounds
+         * OR the translation goes to the left again
+         * THEN: apply the translation
+         */
+        const BOOL outOfBoundsMove = [FRLayeredNavigationController viewController:me
+                                                                      xTranslation:xTranslation
+                                                                           bounded:boundedMove];
+        if (outOfBoundsMove) {
+            /* this move was out of bounds */
+            self.outOfBoundsViewControllerIndex = myIndex;
+        } else if(!outOfBoundsMove && self.outOfBoundsViewControllerIndex == myIndex) {
+            /* I have been moved out of bounds some time ago but now I'm back in the bounds :-), so:
+             * - no one can be out of bounds now
+             * - I have to be reset to my initial position
+             * - discard the rest of the translation
+             */
+            self.outOfBoundsViewControllerIndex = NoVcOutOfBounds;
+            [FRLayeredNavigationController viewControllerToInitialPosition:me];
+            return; /* this discard the rest of the translation (i.e. stops the recursion) */
+        }
+    }
     
-    if (!descendentOfTouched && [touchedView isDescendantOfView:me.view]) {
-        [self moveViewControllerIndex:myIndex-1
-                withGestureRecognizer:g
+    if (isTouchedView) {
+        NSAssert(!descendentOfTouched, @"cannot be descendent of touched AND touched view");
+        [self moveViewControllersStartIndex:myIndex-1
+                xTranslation:xTranslationGesture
                       withParentIndex:myIndex
                    parentLastPosition:myOldPos
                   descendentOfTouched:YES];
     } else {
-        [self moveViewControllerIndex:myIndex-1
-                withGestureRecognizer:g 
+        [self moveViewControllersStartIndex:myIndex-1
+                xTranslation:xTranslationGesture
                       withParentIndex:myIndex
                    parentLastPosition:myOldPos
                   descendentOfTouched:descendentOfTouched];
@@ -416,7 +492,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     CGFloat anchorCurrentX = anchorViewController.layeredNavigationItem.currentViewPosition.x;
     CGFloat anchorWidth = anchorViewController.view.frame.size.width;
     CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance > 0 ? parentNavItem.nextItemDistance :
-                                                                            kFRLayeredNavigationControllerStandardDistance);
+                                                                            FRLayeredNavigationControllerStandardDistance);
     
     navItem.initialViewPosition = CGPointMake(initX, 0);
     navItem.currentViewPosition = CGPointMake(anchorCurrentX + anchorWidth, 0);
@@ -430,7 +506,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     if (navItem.width > 0) {
         width = navItem.width;
     } else {
-        width = newVC.maximumWidth ? self.view.bounds.size.width - initX : kFRLayeredNavigationControllerStandardWidth;
+        width = newVC.maximumWidth ? self.view.bounds.size.width - initX : FRLayeredNavigationControllerStandardWidth;
     }
     
     CGRect newFrame = CGRectMake(newVC.layeredNavigationItem.currentViewPosition.x,
@@ -485,5 +561,6 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 @synthesize viewControllers = _viewControllers;
 @synthesize panGR = _panGR;
 @synthesize firstTouchedView = _firstTouchedView;
+@synthesize outOfBoundsViewControllerIndex = _outOfBoundsViewControllerIndex;
 
 @end

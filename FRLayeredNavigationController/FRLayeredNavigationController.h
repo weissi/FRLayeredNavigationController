@@ -28,6 +28,7 @@
     UIView *_firstTouchedView;
     NSMutableArray *_viewControllers;
     UIPanGestureRecognizer *_panGR;
+    NSInteger _outOfBoundsViewControllerIndex;
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
