@@ -18,8 +18,7 @@
  */
 
 #import "FRLayerChromeView.h"
-#import <QuartzCore/QuartzCore.h>
-
+#import "Utils.h"
 
 @interface FRLayerChromeView ()
 
@@ -31,10 +30,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _savedGradient = nil;
+        self.backgroundColor = [UIColor clearColor];
+
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
         _toolbar.clipsToBounds = YES;
-        self.clipsToBounds = YES;
-        
+        [_toolbar setBackgroundImage:[Utils transparentImage]
+                  forToolbarPosition:UIToolbarPositionAny
+                          barMetrics:UIBarMetricsDefault];
         [self addSubview:_toolbar];
         
         if (titleView == nil) {
@@ -58,6 +61,11 @@
         [self manageToolbar];
     }
     return self;
+}
+
+- (void)dealloc {
+    CGGradientRelease(self->_savedGradient);
+    self->_savedGradient = NULL;
 }
 
 - (void)manageToolbar
@@ -94,7 +102,6 @@
     
     CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?44:0) + (self.rightBarButtonItem!=nil?44:0);
     
-    //self.toolbar.frame = CGRectMake(10, 0, self.bounds.size.width-20, self.bounds.size.height);
     self.toolbar.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     
     CGRect headerMiddleFrame = CGRectMake(10 + (barButtonItemsSpace/2),
@@ -111,20 +118,45 @@
                                    MIN(titleFittingSize.height, headerMiddleFrame.size.height));        
     
     self.titleView.frame = titleFrame;
+}
+
+- (CGGradientRef)gradient {
+    if (NULL == _savedGradient) {
+        CGFloat colors[12] = {
+            244.0/255.0, 245.0/255.0, 247.0/255.0, 1.0,
+            223.0/255.0, 225.0/255.0, 230.0/255.0, 1.0,
+            167.0/244.0, 171.0/255.0, 184.0/255.0, 1.0,
+        };
+        CGFloat locations[3] = { 0.05f, 0.45f, 0.95f };
+        
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        
+        _savedGradient = CGGradientCreateWithColorComponents(colorSpace,
+                                                             colors,
+                                                             locations,
+                                                             3);
+        
+        CGColorSpaceRelease(colorSpace);
+    }
     
+    return _savedGradient;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    // Create the path (with only the top-left corner rounded)
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds 
-                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
-                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                               byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+    [path addClip];
     
-    // Create the shape layer and set its path
-    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.frame = self.bounds;
-    maskLayer.path = maskPath.CGPath;
+    CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
+    CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
+                              CGRectGetMaxY(self.bounds));
     
-    // Set the newly created shape layer as the mask for the image view's layer
-    self.layer.mask = maskLayer;
+    CGGradientRef gradient = [self gradient];
+    
+    CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
 }
 
 @synthesize leftBarButtonItem = _leftBarButtonItem;

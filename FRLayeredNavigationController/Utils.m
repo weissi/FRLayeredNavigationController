@@ -18,6 +18,8 @@
  */
 
 #import "Utils.h"
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 BOOL CGFloatEquals(CGFloat l, CGFloat r)
 {
@@ -28,3 +30,19 @@ BOOL CGFloatNotEqual(CGFloat l, CGFloat r)
 {
     return !CGFloatEquals(l, r);
 }
+
+@implementation Utils
+
++ (UIImage *)transparentImage
+{
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *transparentImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return transparentImage;
+}
+
+@end

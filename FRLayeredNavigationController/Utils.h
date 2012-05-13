@@ -19,6 +19,13 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 BOOL CGFloatEquals(CGFloat l, CGFloat r);
 BOOL CGFloatNotEqual(CGFloat l, CGFloat r);
+
+@interface Utils
+
++ (UIImage *)transparentImage;
+
+@end

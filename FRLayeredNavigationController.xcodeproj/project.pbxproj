@@ -38,9 +38,7 @@
 		DAB8C67E155E8F6A00340CB7 /* FRLayeredNavigationItem+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */; };
 		DAB8C686155E93E700340CB7 /* FRLayerController+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB8C684155E93E700340CB7 /* FRLayerController+Protected.h */; };
 		DAB8C68C155E9DEE00340CB7 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB8C68B155E9DEE00340CB7 /* back.png */; };
-		DAB8C6C1155EBF3900340CB7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB8C6BF155EBD3100340CB7 /* QuartzCore.framework */; };
 		DAB8C6C2155EBF4400340CB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FAD0415591BD500D85A7E /* UIKit.framework */; };
-		DAB8C6C3155EBF5800340CB7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB8C6BF155EBD3100340CB7 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +99,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB8C6C2155EBF4400340CB7 /* UIKit.framework in Frameworks */,
-				DAB8C6C1155EBF3900340CB7 /* QuartzCore.framework in Frameworks */,
 				DA4FACCA15591AB300D85A7E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAB8C6C3155EBF5800340CB7 /* QuartzCore.framework in Frameworks */,
 				DA5B059B155923D000C93809 /* libFRLayeredNavigationController.a in Frameworks */,
 				DA4FAD0515591BD500D85A7E /* UIKit.framework in Frameworks */,
 				DA4FAD0615591BD500D85A7E /* Foundation.framework in Frameworks */,
