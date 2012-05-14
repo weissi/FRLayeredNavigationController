@@ -46,6 +46,7 @@ typedef enum {
 @implementation FRLayeredNavigationController
 
 #pragma mark - Initialization/dealloc
+
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
     return [self initWithRootViewController:rootViewController configuration:^(FRLayeredNavigationItem *item) {
@@ -65,6 +66,9 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         layeredRC.layeredNavigationItem.hasChrome = NO;
         configuration(layeredRC.layeredNavigationItem);
         _outOfBoundsViewController = nil;
+        
+        [self addChildViewController:layeredRC];
+        [layeredRC didMoveToParentViewController:self];
     }
     return self;    
 }
@@ -78,16 +82,16 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)loadView
 {
-    NSAssert([self.viewControllers count] == 1, @"This is a bug, more than one ViewController present! Go on and implement more sophisticated view loading/unloading...");
-    UIViewController *rootViewController = [self.viewControllers objectAtIndex:0];
-    [self addChildViewController:rootViewController];
-    
     self.view = [[UIView alloc] init];
-    CGRect rootViewFrame = CGRectMake(0, 0, rootViewController.layeredNavigationItem.width, self.view.bounds.size.height);
-    rootViewController.view.frame = rootViewFrame;
-    rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:rootViewController.view];
-    [rootViewController didMoveToParentViewController:self];
+    
+    for (FRLayerController *vc in self.viewControllers) {
+        vc.view.frame = CGRectMake(vc.layeredNavigationItem.currentViewPosition.x,
+                                   vc.layeredNavigationItem.currentViewPosition.y,
+                                   vc.layeredNavigationItem.width,
+                                   self.view.frame.size.height);
+        vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:vc.view];
+    }
 }
 
 - (void)viewDidLoad
@@ -98,6 +102,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     self.panGR.maximumNumberOfTouches = 1;
     self.panGR.delegate = self;
     [self.view addGestureRecognizer:self.panGR];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -121,12 +126,15 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)viewWillUnload
 {
-    NSAssert([self.viewControllers count] == 1, @"This is a bug, more than one ViewController present! Go on and implement more sophisticated view loading/unloading...");
+    self.panGR = nil;
+    self.firstTouchedView = nil;
+    self.outOfBoundsViewController = nil;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    NSLog(@"FRLayeredNavigationController (%@): viewDidUnload", self);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
