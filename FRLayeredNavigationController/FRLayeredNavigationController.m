@@ -505,6 +505,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         width = navItem.width;
     } else {
         width = newVC.maximumWidth ? self.view.bounds.size.width - initX : FRLayeredNavigationControllerStandardWidth;
+        navItem.width = width;
     }
     
     CGRect newFrame = CGRectMake(newVC.layeredNavigationItem.currentViewPosition.x,
