@@ -107,7 +107,14 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    NSLog(@"ORIENTATION");
+    NSLog(@"ORIENTATION, new size: %@", NSStringFromCGSize(self.view.bounds.size));
+    [super didRotateFromInterfaceOrientation:orientation];
+    [self doLayout];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self doLayout];
 }
 
@@ -415,6 +422,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 }
 
 - (void)doLayout {
+    CGSize overallSize = self.view.bounds.size;
+    
     for (FRLayerController *vc in self.viewControllers) {
         CGRect f = vc.view.frame;
         if (vc.layeredNavigationItem.currentViewPosition.x < vc.layeredNavigationItem.initialViewPosition.x) {
