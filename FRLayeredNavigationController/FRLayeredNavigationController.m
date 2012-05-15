@@ -422,8 +422,6 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 }
 
 - (void)doLayout {
-    CGSize overallSize = self.view.bounds.size;
-    
     for (FRLayerController *vc in self.viewControllers) {
         CGRect f = vc.view.frame;
         if (vc.layeredNavigationItem.currentViewPosition.x < vc.layeredNavigationItem.initialViewPosition.x) {
