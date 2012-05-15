@@ -128,11 +128,13 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    self.view.layer.shadowRadius = 10.0;
-    self.view.layer.shadowOffset = CGSizeMake(-2.0, -3.0);
-    self.view.layer.shadowOpacity = 0.5;
-    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
+    if (self != [self.layeredNavigationController.childViewControllers objectAtIndex:0]) {
+        self.view.layer.shadowRadius = 10.0;
+        self.view.layer.shadowOffset = CGSizeMake(-2.0, -3.0);
+        self.view.layer.shadowOpacity = 0.5;
+        self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
+    }
 
     [self doViewLayout];
 }
