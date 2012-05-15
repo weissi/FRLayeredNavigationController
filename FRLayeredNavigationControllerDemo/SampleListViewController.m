@@ -40,10 +40,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -129,11 +129,11 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+
     cell.textLabel.text = [self cellText:indexPath.row];
     return cell;
 }
@@ -154,10 +154,10 @@
  if (editingStyle == UITableViewCellEditingStyleDelete) {
  // Delete the row from the data source
  [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
+ }
  else if (editingStyle == UITableViewCellEditingStyleInsert) {
  // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
+ }
  }
  */
 
@@ -183,7 +183,7 @@
 {
     UIViewController *svc = nil;
     NSString *title = [NSString stringWithFormat:@"%@ : %@", self.title, [self cellText:indexPath.row]];
-    
+
     if (indexPath.row == 0) {
         /* push a content view controller */
         svc = [[SampleContentViewController alloc] init];
@@ -198,11 +198,11 @@
                                                                                                     arrayWithObjects:@"foo", @"bar", @"buz", nil]];
                                                    segControl.segmentedControlStyle = UISegmentedControlStyleBar;
                                                    segControl.selectedSegmentIndex = 0;
-                                                   
+
                                                    [segControl addTarget:svc
                                                                   action:@selector(indexDidChangeForSegmentedControl:)
                                                         forControlEvents:UIControlEventValueChanged];
-                                                   
+
                                                    item.titleView = segControl;
                                                }];
     } else if (indexPath.row == 1) {
@@ -216,7 +216,7 @@
         [self.layeredNavigationController popToRootViewControllerAnimated:YES];
     } else if (indexPath.row == 3) {
         [self.layeredNavigationController popToRootViewControllerAnimated:NO];
-        
+
     } else if (indexPath.row == 4) {
         [self.layeredNavigationController popViewControllerAnimated:YES];
     } else if (indexPath.row == 5) {

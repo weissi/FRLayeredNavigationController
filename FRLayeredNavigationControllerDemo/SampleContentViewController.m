@@ -50,12 +50,12 @@
 - (void)loadView
 {
     self.view = [[UIView alloc] init];
-    
+
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"mandel" ofType:@"jpg"];
     UIImage *img = [UIImage imageWithContentsOfFile:path];
     self.imageView = [[UIImageView alloc] initWithImage:img];
-    
+
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.scrollView.maximumZoomScale = 10;
@@ -65,9 +65,9 @@
     self.scrollView.delegate = self;
     [self.scrollView addSubview:self.imageView];
     self.scrollView.zoomScale = .37;
-    
+
     [self.view addSubview:self.scrollView];
-    
+
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, 10, 400, 40)];
     [self.view addSubview:slider];
 }
@@ -107,7 +107,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
+
     self.scrollView.delegate = nil;
     self.scrollView = nil;
     self.imageView = nil;

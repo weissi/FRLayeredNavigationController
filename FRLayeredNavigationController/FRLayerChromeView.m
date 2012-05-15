@@ -39,10 +39,10 @@
                   forToolbarPosition:UIToolbarPositionAny
                           barMetrics:UIBarMetricsDefault];
         [self addSubview:_toolbar];
-        
+
         if (titleView == nil) {
             UILabel *titleLabel = [[UILabel alloc] init];
-            
+
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.text = titleText;
             titleLabel.textAlignment = UITextAlignmentCenter;
@@ -52,7 +52,7 @@
                                                    green:118.0f/255.0f
                                                     blue:126.0f/255.0f
                                                    alpha:1.0f];
-            
+
             self.titleView = titleLabel;
         } else {
             self.titleView = titleView;
@@ -81,7 +81,7 @@
     } else {
         [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, _rightBarButtonItem, nil]];
     }
-    
+
     [self setNeedsLayout];
 }
 
@@ -99,24 +99,24 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?44:0) + (self.rightBarButtonItem!=nil?44:0);
-    
+
     self.toolbar.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
-    
+
     CGRect headerMiddleFrame = CGRectMake(10 + (barButtonItemsSpace/2),
-                                          0, 
+                                          0,
                                           self.bounds.size.width-20-barButtonItemsSpace,
                                           self.bounds.size.height);
-    
+
     CGSize titleFittingSize = [self.titleView sizeThatFits:headerMiddleFrame.size];
     CGRect titleFrame = CGRectMake(MAX((headerMiddleFrame.size.width - titleFittingSize.width)/2,
                                        headerMiddleFrame.origin.x),
                                    MAX((headerMiddleFrame.size.height - titleFittingSize.height)/2,
                                        headerMiddleFrame.origin.y),
                                    MIN(titleFittingSize.width, headerMiddleFrame.size.width),
-                                   MIN(titleFittingSize.height, headerMiddleFrame.size.height));        
-    
+                                   MIN(titleFittingSize.height, headerMiddleFrame.size.height));
+
     self.titleView.frame = titleFrame;
 }
 
@@ -128,34 +128,34 @@
             167.0/244.0, 171.0/255.0, 184.0/255.0, 1.0,
         };
         CGFloat locations[3] = { 0.05f, 0.45f, 0.95f };
-        
+
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        
+
         _savedGradient = CGGradientCreateWithColorComponents(colorSpace,
                                                              colors,
                                                              locations,
                                                              3);
-        
+
         CGColorSpaceRelease(colorSpace);
     }
-    
+
     return _savedGradient;
 }
 
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
+
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                                byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
     [path addClip];
-    
+
     CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
     CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
                               CGRectGetMaxY(self.bounds));
-    
+
     CGGradientRef gradient = [self gradient];
-    
+
     CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
 }
 

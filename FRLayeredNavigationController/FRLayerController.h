@@ -25,12 +25,12 @@
 @interface FRLayerController : UIViewController {
     @private
     FRLayeredNavigationItem *_layeredNavigationItem;
-    
+
     BOOL _maximumWidth;
-    
+
     FRLayerChromeView *_chromeView;
     UIView *_borderView;
-    
+
     UIViewController *_contentViewController;
 }
 

@@ -47,7 +47,7 @@
         _layeredNavigationItem.layerController = self;
         _contentViewController = vc;
         _maximumWidth = maxWidth;
-        
+
         [self attachContentViewController];
     }
 
@@ -65,7 +65,7 @@
 
 - (void)doViewLayout {
     CGRect contentFrame = CGRectZero;
-    
+
     if (self.layeredNavigationItem.hasChrome) {
         CGRect chromeFrame = CGRectMake(0,
                                         0,
@@ -87,8 +87,8 @@
                                   self.view.bounds.size.width,
                                   self.view.bounds.size.height);
     }
-    
-    
+
+
     self.contentViewController.view.frame = contentFrame;
 }
 
@@ -109,18 +109,18 @@
 - (void)loadView {
     self.view = [[UIView alloc] init];
     self.view.backgroundColor = [UIColor clearColor];
-    
+
     const FRLayeredNavigationItem *navItem = self.layeredNavigationItem;
-    
+
     if (self.layeredNavigationItem.hasChrome) {
         self.chromeView = [[FRLayerChromeView alloc] initWithFrame:CGRectZero
                                                          titleView:navItem.titleView
                                                              title:navItem.title == nil ?
                            self.contentViewController.title : navItem.title];
-        
+
         self.borderView = [[UIView alloc] init];
         self.borderView.backgroundColor = [UIColor colorWithWhite:236.0f/255.0f alpha:1];
-        
+
         [self.view addSubview:self.chromeView];
         [self.view addSubview:self.borderView];
     }
@@ -143,7 +143,7 @@
 {
     [super viewDidUnload];
     NSLog(@"FRLayerController (%@): viewDidUnload", self);
-    
+
     self.borderView = nil;
     self.chromeView = nil;
 }

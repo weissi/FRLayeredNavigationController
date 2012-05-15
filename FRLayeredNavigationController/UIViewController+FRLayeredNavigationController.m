@@ -25,7 +25,7 @@
 
 - (FRLayeredNavigationController *)layeredNavigationController {
     UIViewController *here = self;
-    
+
     while (here != nil) {
         if([here class] == [FRLayeredNavigationController class]) {
             return (FRLayeredNavigationController *)here;
@@ -33,21 +33,21 @@
 
         here = here.parentViewController;
     }
-    
+
     return nil;
 }
 
 - (FRLayeredNavigationItem *)layeredNavigationItem {
     UIViewController *here = self;
-    
+
     while (here != nil) {
         if([here class] == [FRLayerController class]) {
             return ((FRLayerController *)here).layeredNavigationItem;
         }
-        
+
         here = here.parentViewController;
     }
-    
+
     return nil;
 }
 
