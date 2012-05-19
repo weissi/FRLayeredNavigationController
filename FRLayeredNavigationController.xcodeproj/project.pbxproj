@@ -84,6 +84,8 @@
 		DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
 		DA4FAD2A15591C6E00D85A7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DA5B05A11559267000C93809 /* FRLayeredNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayeredNavigation.h; sourceTree = "<group>"; };
+		DA6609B11567FD530033DBFF /* FRLayeredNavigationControllerScreenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FRLayeredNavigationControllerScreenshot2.png; sourceTree = "<group>"; };
+		DA6609B21567FD530033DBFF /* FRLayeredNavigationControllerScreenshot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FRLayeredNavigationControllerScreenshot1.png; sourceTree = "<group>"; };
 		DAAB20AE155D27A700C5CAA5 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		DAAB20AF155D27A700C5CAA5 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FRLayeredNavigationItem+Protected.h"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				DA4FAD0915591BD500D85A7E /* FRLayeredNavigationControllerDemo */,
 				DA4FACC815591AB300D85A7E /* Frameworks */,
 				DA4FACC715591AB300D85A7E /* Products */,
+				DA6609AF1567FD390033DBFF /* Screenshots */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +211,15 @@
 				DA4FAD1115591BD500D85A7E /* FRLayeredNavigationControllerDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA6609AF1567FD390033DBFF /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				DA6609B11567FD530033DBFF /* FRLayeredNavigationControllerScreenshot2.png */,
+				DA6609B21567FD530033DBFF /* FRLayeredNavigationControllerScreenshot1.png */,
+			);
+			name = Screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
