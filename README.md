@@ -9,9 +9,6 @@ Project home: https://github.com/weissi/FRLayeredNavigationController
 (c)2012, Johannes Weiß <weiss@tux4u.de> for factis research GmbH
 (http://www.factisresearch.com).
 
-[![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)
-[![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)
-
 License
 =======
 LGPL 3 (see COPYING and COPYING.LESSER)
@@ -20,6 +17,11 @@ Watch the demo videos
 =====================
  - http://youtu.be/v_tXD_mL05E
  - http://youtu.be/q66HX2td_uc
+
+Screenshots
+===========
+[![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)
+[![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)
 
 Adding FRLayeredNavigationController to your project
 ====================================================
