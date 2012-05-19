@@ -10,3 +10,5 @@ Project home: https://github.com/weissi/FRLayeredNavigationController
 (http://www.factisresearch.com).
 
 LICENSE: LGPL 3 (see COPYING and COPYING.LESSER)
+
+Watch the demo video: http://youtu.be/q66HX2td_uc
