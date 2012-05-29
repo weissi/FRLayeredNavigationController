@@ -6,6 +6,11 @@ similar to UINavigationController.
 
 Project home: https://github.com/weissi/FRLayeredNavigationController
 
+See below for instructions (and a screencast) on how to add
+FRLayeredNavigationController to your project.
+
+If you have further questions, feel free to ask them!
+
 (c)2012, Johannes Weiß <weiss@tux4u.de> for factis research GmbH
 (http://www.factisresearch.com).
 
@@ -31,6 +36,11 @@ FRLayeredNavigationController is compiled as static libraries. It use Xcode's
 
 Here is how:  **Estimated time:** 5 minutes.
 
+There's also a screencast which shows how to add
+FRLayeredNavigationController to a project and how to switch from
+UINavigationController to FRLayeredNavigationController:
+http://youtu.be/MrDYtuCugqE
+
 1. Clone the FRLayeredNavigationController git repository: `git clone
    git@github.com:weissi/FRLayeredNavigationController.git`.  Make sure you
    store the repository in a permanent place because Xcode will need to reference
@@ -49,7 +59,7 @@ Here is how:  **Estimated time:** 5 minutes.
    FRLayeredNavigationController headers.  Open your "Project Settings" and go
    to the "Build" tab. Look for "Header Search Paths" and double-click it.  Add the
    relative path from your project's directory to the
-   "FRLayeredNavigationController/FRLayeredNavigationController" directory.
+   "FRLayeredNavigationController/" directory.
 
 5. While you are in Project Settings, go to "Other Linker Flags" under the
    "Linker" section, and add "-ObjC", "-fobjc-arc" and "-all_load" to the list
