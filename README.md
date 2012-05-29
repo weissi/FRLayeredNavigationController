@@ -39,7 +39,7 @@ Here is how:  **Estimated time:** 5 minutes.
 There's also a screencast which shows how to add
 FRLayeredNavigationController to a project and how to switch from
 UINavigationController to FRLayeredNavigationController:
-http://youtu.be/MrDYtuCugqE
+http://youtu.be/k9bFAYtoenw .
 
 1. Clone the FRLayeredNavigationController git repository: `git clone
    git@github.com:weissi/FRLayeredNavigationController.git`.  Make sure you
