@@ -2,7 +2,9 @@ FRLayeredNavigationController
 =============================
 
 FRLayeredNavigationController, an iOS container view controller with an API
-similar to UINavigationController.
+similar to UINavigationController. Read
+[my blog post about FRLayeredNavigationController](http://factisresearch.blogspot.de/2012/06/uis-for-hierachical-ipad-apps.html)
+to get an idea of what it is.
 
 Project home: https://github.com/weissi/FRLayeredNavigationController
 
