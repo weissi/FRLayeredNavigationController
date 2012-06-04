@@ -13,7 +13,7 @@ FRLayeredNavigationController to your project.
 
 If you have further questions, feel free to ask them!
 
-©2012, [Johannes Weiß](<weiss@tux4u.de>) for
+©2012, [Johannes Weiß](mailto:weiss@tux4u.de) for
 [factis research GmbH](http://www.factisresearch.com).
 
 License
