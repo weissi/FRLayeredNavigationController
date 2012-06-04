@@ -20,7 +20,7 @@ License
 =======
 It's all open source but you can use it in your commercial product free of
 charge. FRLayeredNavigationController is licensed under the terms of the
-[GNU Lesser General Public License (LGPL 3)](http://www.gnu.org/licenses/lgpl.html).
+Modified BSD License.
 
 Watch the demo videos
 =====================
