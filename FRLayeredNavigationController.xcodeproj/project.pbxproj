@@ -27,8 +27,6 @@
 		DA4FAD2415591C4100D85A7E /* SampleContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FAD1D15591C4100D85A7E /* SampleContentViewController.m */; };
 		DA4FAD2515591C4100D85A7E /* SampleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FAD1F15591C4100D85A7E /* SampleListViewController.m */; };
 		DA4FAD2B15591C6E00D85A7E /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2715591C6E00D85A7E /* AUTHORS */; };
-		DA4FAD2C15591C6E00D85A7E /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2815591C6E00D85A7E /* COPYING */; };
-		DA4FAD2D15591C6E00D85A7E /* COPYING.LESSER in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */; };
 		DA4FAD2E15591C6E00D85A7E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DA4FAD2A15591C6E00D85A7E /* README.md */; };
 		DA5B059B155923D000C93809 /* libFRLayeredNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */; };
 		DA5B05A21559267000C93809 /* FRLayeredNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5B05A11559267000C93809 /* FRLayeredNavigation.h */; };
@@ -80,12 +78,11 @@
 		DA4FAD1E15591C4100D85A7E /* SampleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleListViewController.h; sourceTree = "<group>"; };
 		DA4FAD1F15591C4100D85A7E /* SampleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SampleListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA4FAD2715591C6E00D85A7E /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
-		DA4FAD2815591C6E00D85A7E /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
-		DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
 		DA4FAD2A15591C6E00D85A7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DA5B05A11559267000C93809 /* FRLayeredNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLayeredNavigation.h; sourceTree = "<group>"; };
 		DA6609B11567FD530033DBFF /* FRLayeredNavigationControllerScreenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FRLayeredNavigationControllerScreenshot2.png; sourceTree = "<group>"; };
 		DA6609B21567FD530033DBFF /* FRLayeredNavigationControllerScreenshot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FRLayeredNavigationControllerScreenshot1.png; sourceTree = "<group>"; };
+		DA8616AD157D0B1D009EC9BD /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		DAAB20AE155D27A700C5CAA5 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		DAAB20AF155D27A700C5CAA5 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FRLayeredNavigationItem+Protected.h"; sourceTree = "<group>"; };
@@ -125,8 +122,7 @@
 				DAB8C6BF155EBD3100340CB7 /* QuartzCore.framework */,
 				DAB8C6BC155EBD1200340CB7 /* CoreImage.framework */,
 				DA4FAD2715591C6E00D85A7E /* AUTHORS */,
-				DA4FAD2815591C6E00D85A7E /* COPYING */,
-				DA4FAD2915591C6E00D85A7E /* COPYING.LESSER */,
+				DA8616AD157D0B1D009EC9BD /* LICENSE */,
 				DA4FAD2A15591C6E00D85A7E /* README.md */,
 				DA4FACCB15591AB300D85A7E /* FRLayeredNavigationController */,
 				DA4FAD0915591BD500D85A7E /* FRLayeredNavigationControllerDemo */,
@@ -313,8 +309,6 @@
 				DA4FAD0E15591BD500D85A7E /* InfoPlist.strings in Resources */,
 				DA4FAD2315591C4100D85A7E /* mandel.jpg in Resources */,
 				DA4FAD2B15591C6E00D85A7E /* AUTHORS in Resources */,
-				DA4FAD2C15591C6E00D85A7E /* COPYING in Resources */,
-				DA4FAD2D15591C6E00D85A7E /* COPYING.LESSER in Resources */,
 				DA4FAD2E15591C6E00D85A7E /* README.md in Resources */,
 				DAB8C68C155E9DEE00340CB7 /* back.png in Resources */,
 			);
