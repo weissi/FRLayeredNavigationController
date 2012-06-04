@@ -6,19 +6,21 @@ similar to UINavigationController. Read
 [my blog post about FRLayeredNavigationController](http://factisresearch.blogspot.de/2012/06/uis-for-hierachical-ipad-apps.html)
 to get an idea of what it is.
 
-Project home: https://github.com/weissi/FRLayeredNavigationController
+Official Project Home: https://github.com/weissi/FRLayeredNavigationController
 
 See below for instructions (and a screencast) on how to add
 FRLayeredNavigationController to your project.
 
 If you have further questions, feel free to ask them!
 
-(c)2012, Johannes Weiß <weiss@tux4u.de> for factis research GmbH
-(http://www.factisresearch.com).
+©2012, [Johannes Weiß](weiss@tux4u.de) for
+[factis research GmbH](http://www.factisresearch.com).
 
 License
 =======
-LGPL 3 (see COPYING and COPYING.LESSER)
+It's all open source but you can use it in your commercial product free of
+charge. FRLayeredNavigationController is licensed under the terms of the
+[GNU Lesser General Public License (LGPL 3)](http://www.gnu.org/licenses/lgpl.html).
 
 Watch the demo videos
 =====================
@@ -64,10 +66,10 @@ http://youtu.be/k9bFAYtoenw .
    "FRLayeredNavigationController/" directory.
 
 5. While you are in Project Settings, go to "Other Linker Flags" under the
-   "Linker" section, and add "-ObjC", "-fobjc-arc" and "-all_load" to the list
-  of flags.
+   "Linker" section, and add "`-ObjC`", "`-fobjc-arc`" and "`-all_load`" to the
+   list of flags.
 
-6. You're ready to go.  Just #import
-   "FRLayeredNavigationController/FRLayeredNavigation.h" anywhere you want to
-   use FRLayeredNavigationController in your project.
+6. You're ready to go.
+   Just `#import "FRLayeredNavigationController/FRLayeredNavigation.h"`
+   anywhere you want to use FRLayeredNavigationController in your project.
 
