@@ -32,6 +32,10 @@
 
 @class FRLayerController;
 
+/**
+ * FRLayeredNavigationItem is used to configure one view controller layer. It is very similar to UINavigationItem .
+ *
+ */
 @interface FRLayeredNavigationItem : NSObject {
     @private
     CGPoint _initialViewPosition;
@@ -44,14 +48,49 @@
     FRLayerController __weak * _layerController;
 }
 
-@property (nonatomic, readwrite) CGPoint initialViewPosition;
-@property (nonatomic, readwrite) CGPoint currentViewPosition;
+/**
+ * The view position when the layers are compacted maximally.
+ */
+@property (nonatomic, readonly) CGPoint initialViewPosition;
+
+/**
+ * The current view position.
+ */
+@property (nonatomic, readonly) CGPoint currentViewPosition;
+
+/**
+ * The navigation item’s title displayed in the center of the navigation bar.
+ */
 @property (nonatomic, readwrite, strong) NSString *title;
+
+/**
+ * A custom view displayed in the center of the navigation bar.
+ */
 @property (nonatomic, readwrite, strong) UIView *titleView;
+
+/**
+ * The layer's width in points.
+ */
 @property (nonatomic, readwrite) CGFloat width;
+
+/**
+ * The minimal distance (when the child layer is as far on the left as possible) to the next layer in points.
+ */
 @property (nonatomic, readwrite) CGFloat nextItemDistance;
+
+/**
+ * If the view controller should get decorated by some UI chrome: the navigation bar.
+ */
 @property (nonatomic, readwrite) BOOL hasChrome;
+
+/**
+ * A custom bar button item displayed on the left of the navigation bar.
+ */
 @property (nonatomic, strong) UIBarButtonItem *leftBarButtonItem;
+
+/**
+ * A custom bar button item displayed on the right of the navigation bar.
+ */
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 
 @end

@@ -28,9 +28,27 @@
 
 #import "FRLayeredNavigationController.h"
 
+/**
+ * The UIViewController(FRLayeredNavigationController) category provides convenience properties
+ * to access a view controller's FRLayeredNavigationItem and the nearest FRLayeredNavigationController. Just
+ * as the `navigationItem` and `navigationController` properties of UIViewController.
+ */
 @interface UIViewController (FRLayeredNavigationController)
 
+/**
+ * The nearest ancestor in the view controller hierarchy that is a FRLayeredNavigationController.
+ */
 @property (nonatomic, readonly, strong) FRLayeredNavigationController *layeredNavigationController;
+
+/**
+ * The navigation item used to represent the view controller inside a FRLayeredNavigationController.
+ *
+ * @warning This property is `nil` until the view controller is shown on the screen. To configure the
+ *          FRLayeredNavigationItem before appearing on the screen use the following methods:
+ *
+ * - [FRLayeredNavigationController initWithRootViewController:configuration:]
+ * - [FRLayeredNavigationController pushViewController:inFrontOf:maximumWidth:animated:configuration:]
+ */
 @property (nonatomic, readonly, strong) FRLayeredNavigationItem *layeredNavigationItem;
 
 @end

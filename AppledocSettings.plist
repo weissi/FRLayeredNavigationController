@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>--input</key>
+    <array>
+        <string>FRLayeredNavigationController</string>
+    </array>
+    <key>--project-name</key>
+    <string>FRLayeredNavigationController</string>
+    <key>--project-company</key>
+    <string>factis research GmbH</string>
+    <key>--company-id</key>
+    <string>com.factisresearch</string>
+    <key>--output</key>
+    <string>doc</string>
+</dict>
+</plist>
