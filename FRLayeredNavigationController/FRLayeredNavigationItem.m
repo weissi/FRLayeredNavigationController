@@ -26,7 +26,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "FRLayeredNavigationItem.h"
+#import "FRLayeredNavigationItem+Protected.h"
 #import "FRLayerController+Protected.h"
 #import "FRLayerController.h"
 #import "FRLayerChromeView.h"
