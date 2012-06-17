@@ -2,19 +2,26 @@ FRLayeredNavigationController
 =============================
 
 FRLayeredNavigationController, an iOS container view controller with an API
-similar to UINavigationController. Read
-[my blog post about FRLayeredNavigationController](http://factisresearch.blogspot.de/2012/06/uis-for-hierachical-ipad-apps.html)
-to get an idea of what it is.
+similar to UINavigationController.
 
 Official Project Home: https://github.com/weissi/FRLayeredNavigationController
 
-See below for instructions (and a screencast) on how to add
-FRLayeredNavigationController to your project.
+See below for documentation and instructions (including a screencast) on how
+to add FRLayeredNavigationController to your project.
 
-If you have further questions, feel free to ask them!
+If you have further questions, feel free to [mail me](mailto:weiss@tux4u.de)!
 
 ©2012, [Johannes Weiß](mailto:weiss@tux4u.de) for
 [factis research GmbH](http://www.factisresearch.com).
+
+
+Documentation
+=============
+
+ - [The API documentation](http://weissi.github.com/FRLayeredNavigationController/docs/html/index.html)
+ - [my blog post](http://factisresearch.blogspot.de/2012/06/uis-for-hierachical-ipad-apps.html)
+ - [EuroCopa demo project](https://github.com/weissi/EuroCopaInfo)
+
 
 License
 =======
@@ -22,15 +29,18 @@ It's all open source but you can use it in your commercial product free of
 charge. FRLayeredNavigationController is licensed under the terms of the
 Modified BSD License.
 
+
 Watch the demo videos
 =====================
  - http://youtu.be/v_tXD_mL05E
  - http://youtu.be/q66HX2td_uc
 
+
 Screenshots
 ===========
 [![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)
 [![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)
+
 
 Adding FRLayeredNavigationController to your project
 ====================================================
@@ -73,3 +83,6 @@ http://youtu.be/k9bFAYtoenw .
    Just `#import "FRLayeredNavigationController/FRLayeredNavigation.h"`
    anywhere you want to use FRLayeredNavigationController in your project.
 
+If you want to, you can install [appledoc](http://gentlebytes.com/appledoc/)
+and type `appledoc .` in FRLayeredNavigationController's root directory to
+install the API documentation in Xcode.

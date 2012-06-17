@@ -14,6 +14,6 @@
     <key>--company-id</key>
     <string>com.factisresearch</string>
     <key>--output</key>
-    <string>doc</string>
+    <string>docs</string>
 </dict>
 </plist>
