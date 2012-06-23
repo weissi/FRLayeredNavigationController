@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name     = 'FRLayeredNavigationController'
   s.version  = '0.3.0'
-  s.license  = '3BSD'
+  s.license  = 'Modified BSD'
   s.summary  = 'Layered navigation controller for hierarchical iPad apps.'
   s.homepage = 'https://github.com/weissi/FRLayeredNavigationController'
   s.author   = { 'Johannes Weiß' => 'weiss@tux4u.de' }
@@ -12,11 +12,13 @@ Pod::Spec.new do |s|
 
   s.platform = :ios
 
-  s.source_files = 'FRLayeredNavigationController/*.{h,m}'
+  s.source_files = 'FRLayeredNavigationController'
 
-  s.clean_paths = "FRLayeredNavigationControllerDemo", "*.png"
+  s.clean_paths = 'FRLayeredNavigationControllerDemo', '*.png', 'FRLayeredNavigationControllerDemo', 'FRLayeredNavigationController.xcodeproj', 'docs', 'index.html'
 
   s.framework = 'UIKit'
 
   s.requires_arc = true
+
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-ObjC -fobjc-arc -all_load' }
 end
