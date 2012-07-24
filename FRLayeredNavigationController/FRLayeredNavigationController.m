@@ -84,7 +84,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 }
 
 - (void)dealloc {
-    self.panGR.delegate = nil;
+    [self detachGestureRecognizer];
 }
 
 
@@ -108,10 +108,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     [super viewDidLoad];
 
-    self.panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    self.panGR.maximumNumberOfTouches = 1;
-    self.panGR.delegate = self;
-    [self.view addGestureRecognizer:self.panGR];
+    [self attachGestureRecognizer];
     self.view.backgroundColor = [UIColor clearColor];
 }
 
@@ -130,7 +127,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)viewWillUnload
 {
-    self.panGR = nil;
+    [self detachGestureRecognizer];
     self.firstTouchedView = nil;
     self.outOfBoundsViewController = nil;
 }
@@ -470,6 +467,21 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     }
 
     return fullScreenRect;
+}
+
+- (void)attachGestureRecognizer
+{
+    self.panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    self.panGR.maximumNumberOfTouches = 1;
+    self.panGR.delegate = self;
+    [self.view addGestureRecognizer:self.panGR];
+}
+
+- (void)detachGestureRecognizer
+{
+    [self.panGR removeTarget:self action:NULL];
+    self.panGR.delegate = nil;
+    self.panGR = nil;
 }
 
 #pragma mark - Public API
