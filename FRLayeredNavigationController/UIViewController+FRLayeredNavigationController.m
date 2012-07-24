@@ -43,6 +43,9 @@
         here = here.parentViewController;
     }
 
+    NSLog(@"WARNING: No instance of FRLayeredNavigationController in view controller hierachy!");
+    NSLog(@"HINT: If you used [UIWindow addSubview:], change it to [UIWindow setRootViewController:]");
+
     return nil;
 }
 
@@ -56,6 +59,9 @@
 
         here = here.parentViewController;
     }
+
+    NSLog(@"WARNING: No instance of FRLayerController in view controller hierachy!");
+    NSLog(@"HINT: The layeredNavigationItem property is nil until the view controller is shown on the screen.");
 
     return nil;
 }
