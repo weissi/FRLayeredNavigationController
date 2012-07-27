@@ -26,6 +26,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "FRLayeredNavigationController.h"
-#import "FRLayeredNavigationItem.h"
-#import "UIViewController+FRLayeredNavigationController.h"
+/* http://kuoi.com/~kamikaze/read.php?id=158 */
+#ifdef DEBUG
+#define FRDLOG(fmt, ...) NSLog(@"%s: " fmt, __PRETTY_FUNCTION__, ##__VA_ARGS__)
+#else
+#define FRDLOG(...)
+#endif

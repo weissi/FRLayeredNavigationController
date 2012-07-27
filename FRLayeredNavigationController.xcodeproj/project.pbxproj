@@ -50,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D98F9C8715C2843E00E1A3FF /* FRDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRDLog.h; sourceTree = "<group>"; };
 		DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRLayeredNavigationController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4FACC915591AB300D85A7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA4FACCD15591AB300D85A7E /* FRLayeredNavigationController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRLayeredNavigationController-Prefix.pch"; sourceTree = "<group>"; };
@@ -170,6 +171,7 @@
 				DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */,
 				DA4FACCC15591AB300D85A7E /* Supporting Files */,
 				DA5B05A11559267000C93809 /* FRLayeredNavigation.h */,
+				D98F9C8715C2843E00E1A3FF /* FRDLog.h */,
 			);
 			path = FRLayeredNavigationController;
 			sourceTree = "<group>";
