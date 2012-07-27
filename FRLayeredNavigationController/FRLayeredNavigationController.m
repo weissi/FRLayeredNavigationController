@@ -26,6 +26,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "FRDLog.h"
 #import "FRLayeredNavigationController.h"
 #import "FRLayerController.h"
 #import "FRLayeredNavigationItem.h"
@@ -114,7 +115,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    NSLog(@"ORIENTATION, new size: %@", NSStringFromCGSize(self.view.bounds.size));
+    FRDLOG(@"ORIENTATION, new size: %@", NSStringFromCGSize(self.view.bounds.size));
     [super didRotateFromInterfaceOrientation:orientation];
     [self doLayout];
 }
