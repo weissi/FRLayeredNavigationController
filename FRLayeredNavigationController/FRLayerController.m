@@ -26,6 +26,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "FRDLog.h"
 #import "FRLayerController.h"
 #import "FRLayerChromeView.h"
 #import "FRLayeredNavigation.h"
@@ -151,7 +152,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    NSLog(@"FRLayerController (%@): viewDidUnload", self);
+    FRDLOG(@"FRLayerController (%@): viewDidUnload", self);
 
     self.borderView = nil;
     self.chromeView = nil;
