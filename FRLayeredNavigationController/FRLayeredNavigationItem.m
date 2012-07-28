@@ -69,6 +69,7 @@
 @synthesize width = _width;
 @synthesize nextItemDistance = _nextItemDistance;
 @synthesize hasChrome = _hasChrome;
+@synthesize displayShadow = _displayShadow;
 @synthesize layerController = _layerController;
 
 @end

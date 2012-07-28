@@ -45,6 +45,7 @@
     CGFloat _width;
     CGFloat _nextItemDistance;
     BOOL _hasChrome;
+    BOOL _displayShadow;
     FRLayerController __weak * _layerController;
 }
 
@@ -82,6 +83,11 @@
  * If the view controller should get decorated by some UI chrome: the navigation bar.
  */
 @property (nonatomic, readwrite) BOOL hasChrome;
+
+/**
+ * If the view should display a shadow
+ */
+@property (nonatomic, readwrite) BOOL displayShadow;
 
 /**
  * A custom bar button item displayed on the left of the navigation bar.

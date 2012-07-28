@@ -29,7 +29,6 @@
 #import "FRDLog.h"
 #import "FRLayerController.h"
 #import "FRLayerChromeView.h"
-#import "FRLayeredNavigation.h"
 #import "FRLayeredNavigationItem+Protected.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -138,7 +137,7 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    if (self != [self.layeredNavigationController.childViewControllers objectAtIndex:0]) {
+    if (self.layeredNavigationItem.displayShadow) {
         self.view.layer.shadowRadius = 10.0;
         self.view.layer.shadowOffset = CGSizeMake(-2.0, -3.0);
         self.view.layer.shadowOpacity = 0.5;

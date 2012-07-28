@@ -75,6 +75,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
+        layeredRC.layeredNavigationItem.displayShadow = NO;
         configuration(layeredRC.layeredNavigationItem);
         _outOfBoundsViewController = nil;
 
@@ -565,6 +566,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     navItem.titleView = nil;
     navItem.title = nil;
     navItem.hasChrome = YES;
+    navItem.displayShadow = YES;
 
     configuration(newVC.layeredNavigationItem);
 
