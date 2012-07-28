@@ -44,6 +44,7 @@
     NSMutableArray *_viewControllers;
     UIPanGestureRecognizer *_panGR;
     UIViewController * __weak _outOfBoundsViewController;
+    BOOL _userInteractionEnabled;
 }
 
 /**
@@ -124,5 +125,10 @@
               maximumWidth:(BOOL)maxWidth
                   animated:(BOOL)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration;
+
+/**
+ * If user interaction on the layered navigation controller is enabled.
+ */
+@property (nonatomic) BOOL userInteractionEnabled;
 
 @end

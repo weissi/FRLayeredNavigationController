@@ -78,6 +78,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         layeredRC.layeredNavigationItem.displayShadow = NO;
         configuration(layeredRC.layeredNavigationItem);
         _outOfBoundsViewController = nil;
+        _userInteractionEnabled = YES;
 
         [self addChildViewController:layeredRC];
         [layeredRC didMoveToParentViewController:self];
@@ -110,7 +111,9 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     [super viewDidLoad];
 
-    [self attachGestureRecognizer];
+    if (self.userInteractionEnabled) {
+        [self attachGestureRecognizer];
+    }
     self.view.backgroundColor = [UIColor clearColor];
 }
 
@@ -622,11 +625,25 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                }];
 }
 
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    if (self.userInteractionEnabled != userInteractionEnabled) {
+        self->_userInteractionEnabled = userInteractionEnabled;
+
+        if (self.userInteractionEnabled) {
+            [self attachGestureRecognizer];
+        } else {
+            [self detachGestureRecognizer];
+        }
+    }
+}
+
 #pragma mark - properties
 
 @synthesize viewControllers = _viewControllers;
 @synthesize panGR = _panGR;
 @synthesize firstTouchedView = _firstTouchedView;
 @synthesize outOfBoundsViewController = _outOfBoundsViewController;
+@synthesize userInteractionEnabled = _userInteractionEnabled;
 
 @end
