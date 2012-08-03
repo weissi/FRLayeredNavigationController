@@ -41,6 +41,18 @@
 
 @implementation FRLayeredNavigationItem
 
+- (id)init
+{
+    if ((self = [super init])) {
+        self->_width = -1;
+        self->_nextItemDistance = -1;
+        self->_hasChrome = YES;
+        self->_displayShadow = YES;
+    }
+
+    return self;
+}
+
 - (void)setLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem
 {
     self.layerController.chromeView.leftBarButtonItem = leftBarButtonItem;

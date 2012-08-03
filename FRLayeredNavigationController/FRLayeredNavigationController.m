@@ -561,7 +561,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     CGFloat anchorInitX = anchorViewController.layeredNavigationItem.initialViewPosition.x;
     CGFloat anchorCurrentX = anchorViewController.layeredNavigationItem.currentViewPosition.x;
     CGFloat anchorWidth = anchorViewController.layeredNavigationItem.width;
-    CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance > 0 ?
+    CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance >= 0 ?
                                    parentNavItem.nextItemDistance :
                                    FRLayeredNavigationControllerStandardDistance);
     navItem.initialViewPosition = CGPointMake(initX, 0);
