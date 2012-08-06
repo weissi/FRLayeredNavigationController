@@ -43,6 +43,7 @@
 
 @property (nonatomic, strong) FRLayerChromeView *chromeView;
 @property (nonatomic, strong) UIView *borderView;
+@property (nonatomic, weak) UIView *contentView;
 
 @end
 
@@ -56,8 +57,6 @@
         _layeredNavigationItem.layerController = self;
         _contentViewController = vc;
         _maximumWidth = maxWidth;
-
-        [self attachContentViewController];
     }
 
     return self;
@@ -66,11 +65,9 @@
 - (void)dealloc
 {
     self.layeredNavigationItem.layerController = nil;
-    [self detachContentViewController];
 }
 
 #pragma mark - internal methods
-
 
 - (void)doViewLayout {
     CGRect contentFrame = CGRectZero;
@@ -98,20 +95,9 @@
     }
 
 
-    self.contentViewController.view.frame = contentFrame;
+    self.contentView.frame = contentFrame;
 }
 
-- (void)attachContentViewController
-{
-    [self addChildViewController:self.contentViewController];
-    [self.contentViewController didMoveToParentViewController:self];
-}
-
-- (void)detachContentViewController
-{
-    [self.contentViewController willMoveToParentViewController:nil];
-    [self.contentViewController removeFromParentViewController];
-}
 
 #pragma mark - UIViewController interface methods
 
@@ -133,7 +119,15 @@
         [self.view addSubview:self.chromeView];
         [self.view addSubview:self.borderView];
     }
-    [self.view addSubview:self.contentViewController.view];
+
+    if (self.contentView == nil && self.contentViewController.parentViewController == self) {
+        /* when loaded again after a low memory view removal */
+        self.contentView = self.contentViewController.view;
+    }
+
+    if (self.contentView != nil) {
+        [self.view addSubview:self.contentView];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -155,6 +149,7 @@
 
     self.borderView = nil;
     self.chromeView = nil;
+    self.contentView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -162,10 +157,43 @@
 	return YES;
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    [super willMoveToParentViewController:parent];
+
+    if (parent != nil) {
+        /* will shortly attach to parent */
+        [self addChildViewController:self.contentViewController];
+
+        self.contentView = self.contentViewController.view;
+        [self.view addSubview:self.contentView];
+    } else {
+        /* will shortly detach from parent view controller */
+        [self.contentViewController willMoveToParentViewController:nil];
+
+        [self.contentView removeFromSuperview];
+        self.contentView = nil;
+    }
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    [super didMoveToParentViewController:parent];
+
+    if (parent != nil) {
+        /* just attached to parent view controller */
+        [self.contentViewController didMoveToParentViewController:self];
+    } else {
+        /* did just detach */
+        [self.contentViewController removeFromParentViewController];
+    }
+}
+
 @synthesize contentViewController = _contentViewController;
 @synthesize maximumWidth = _maximumWidth;
 @synthesize borderView = _borderView;
 @synthesize chromeView = _chromeView;
 @synthesize layeredNavigationItem = _layeredNavigationItem;
+@synthesize contentView = _contentView;
 
 @end

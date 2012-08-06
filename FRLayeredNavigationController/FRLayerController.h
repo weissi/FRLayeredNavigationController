@@ -39,6 +39,7 @@
 
     FRLayerChromeView *_chromeView;
     UIView *_borderView;
+    UIView __weak *_contentView;
 
     UIViewController *_contentViewController;
 }

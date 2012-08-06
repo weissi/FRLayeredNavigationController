@@ -500,20 +500,32 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         return;
     }
 
-    [vc willMoveToParentViewController:nil];
     [self.viewControllers removeObject:vc];
 
-    CGRect goAwayFrame = CGRectMake(vc.view.frame.origin.x, 1024, vc.view.bounds.size.width, vc.view.bounds.size.height);
-    [UIView animateWithDuration:animated ? 0.5 : 0
-                          delay:0
-                        options: UIViewAnimationCurveLinear
-                     animations:^{
-                         vc.view.frame = goAwayFrame;
-                     }
-                     completion:^(BOOL finished) {
-                         [vc.view removeFromSuperview];
-                         [vc removeFromParentViewController];
-                     }];
+    CGRect goAwayFrame = CGRectMake(vc.view.frame.origin.x,
+                                    1024,
+                                    vc.view.bounds.size.width,
+                                    vc.view.bounds.size.height);
+
+    void (^completeViewRemoval)(BOOL) = ^(BOOL finished) {
+        [vc willMoveToParentViewController:nil];
+
+        [vc.view removeFromSuperview];
+
+        [vc removeFromParentViewController];
+    };
+
+    if (animated) {
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveLinear
+                         animations:^{
+                             vc.view.frame = goAwayFrame;
+                         }
+                         completion:completeViewRemoval];
+    } else {
+        completeViewRemoval(YES);
+    }
 }
 
 - (void)popToViewController:(UIViewController *)vc animated:(BOOL)animated
@@ -556,7 +568,12 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                                  self.view.bounds.size.width :
                                  [self getScreenBoundsForCurrentOrientation].size.width;
 
-    [self popToViewController:anchorViewController animated:animated];
+    if (contentViewController.parentViewController.parentViewController == self) {
+        /* no animation if the new content view controller is already a child of self */
+        [self popToViewController:anchorViewController animated:NO];
+    } else {
+        [self popToViewController:anchorViewController animated:animated];
+    }
 
     CGFloat anchorInitX = anchorViewController.layeredNavigationItem.initialViewPosition.x;
     CGFloat anchorCurrentX = anchorViewController.layeredNavigationItem.currentViewPosition.x;
@@ -594,7 +611,6 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     [self.viewControllers addObject:newVC];
     [self addChildViewController:newVC];
     [self.view addSubview:newVC.view];
-    [newVC didMoveToParentViewController:self];
 
     [UIView animateWithDuration:animated ? 0.5 : 0
                           delay:0
@@ -609,6 +625,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
                      }
                      completion:^(BOOL finished) {
+                         [newVC didMoveToParentViewController:self];
                      }];
 }
 
