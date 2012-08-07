@@ -111,12 +111,12 @@
 
     CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?44:0) + (self.rightBarButtonItem!=nil?44:0);
 
-    self.toolbar.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    self.toolbar.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
 
     CGRect headerMiddleFrame = CGRectMake(10 + (barButtonItemsSpace/2),
                                           0,
-                                          self.bounds.size.width-20-barButtonItemsSpace,
-                                          self.bounds.size.height);
+                                          CGRectGetWidth(self.bounds)-20-barButtonItemsSpace,
+                                          CGRectGetHeight(self.bounds));
 
     CGSize titleFittingSize = [self.titleView sizeThatFits:headerMiddleFrame.size];
     CGRect titleFrame = CGRectMake(MAX((headerMiddleFrame.size.width - titleFittingSize.width)/2,

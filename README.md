@@ -40,6 +40,9 @@ Features
  - You can easily install FRLayeredNavigationController using
    [CocoaPods](http://cocoapods.org/) or manually (screencast and instructions
    below)
+ - Correctly handles `view.frame` and `view.bounds` and has therefore no
+   problems with `view.transform` (such as rotations) as you can see on this
+   [screenshot](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerRotation.png).
 
 
 License

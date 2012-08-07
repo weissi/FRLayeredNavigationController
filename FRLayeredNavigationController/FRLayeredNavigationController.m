@@ -101,7 +101,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         vc.view.frame = CGRectMake(vc.layeredNavigationItem.currentViewPosition.x,
                                    vc.layeredNavigationItem.currentViewPosition.y,
                                    vc.layeredNavigationItem.width,
-                                   self.view.bounds.size.height);
+                                   CGRectGetHeight(self.view.bounds));
         vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:vc.view];
     }
@@ -272,7 +272,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
         const CGFloat curDiff = myPos.x - last.layeredNavigationItem.currentViewPosition.x;
         const CGFloat initDiff = myInitPos.x - last.layeredNavigationItem.initialViewPosition.x;
-        const CGFloat maxDiff = last.view.bounds.size.width;
+        const CGFloat maxDiff = CGRectGetWidth(last.view.frame);
 
         if (xTranslation == 0 && (CGFloatNotEqual(curDiff, initDiff) && CGFloatNotEqual(curDiff, maxDiff))) {
             switch (method) {
@@ -333,7 +333,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
         const CGPoint myPos = meNavItem.currentViewPosition;
         const CGPoint myInitPos = meNavItem.initialViewPosition;
-        const CGFloat myWidth = me.view.bounds.size.width;
+        const CGFloat myWidth = CGRectGetWidth(me.view.frame);
         CGPoint myNewPos = myPos;
 
         const CGPoint myOldPos = myPos;
@@ -442,11 +442,11 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         f.origin = vc.layeredNavigationItem.currentViewPosition;
 
         if (vc.maximumWidth) {
-            f.size.width = self.view.bounds.size.width - vc.layeredNavigationItem.initialViewPosition.x;
-            vc.layeredNavigationItem.width = f.size.width;
+            f.size.width = CGRectGetWidth(self.view.bounds) - vc.layeredNavigationItem.initialViewPosition.x;
+            vc.layeredNavigationItem.width = CGRectGetWidth(f);
         }
 
-        f.size.height = self.view.bounds.size.height;
+        f.size.height = CGRectGetHeight(self.view.bounds);
 
         vc.view.frame = f;
     }
@@ -502,10 +502,10 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
     [self.viewControllers removeObject:vc];
 
-    CGRect goAwayFrame = CGRectMake(vc.view.frame.origin.x,
+    CGRect goAwayFrame = CGRectMake(CGRectGetMinX(vc.view.frame),
                                     1024,
-                                    vc.view.bounds.size.width,
-                                    vc.view.bounds.size.height);
+                                    CGRectGetWidth(vc.view.frame),
+                                    CGRectGetHeight(vc.view.frame));
 
     void (^completeViewRemoval)(BOOL) = ^(BOOL finished) {
         [vc willMoveToParentViewController:nil];
@@ -564,8 +564,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                                                    initWithContentViewController:contentViewController maximumWidth:maxWidth];
     const FRLayeredNavigationItem *navItem = newVC.layeredNavigationItem;
     const FRLayeredNavigationItem *parentNavItem = anchorViewController.layeredNavigationItem;
-    const CGFloat overallWidth = self.view.bounds.size.width > 0 ?
-                                 self.view.bounds.size.width :
+    const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
+                                 CGRectGetWidth(self.view.bounds) :
                                  [self getScreenBoundsForCurrentOrientation].size.width;
 
     if (contentViewController.parentViewController.parentViewController == self) {
@@ -601,11 +601,11 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     CGRect onscreenFrame = CGRectMake(newVC.layeredNavigationItem.currentViewPosition.x,
                                       newVC.layeredNavigationItem.currentViewPosition.y,
                                       width,
-                                      self.view.bounds.size.height);
-    CGRect offscreenFrame = CGRectMake(MAX(1024, onscreenFrame.origin.x),
+                                      CGRectGetHeight(self.view.bounds));
+    CGRect offscreenFrame = CGRectMake(MAX(1024, CGRectGetMinX(onscreenFrame)),
                                        0,
-                                       onscreenFrame.size.width,
-                                       onscreenFrame.size.height);
+                                       CGRectGetWidth(onscreenFrame),
+                                       CGRectGetHeight(onscreenFrame));
     newVC.view.frame = offscreenFrame;
 
     [self.viewControllers addObject:newVC];
@@ -616,11 +616,11 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         CGFloat saved = [self savePlaceWanted:onscreenFrame.origin.x+width-overallWidth];
-                         newVC.view.frame = CGRectMake(onscreenFrame.origin.x - saved,
-                                                       onscreenFrame.origin.y,
-                                                       onscreenFrame.size.width,
-                                                       onscreenFrame.size.height);
+                         CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
+                         newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
+                                                       CGRectGetMinY(onscreenFrame),
+                                                       CGRectGetWidth(onscreenFrame),
+                                                       CGRectGetHeight(onscreenFrame));
                          newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
 
                      }

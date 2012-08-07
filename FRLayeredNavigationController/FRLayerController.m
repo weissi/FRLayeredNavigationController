@@ -75,23 +75,23 @@
     if (self.layeredNavigationItem.hasChrome) {
         CGRect chromeFrame = CGRectMake(0,
                                         0,
-                                        self.view.bounds.size.width,
+                                        CGRectGetWidth(self.view.bounds),
                                         FRLayerChromeHeight);
         CGRect borderFrame = CGRectMake(0,
                                         FRLayerChromeHeight,
-                                        self.view.bounds.size.width,
-                                        self.view.bounds.size.height-FRLayerChromeHeight);
+                                        CGRectGetWidth(self.view.bounds),
+                                        CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight);
         contentFrame = CGRectMake(1,
                                   FRLayerChromeHeight + 1,
-                                  self.view.bounds.size.width-2,
-                                  self.view.bounds.size.height-FRLayerChromeHeight-2);
+                                  CGRectGetWidth(self.view.bounds)-2,
+                                  CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight-2);
         self.borderView.frame = borderFrame;
         self.chromeView.frame = chromeFrame;
     } else {
         contentFrame = CGRectMake(0,
                                   0,
-                                  self.view.bounds.size.width,
-                                  self.view.bounds.size.height);
+                                  CGRectGetWidth(self.view.bounds),
+                                  CGRectGetHeight(self.view.bounds));
     }
 
 
