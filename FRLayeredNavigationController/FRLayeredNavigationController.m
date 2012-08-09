@@ -613,7 +613,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     [self.view addSubview:newVC.view];
 
     if(animated) {
-        [UIView animateWithDuration:animated ? 0.5 : 0
+        [UIView animateWithDuration:0.5
                               delay:0
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
