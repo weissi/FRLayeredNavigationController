@@ -99,4 +99,9 @@
  */
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 
+/**
+ * A custom background view for the navigation bar
+ */
+@property (nonatomic, strong) UIView *backgroundView;
+
 @end

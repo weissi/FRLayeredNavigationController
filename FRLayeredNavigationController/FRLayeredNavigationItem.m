@@ -73,7 +73,16 @@
     return self.layerController.chromeView.rightBarButtonItem;
 }
 
+-(void) setBackgroundView:(UIView *)backgroundView
+{
+    self.layerController.chromeView.backgroundView = backgroundView;
+}
 
+-(UIView *) backgroundView
+{
+    return self.layerController.chromeView.backgroundView;
+}
+ 
 @synthesize initialViewPosition = _initialViewPosition;
 @synthesize currentViewPosition = _currentViewPosition;
 @synthesize title = _title;
