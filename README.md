@@ -13,6 +13,8 @@ to add FRLayeredNavigationController to your project.
 
 If you have further questions, feel free to [mail me](mailto:weiss@tux4u.de)!
 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=JohannesWeiss&url=https://github.com/weissi/FRLayeredNavigationController&title=FRLayeredNavigationController&language=&tags=github&category=software)
+
 ©2012, [Johannes Weiß](mailto:weiss@tux4u.de) for
 [factis research GmbH](http://www.factisresearch.com).
 
