@@ -54,20 +54,6 @@
     self.window.rootViewController = nvc;
     fvc.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 
-    [[FRNavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"navbar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)]];
-
-    [[FRNavigationBar appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIFont fontWithName:@"GillSans" size:20.5],
-      UITextAttributeFont,
-      [UIColor whiteColor],
-      UITextAttributeTextColor,
-      [UIColor colorWithRed:66.0/255 green:66.0/255 blue:66.0/255 alpha:1.0],
-      UITextAttributeTextShadowColor,
-      nil]
-     ];
-
-
     [self.window makeKeyAndVisible];
 
     return YES;
