@@ -30,15 +30,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FRNavigationBar : NSObject
+@interface FRNavigationBar : NSObject<UIAppearance>
 
 /**
- * A singleton FRNavigationBar that can be used to set the default backgroundImage and titleTextAttributes of all FRNavigationBars in the application. Mimics the iOS 5.0 appearance API for UINavigationBar.
+ * Returns an object which can be used to set global styles for the FRNavigationBar.
  */
 +(FRNavigationBar *) appearance;
 
 
+/** 
+ * Returns an object which can be used set the style of an FRNavigationBar when embedded within other appearance containers.
+ */
 
++(FRNavigationBar *) appearanceWhenContainedIn: (Class <UIAppearanceContainer>)ContainerClass,...;
 /**
  * The default background image of all FRNavigationBars in the application. If none is specified, the default gray gradient of the iPad is used.
  */

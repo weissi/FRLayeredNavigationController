@@ -61,4 +61,10 @@ static FRNavigationBar *_appearance = nil;
     
     return _appearance;
 }
+
++(FRNavigationBar *) appearanceWhenContainedIn: (Class <UIAppearanceContainer>)ContainerClass,...
+{
+    return [FRNavigationBar appearance];
+}
+
 @end
