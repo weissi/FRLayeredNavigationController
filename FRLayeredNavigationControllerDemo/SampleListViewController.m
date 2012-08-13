@@ -108,15 +108,17 @@
     } else if (n == 5) {
         return @"pop VC (NO ANIMATION)";
     } else if (n == 6) {
-        return @"foo";
+        return @"low mem testing: push on UINavigationController";
     } else if (n == 7) {
-        return @"bar";
+        return @"foo";
     } else if (n == 8) {
+        return @"bar";
+    } else if (n == 9) {
         return @"buz";
     } else {
         NSMutableString *s = [[NSMutableString alloc] initWithCapacity:n];
         [s appendString:@"q"];
-        for (int i=8; i<n; i++) {
+        for (int i=7; i<n; i++) {
             [s appendString:@"u"];
         }
         [s appendString:@"x"];
@@ -230,6 +232,10 @@
         [self.layeredNavigationController popViewControllerAnimated:YES];
     } else if (indexPath.row == 5) {
         [self.layeredNavigationController popViewControllerAnimated:NO];
+    } else if (indexPath.row == 6) {
+        UIViewController *vc = [[SampleListViewController alloc] init];
+        FRLayeredNavigationController *fvc = [[FRLayeredNavigationController alloc] initWithRootViewController:vc];
+        [self.navigationController pushViewController:fvc animated:YES];
     } else {
         /* list */
         svc = [[SampleListViewController alloc] init];
