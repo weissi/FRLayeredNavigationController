@@ -262,6 +262,19 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     return didMoveOutOfBounds;
 }
 
+- (BOOL)areViewControllersMaximallyCompressed
+{
+    BOOL maximalCompression = YES;
+
+    for (FRLayerController *lvc in self.viewControllers) {
+        if (lvc.layeredNavigationItem.currentViewPosition.x > lvc.layeredNavigationItem.initialViewPosition.x) {
+            maximalCompression = NO;
+        }
+    }
+
+    return maximalCompression;
+}
+
 - (void)viewControllersToSnappingPointsMethod:(SnappingPointsMethod)method {
     FRLayerController *last = nil;
     CGFloat xTranslation = 0;
@@ -367,7 +380,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         if (self.outOfBoundsViewController == nil ||
             self.outOfBoundsViewController == me ||
             xTranslationGesture < 0) {
-            const BOOL boundedMove = !isTouchedView;
+            const BOOL boundedMove = !(isTouchedView && [self areViewControllersMaximallyCompressed]);
 
             /*
              * IF no view controller is out of bounds (too far on the left)
