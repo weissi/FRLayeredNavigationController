@@ -637,21 +637,31 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     [self addChildViewController:newVC];
     [self.view addSubview:newVC.view];
 
-    [UIView animateWithDuration:animated ? 0.5 : 0
-                          delay:0
-                        options: UIViewAnimationCurveEaseOut
-                     animations:^{
-                         CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
-                         newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
-                                                       CGRectGetMinY(onscreenFrame),
-                                                       CGRectGetWidth(onscreenFrame),
-                                                       CGRectGetHeight(onscreenFrame));
-                         newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
+    if(animated) {
+        [UIView animateWithDuration:animated ? 0.5 : 0
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
+                             newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
+                                                           CGRectGetMinY(onscreenFrame),
+                                                           CGRectGetWidth(onscreenFrame),
+                                                           CGRectGetHeight(onscreenFrame));
+                             newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
 
-                     }
-                     completion:^(BOOL finished) {
-                         [newVC didMoveToParentViewController:self];
-                     }];
+                         }
+                         completion:^(BOOL finished) {
+                             [newVC didMoveToParentViewController:self];
+                         }];
+    } else {
+        CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
+        newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
+                                      CGRectGetMinY(onscreenFrame),
+                                      CGRectGetWidth(onscreenFrame),
+                                      CGRectGetHeight(onscreenFrame));
+        newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
+        [newVC didMoveToParentViewController:self];
+    }
 }
 
 - (void)pushViewController:(UIViewController *)contentViewController
