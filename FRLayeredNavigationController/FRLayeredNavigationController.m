@@ -637,30 +637,31 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     [self addChildViewController:newVC];
     [self.view addSubview:newVC.view];
 
-    if(animated) {
-        [UIView animateWithDuration:animated ? 0.5 : 0
-                              delay:0
-                            options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
-                             newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
-                                                           CGRectGetMinY(onscreenFrame),
-                                                           CGRectGetWidth(onscreenFrame),
-                                                           CGRectGetHeight(onscreenFrame));
-                             newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
-
-                         }
-                         completion:^(BOOL finished) {
-                             [newVC didMoveToParentViewController:self];
-                         }];
-    } else {
+    void (^doNewFrameMove)() = ^() {
         CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
         newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
                                       CGRectGetMinY(onscreenFrame),
                                       CGRectGetWidth(onscreenFrame),
                                       CGRectGetHeight(onscreenFrame));
         newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
+    };
+    void (^newFrameMoveCompleted)(BOOL) = ^(BOOL finished) {
         [newVC didMoveToParentViewController:self];
+    };
+
+    if(animated) {
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             doNewFrameMove();
+                         }
+                         completion:^(BOOL finished) {
+                             newFrameMoveCompleted(finished);
+                         }];
+    } else {
+        doNewFrameMove();
+        newFrameMoveCompleted(YES);
     }
 }
 
