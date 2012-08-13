@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		687661CC15D997BE009DF4A4 /* FRNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 687661CA15D997BE009DF4A4 /* FRNavigationBar.h */; };
+		687661CD15D997BE009DF4A4 /* FRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 687661CB15D997BE009DF4A4 /* FRNavigationBar.m */; };
 		DA4FACCA15591AB300D85A7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC915591AB300D85A7E /* Foundation.framework */; };
 		DA4FACF415591B6700D85A7E /* FRLayerChromeView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA4FACEA15591B6700D85A7E /* FRLayerChromeView.h */; };
 		DA4FACF515591B6700D85A7E /* FRLayerChromeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FACEB15591B6700D85A7E /* FRLayerChromeView.m */; };
@@ -50,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		687661CA15D997BE009DF4A4 /* FRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRNavigationBar.h; sourceTree = "<group>"; };
+		687661CB15D997BE009DF4A4 /* FRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRNavigationBar.m; sourceTree = "<group>"; };
 		D98F9C8715C2843E00E1A3FF /* FRDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRDLog.h; sourceTree = "<group>"; };
 		DA4FACC615591AB300D85A7E /* libFRLayeredNavigationController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRLayeredNavigationController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4FACC915591AB300D85A7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -172,6 +176,8 @@
 				DA4FACCC15591AB300D85A7E /* Supporting Files */,
 				DA5B05A11559267000C93809 /* FRLayeredNavigation.h */,
 				D98F9C8715C2843E00E1A3FF /* FRDLog.h */,
+				687661CA15D997BE009DF4A4 /* FRNavigationBar.h */,
+				687661CB15D997BE009DF4A4 /* FRNavigationBar.m */,
 			);
 			path = FRLayeredNavigationController;
 			sourceTree = "<group>";
@@ -236,6 +242,7 @@
 				DAAB20B0155D27A700C5CAA5 /* Utils.h in Headers */,
 				DAB8C67E155E8F6A00340CB7 /* FRLayeredNavigationItem+Protected.h in Headers */,
 				DAB8C686155E93E700340CB7 /* FRLayerController+Protected.h in Headers */,
+				687661CC15D997BE009DF4A4 /* FRNavigationBar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +336,7 @@
 				DA4FACF915591B6700D85A7E /* FRLayeredNavigationController.m in Sources */,
 				DA4FACFB15591B6700D85A7E /* FRLayeredNavigationItem.m in Sources */,
 				DAAB20B1155D27A700C5CAA5 /* Utils.m in Sources */,
+				687661CD15D997BE009DF4A4 /* FRNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
