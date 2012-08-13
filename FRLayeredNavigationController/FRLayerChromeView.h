@@ -40,6 +40,7 @@
 
 @property (nonatomic, strong) UIBarButtonItem *leftBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
+@property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, readonly, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UIView *titleView;
 

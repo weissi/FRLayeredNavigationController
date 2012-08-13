@@ -106,6 +106,15 @@
     [self manageToolbar];
 }
 
+-(void) setBackgroundView:(UIView *)backgroundView
+{
+    _backgroundView = backgroundView;
+    _backgroundView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self addSubview:_backgroundView];
+    [self sendSubviewToBack:_backgroundView];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
 
@@ -153,23 +162,26 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    if(_backgroundView == nil) {
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
 
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                               byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
-    [path addClip];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+        [path addClip];
 
-    CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
-    CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
-                              CGRectGetMaxY(self.bounds));
+        CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
+        CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
+                                  CGRectGetMaxY(self.bounds));
 
-    CGGradientRef gradient = [self gradient];
+        CGGradientRef gradient = [self gradient];
 
-    CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
+        CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
+    }
 }
 
 @synthesize leftBarButtonItem = _leftBarButtonItem;
 @synthesize rightBarButtonItem = _rightBarButtonItem;
+@synthesize backgroundView = _backgroundView;
 @synthesize toolbar = _toolbar;
 @synthesize titleView = _titleView;
 
