@@ -489,6 +489,16 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     self.panGR = nil;
 }
 
+- (FRLayerController *)layerControllerOf:(UIViewController *)vc
+{
+    for (FRLayerController *lvc in self.viewControllers) {
+        if (lvc.contentViewController == vc) {
+            return lvc;
+        }
+    }
+    return nil;
+}
+
 #pragma mark - Public API
 
 - (void)popViewControllerAnimated:(BOOL)animated
@@ -563,7 +573,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     FRLayerController *newVC = [[FRLayerController alloc]
                                                    initWithContentViewController:contentViewController maximumWidth:maxWidth];
     const FRLayeredNavigationItem *navItem = newVC.layeredNavigationItem;
-    const FRLayeredNavigationItem *parentNavItem = anchorViewController.layeredNavigationItem;
+    const FRLayeredNavigationItem *parentNavItem = [self layerControllerOf:anchorViewController].layeredNavigationItem;
     const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
                                  CGRectGetWidth(self.view.bounds) :
                                  [self getScreenBoundsForCurrentOrientation].size.width;
@@ -575,9 +585,9 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         [self popToViewController:anchorViewController animated:animated];
     }
 
-    CGFloat anchorInitX = anchorViewController.layeredNavigationItem.initialViewPosition.x;
-    CGFloat anchorCurrentX = anchorViewController.layeredNavigationItem.currentViewPosition.x;
-    CGFloat anchorWidth = anchorViewController.layeredNavigationItem.width;
+    CGFloat anchorInitX = parentNavItem.initialViewPosition.x;
+    CGFloat anchorCurrentX = parentNavItem.currentViewPosition.x;
+    CGFloat anchorWidth = parentNavItem.width;
     CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance >= 0 ?
                                    parentNavItem.nextItemDistance :
                                    FRLayeredNavigationControllerStandardDistance);
