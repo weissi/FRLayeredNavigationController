@@ -31,10 +31,12 @@
 #import "FRNavigationBar.h"
 
 @interface FRLayerChromeView ()
+@property (nonatomic, readonly, strong) UIView *savedBackgroundView;
 
 @end
 
 @implementation FRLayerChromeView
+@synthesize savedBackgroundView = _savedBackgroundView;
 
 -(id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
@@ -157,12 +159,22 @@
     return _savedGradient;
 }
 
+-(UIView *) savedBackgroundView
+{
+    if (!_savedBackgroundView && [[FRNavigationBar appearance] backgroundImage] ){
+        _savedBackgroundView = [[UIImageView alloc] initWithImage:[[FRNavigationBar appearance] backgroundImage]];
+        _savedBackgroundView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        _savedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+ 
+    }
+    
+    return _savedBackgroundView;
+}
+
 - (void)drawRect:(CGRect)rect
 {
-    if ([[FRNavigationBar appearance] backgroundImage]){
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[[FRNavigationBar appearance] backgroundImage]];
-        imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
-        [self insertSubview:imageView atIndex:0];
+    if (self.savedBackgroundView){
+        [self insertSubview:self.savedBackgroundView atIndex:0];
         
     } else {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
