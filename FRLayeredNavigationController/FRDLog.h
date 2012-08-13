@@ -32,3 +32,5 @@
 #else
 #define FRDLOG(...)
 #endif
+
+#define FRWLOG(fmt, ...) NSLog(@"%s: " fmt, __PRETTY_FUNCTION__, ##__VA_ARGS__)

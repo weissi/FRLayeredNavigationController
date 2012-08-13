@@ -572,11 +572,22 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     FRLayerController *newVC = [[FRLayerController alloc]
                                                    initWithContentViewController:contentViewController maximumWidth:maxWidth];
+    const FRLayerController *parentLayerController = [self layerControllerOf:anchorViewController];
+
+    if (parentLayerController == nil) {
+        /* view controller to push on not found */
+        FRWLOG(@"WARNING: View controller to push in front of ('%@') not pushed (yet), pushing on top instead.",
+               anchorViewController);
+        [self pushViewController:contentViewController
+                       inFrontOf:((FRLayerController *)[self.viewControllers lastObject]).contentViewController
+                    maximumWidth:maxWidth
+                        animated:animated
+                   configuration:configuration];
+        return;
+    }
+
     const FRLayeredNavigationItem *navItem = newVC.layeredNavigationItem;
-    const FRLayeredNavigationItem *parentNavItem = [self layerControllerOf:anchorViewController].layeredNavigationItem;
-    const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
-                                 CGRectGetWidth(self.view.bounds) :
-                                 [self getScreenBoundsForCurrentOrientation].size.width;
+    const FRLayeredNavigationItem *parentNavItem = parentLayerController.layeredNavigationItem;
 
     if (contentViewController.parentViewController.parentViewController == self) {
         /* no animation if the new content view controller is already a child of self */
@@ -599,6 +610,10 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     navItem.displayShadow = YES;
 
     configuration(newVC.layeredNavigationItem);
+
+    const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
+                                 CGRectGetWidth(self.view.bounds) :
+                                 [self getScreenBoundsForCurrentOrientation].size.width;
 
     CGFloat width;
     if (navItem.width > 0) {
