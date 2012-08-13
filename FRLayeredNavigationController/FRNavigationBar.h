@@ -1,7 +1,7 @@
 /*
  * This file is part of FRLayeredNavigationController.
  *
- * Copyright (c) 2012, Johannes Weiß <weiss@tux4u.de>
+ * Copyright (c) 2012, Apurva Mehta <apurva.1618@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,29 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "FRLayeredNavigationController.h"
-#import "FRLayeredNavigationItem.h"
-#import "UIViewController+FRLayeredNavigationController.h"
-#import "FRNavigationBar.h"
+
+
+#import <UIKit/UIKit.h>
+
+@interface FRNavigationBar : NSObject
+
+/**
+ * A singleton FRNavigationBar that can be used to set the default backgroundImage and titleTextAttributes of all FRNavigationBars in the application. Mimics the iOS 5.0 appearance API for UINavigationBar.
+ */
++(FRNavigationBar *) appearance;
+
+
+
+/**
+ * The default background image of all FRNavigationBars in the application. If none is specified, the default gray gradient of the iPad is used.
+ */
+@property (nonatomic, strong) UIImage *backgroundImage;
+
+
+/** 
+ * The default text attributes for FRNavigationBar titles. Defaults to the etched dark gray look that is default on iPad navigation bars. 
+ */
+@property (nonatomic, copy) NSDictionary *titleTextAttributes;
+
+
+@end
