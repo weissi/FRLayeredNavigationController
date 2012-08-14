@@ -35,7 +35,7 @@ static FRNavigationBar *_appearance = nil;
 @synthesize backgroundImage = _backgroundImage;
 @synthesize titleTextAttributes = _titleTextAttributes;
 
-+(FRNavigationBar *) appearance
++ (FRNavigationBar *)appearance
 {
 
     if (!_appearance){
@@ -62,7 +62,7 @@ static FRNavigationBar *_appearance = nil;
     return _appearance;
 }
 
-+(FRNavigationBar *) appearanceWhenContainedIn: (Class <UIAppearanceContainer>)ContainerClass,...
++ (FRNavigationBar *)appearanceWhenContainedIn:(Class <UIAppearanceContainer>)ContainerClass,...
 {
     return [FRNavigationBar appearance];
 }

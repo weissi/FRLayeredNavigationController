@@ -65,9 +65,9 @@ typedef enum {
     }];
 }
 
-    - (id)initWithRootViewController:(UIViewController *)rootViewController
-configuration:(void (^)(FRLayeredNavigationItem *item))configuration
-    {
+- (id)initWithRootViewController:(UIViewController *)rootViewController
+                   configuration:(void (^)(FRLayeredNavigationItem *item))configuration
+{
     self = [super init];
     if (self) {
         FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController maximumWidth:NO];
@@ -202,7 +202,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
     if ([touch.view isKindOfClass:[UISlider class]]) {
         // prevent recognizing touches on the slider
         return NO;
@@ -221,7 +222,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     vc.view.frame = f;
 }
 
-+ (BOOL)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
++ (BOOL)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded
+{
     BOOL didMoveOutOfBounds = NO;
     const FRLayeredNavigationItem *navItem = vc.layeredNavigationItem;
     const CGPoint initPos = navItem.initialViewPosition;
@@ -275,7 +277,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     return maximalCompression;
 }
 
-- (void)viewControllersToSnappingPointsMethod:(SnappingPointsMethod)method {
+- (void)viewControllersToSnappingPointsMethod:(SnappingPointsMethod)method
+{
     FRLayerController *last = nil;
     CGFloat xTranslation = 0;
 
@@ -446,7 +449,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     return abs(xTranslation);
 }
 
-- (void)doLayout {
+- (void)doLayout
+{
     for (FRLayerController *vc in self.viewControllers) {
         CGRect f = vc.view.frame;
         if (vc.layeredNavigationItem.currentViewPosition.x < vc.layeredNavigationItem.initialViewPosition.x) {

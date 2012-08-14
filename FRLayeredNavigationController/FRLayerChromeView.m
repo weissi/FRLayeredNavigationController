@@ -159,13 +159,12 @@
     return _savedGradient;
 }
 
--(UIView *) savedBackgroundView
+- (UIView *)savedBackgroundView
 {
     if (!_savedBackgroundView && [[FRNavigationBar appearance] backgroundImage] ){
         _savedBackgroundView = [[UIImageView alloc] initWithImage:[[FRNavigationBar appearance] backgroundImage]];
         _savedBackgroundView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
         _savedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
- 
     }
     
     return _savedBackgroundView;
@@ -173,9 +172,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    if (self.savedBackgroundView){
+    if (self.savedBackgroundView && self.savedBackgroundView.superview == nil) {
         [self insertSubview:self.savedBackgroundView atIndex:0];
-        
     } else {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
 
