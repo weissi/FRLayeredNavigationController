@@ -28,12 +28,15 @@
 
 #import "FRLayerChromeView.h"
 #import "Utils.h"
+#import "FRNavigationBar.h"
 
 @interface FRLayerChromeView ()
+@property (nonatomic, readonly, strong) UIView *savedBackgroundView;
 
 @end
 
 @implementation FRLayerChromeView
+@synthesize savedBackgroundView = _savedBackgroundView;
 
 -(id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
@@ -55,12 +58,17 @@
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.text = titleText;
             titleLabel.textAlignment = UITextAlignmentCenter;
-            titleLabel.font = [UIFont boldSystemFontOfSize:20.5];
-            titleLabel.shadowColor = [UIColor whiteColor];
-            titleLabel.textColor = [UIColor colorWithRed:111.0f/255.0f
-                                                   green:118.0f/255.0f
-                                                    blue:126.0f/255.0f
-                                                   alpha:1.0f];
+            
+            
+            titleLabel.font = [[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeFont];
+            
+            titleLabel.textColor = [[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextColor];
+            
+            titleLabel.shadowColor = [[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextShadowColor];
+
+            if ([[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextShadowOffset]){
+                titleLabel.shadowOffset = [[[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextShadowOffset] CGSizeValue];
+            }
 
             self.titleView = titleLabel;
         } else {
@@ -151,21 +159,38 @@
     return _savedGradient;
 }
 
+-(UIView *) savedBackgroundView
+{
+    if (!_savedBackgroundView && [[FRNavigationBar appearance] backgroundImage] ){
+        _savedBackgroundView = [[UIImageView alloc] initWithImage:[[FRNavigationBar appearance] backgroundImage]];
+        _savedBackgroundView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        _savedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+ 
+    }
+    
+    return _savedBackgroundView;
+}
+
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    if (self.savedBackgroundView){
+        [self insertSubview:self.savedBackgroundView atIndex:0];
+        
+    } else {
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
 
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                               byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
-    [path addClip];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+        [path addClip];
 
-    CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
-    CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
-                              CGRectGetMaxY(self.bounds));
+        CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
+        CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
+                                  CGRectGetMaxY(self.bounds));
 
-    CGGradientRef gradient = [self gradient];
+        CGGradientRef gradient = [self gradient];
 
-    CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
+        CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
+    }
 }
 
 @synthesize leftBarButtonItem = _leftBarButtonItem;
