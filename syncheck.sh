@@ -3,6 +3,7 @@
 set -e
 
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)
+PROG=syncheck.sh
 
 trap bug_found ERR 
 
@@ -30,11 +31,6 @@ function check() {
         RET=1
     fi  
     return 0
-}
-
-function bad_exit() {
-    echo FAILED
-    exit 1
 }
 
 while read file; do
