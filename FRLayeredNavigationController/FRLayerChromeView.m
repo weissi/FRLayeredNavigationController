@@ -38,7 +38,7 @@
 @implementation FRLayerChromeView
 @synthesize savedBackgroundView = _savedBackgroundView;
 
--(id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
+- (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,20 +54,21 @@
 
         if (titleView == nil) {
             UILabel *titleLabel = [[UILabel alloc] init];
+            const NSDictionary *titleTextAttrs = [[FRNavigationBar appearance] titleTextAttributes];
 
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.text = titleText;
             titleLabel.textAlignment = UITextAlignmentCenter;
-            
-            
-            titleLabel.font = [[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeFont];
-            
-            titleLabel.textColor = [[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextColor];
-            
-            titleLabel.shadowColor = [[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextShadowColor];
 
-            if ([[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextShadowOffset]){
-                titleLabel.shadowOffset = [[[[FRNavigationBar appearance] titleTextAttributes] objectForKey:UITextAttributeTextShadowOffset] CGSizeValue];
+
+            titleLabel.font = [titleTextAttrs objectForKey:UITextAttributeFont];
+
+            titleLabel.textColor = [titleTextAttrs objectForKey:UITextAttributeTextColor];
+
+            titleLabel.shadowColor = [titleTextAttrs objectForKey:UITextAttributeTextShadowColor];
+
+            if ([titleTextAttrs objectForKey:UITextAttributeTextShadowOffset]){
+                titleLabel.shadowOffset = [[titleTextAttrs objectForKey:UITextAttributeTextShadowOffset] CGSizeValue];
             }
 
             self.titleView = titleLabel;
@@ -80,16 +81,18 @@
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     CGGradientRelease(self->_savedGradient);
     self->_savedGradient = NULL;
 }
 
 - (void)manageToolbar
 {
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                   target:nil
-                                                                                   action:nil];
+    UIBarButtonItem *flexibleSpace =
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                      target:nil
+                                                      action:nil];
 
     if (self.leftBarButtonItem != nil && self.rightBarButtonItem != nil) {
         [self.toolbar setItems:[NSArray arrayWithObjects:_leftBarButtonItem, flexibleSpace, _rightBarButtonItem, nil]];
@@ -114,7 +117,8 @@
     [self manageToolbar];
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
 
     CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?44:0) + (self.rightBarButtonItem!=nil?44:0);
@@ -137,7 +141,8 @@
     self.titleView.frame = titleFrame;
 }
 
-- (CGGradientRef)gradient {
+- (CGGradientRef)gradient
+{
     if (NULL == _savedGradient) {
         CGFloat colors[12] = {
             244.0/255.0, 245.0/255.0, 247.0/255.0, 1.0,
@@ -159,28 +164,28 @@
     return _savedGradient;
 }
 
--(UIView *) savedBackgroundView
+- (UIView *)savedBackgroundView
 {
     if (!_savedBackgroundView && [[FRNavigationBar appearance] backgroundImage] ){
         _savedBackgroundView = [[UIImageView alloc] initWithImage:[[FRNavigationBar appearance] backgroundImage]];
         _savedBackgroundView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
         _savedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
- 
     }
-    
+
     return _savedBackgroundView;
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    if (self.savedBackgroundView){
+    if (self.savedBackgroundView && self.savedBackgroundView.superview == nil) {
         [self insertSubview:self.savedBackgroundView atIndex:0];
-        
     } else {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
 
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+        UIBezierPath *path =
+            [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                  byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
+                                        cornerRadii:CGSizeMake(10, 10)];
         [path addClip];
 
         CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);

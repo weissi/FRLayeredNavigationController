@@ -33,7 +33,8 @@
 
 @implementation UIViewController (FRLayeredNavigationController)
 
-- (FRLayeredNavigationController *)layeredNavigationController {
+- (FRLayeredNavigationController *)layeredNavigationController
+{
     UIViewController *here = self;
 
     while (here != nil) {
@@ -50,7 +51,8 @@
     return nil;
 }
 
-- (FRLayeredNavigationItem *)layeredNavigationItem {
+- (FRLayeredNavigationItem *)layeredNavigationItem
+{
     UIViewController *here = self;
 
     while (here != nil) {

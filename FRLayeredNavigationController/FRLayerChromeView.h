@@ -36,7 +36,7 @@
     UIView *_titleView;
 }
 
--(id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText;
+- (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText;
 
 @property (nonatomic, strong) UIBarButtonItem *leftBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;

@@ -48,7 +48,7 @@ typedef enum {
 @interface FRLayeredNavigationController ()
 
 @property (nonatomic, readwrite, strong) UIPanGestureRecognizer *panGR;
-@property (nonatomic, readwrite, strong) NSMutableArray *myViewControllers;
+@property (nonatomic, readwrite, strong) NSMutableArray *layeredViewControllers;
 @property (nonatomic, readwrite, weak) UIViewController *outOfBoundsViewController;
 @property (nonatomic, readwrite, weak) UIView *firstTouchedView;
 
@@ -65,13 +65,13 @@ typedef enum {
     }];
 }
 
-    - (id)initWithRootViewController:(UIViewController *)rootViewController
-configuration:(void (^)(FRLayeredNavigationItem *item))configuration
-    {
+- (id)initWithRootViewController:(UIViewController *)rootViewController
+                   configuration:(void (^)(FRLayeredNavigationItem *item))configuration
+{
     self = [super init];
     if (self) {
         FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController maximumWidth:NO];
-        _myViewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
+        _layeredViewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
@@ -86,7 +86,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [self detachGestureRecognizer];
 }
 
@@ -97,7 +98,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     self.view = [[UIView alloc] init];
 
-    for (FRLayerController *vc in self.myViewControllers) {
+    for (FRLayerController *vc in self.layeredViewControllers) {
         vc.view.frame = CGRectMake(vc.layeredNavigationItem.currentViewPosition.x,
                                    vc.layeredNavigationItem.currentViewPosition.y,
                                    vc.layeredNavigationItem.width,
@@ -145,7 +146,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+    return YES;
 }
 
 #pragma mark - UIGestureRecognizer delegate interface
@@ -160,8 +161,9 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
         case UIGestureRecognizerStateBegan: {
             //NSLog(@"UIGestureRecognizerStateBegan");
-            UIView *touchedView = [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
-                                                        withEvent:nil];
+            UIView *touchedView =
+                [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
+                                      withEvent:nil];
             self.firstTouchedView = touchedView;
             break;
         }
@@ -169,8 +171,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         case UIGestureRecognizerStateChanged: {
             //NSLog(@"UIGestureRecognizerStateChanged, vel=%f", [gestureRecognizer velocityInView:firstView].x);
 
-            const NSInteger startVcIdx = [self.myViewControllers count]-1;
-            const UIViewController *startVc = [self.myViewControllers objectAtIndex:startVcIdx];
+            const NSInteger startVcIdx = [self.layeredViewControllers count]-1;
+            const UIViewController *startVc = [self.layeredViewControllers objectAtIndex:startVcIdx];
 
             [self moveViewControllersXTranslation:[gestureRecognizer translationInView:self.view].x];
 
@@ -202,7 +204,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
     if ([touch.view isKindOfClass:[UISlider class]]) {
         // prevent recognizing touches on the slider
         return NO;
@@ -221,7 +224,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     vc.view.frame = f;
 }
 
-+ (BOOL)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded {
++ (BOOL)viewController:(FRLayerController *)vc xTranslation:(CGFloat)origXTranslation bounded:(BOOL)bounded
+{
     BOOL didMoveOutOfBounds = NO;
     const FRLayeredNavigationItem *navItem = vc.layeredNavigationItem;
     const CGPoint initPos = navItem.initialViewPosition;
@@ -266,7 +270,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     BOOL maximalCompression = YES;
 
-    for (FRLayerController *lvc in self.myViewControllers) {
+    for (FRLayerController *lvc in self.layeredViewControllers) {
         if (lvc.layeredNavigationItem.currentViewPosition.x > lvc.layeredNavigationItem.initialViewPosition.x) {
             maximalCompression = NO;
         }
@@ -275,11 +279,12 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     return maximalCompression;
 }
 
-- (void)viewControllersToSnappingPointsMethod:(SnappingPointsMethod)method {
+- (void)viewControllersToSnappingPointsMethod:(SnappingPointsMethod)method
+{
     FRLayerController *last = nil;
     CGFloat xTranslation = 0;
 
-    for (FRLayerController *vc in self.myViewControllers) {
+    for (FRLayerController *vc in self.layeredViewControllers) {
         const CGPoint myPos = vc.layeredNavigationItem.currentViewPosition;
         const CGPoint myInitPos = vc.layeredNavigationItem.initialViewPosition;
 
@@ -336,9 +341,9 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     FRLayeredNavigationItem *parentNavItem = nil;
     CGPoint parentOldPos = CGPointZero;
     BOOL descendentOfTouched = NO;
-    FRLayerController *rootVC = [self.myViewControllers objectAtIndex:0];
+    FRLayerController *rootVC = [self.layeredViewControllers objectAtIndex:0];
 
-    for (FRLayerController *me in [self.myViewControllers reverseObjectEnumerator]) {
+    for (FRLayerController *me in [self.layeredViewControllers reverseObjectEnumerator]) {
         if (rootVC == me) {
             break;
         }
@@ -424,7 +429,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         return 0;
     }
 
-    for (FRLayerController *vc in self.myViewControllers) {
+    for (FRLayerController *vc in self.layeredViewControllers) {
         const CGFloat initX = vc.layeredNavigationItem.initialViewPosition.x;
         const CGFloat currentX = vc.layeredNavigationItem.currentViewPosition.x;
 
@@ -437,8 +442,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         }
     }
 
-    for (FRLayerController *vc in self.myViewControllers) {
-        if (vc == [self.myViewControllers lastObject]) {
+    for (FRLayerController *vc in self.layeredViewControllers) {
+        if (vc == [self.layeredViewControllers lastObject]) {
             break;
         }
         [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
@@ -446,8 +451,9 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     return abs(xTranslation);
 }
 
+
 - (void)doLayout {
-    for (FRLayerController *vc in self.myViewControllers) {
+    for (FRLayerController *vc in self.layeredViewControllers) {
         CGRect f = vc.view.frame;
         if (vc.layeredNavigationItem.currentViewPosition.x < vc.layeredNavigationItem.initialViewPosition.x) {
             vc.layeredNavigationItem.currentViewPosition = vc.layeredNavigationItem.initialViewPosition;
@@ -504,7 +510,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (FRLayerController *)layerControllerOf:(UIViewController *)vc
 {
-    for (FRLayerController *lvc in self.myViewControllers) {
+    for (FRLayerController *lvc in self.layeredViewControllers) {
         if (lvc.contentViewController == vc) {
             return lvc;
         }
@@ -516,14 +522,14 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)popViewControllerAnimated:(BOOL)animated
 {
-    UIViewController *vc = [self.myViewControllers lastObject];
+    UIViewController *vc = [self.layeredViewControllers lastObject];
 
-    if ([self.myViewControllers count] == 1) {
+    if ([self.layeredViewControllers count] == 1) {
         /* don't remove root view controller */
         return;
     }
 
-    [self.myViewControllers removeObject:vc];
+    [self.layeredViewControllers removeObject:vc];
 
     CGRect goAwayFrame = CGRectMake(CGRectGetMinX(vc.view.frame),
                                     1024,
@@ -555,7 +561,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     UIViewController *currentVc;
 
-    while ((currentVc = [self.myViewControllers lastObject])) {
+    while ((currentVc = [self.layeredViewControllers lastObject])) {
         if (([currentVc class] == [FRLayerController class] &&
              ((FRLayerController*)currentVc).contentViewController == vc) ||
             ([currentVc class] != [FRLayerController class] &&
@@ -563,7 +569,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                 break;
             }
 
-        if ([self.myViewControllers count] == 1) {
+        if ([self.layeredViewControllers count] == 1) {
             /* don't remove root view controller */
             return;
         }
@@ -574,7 +580,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 
 - (void)popToRootViewControllerAnimated:(BOOL)animated
 {
-    [self popToViewController:[self.myViewControllers objectAtIndex:0] animated:animated];
+    [self popToViewController:[self.layeredViewControllers objectAtIndex:0] animated:animated];
 }
 
 - (void)pushViewController:(UIViewController *)contentViewController
@@ -583,8 +589,8 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                   animated:(BOOL)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
-    FRLayerController *newVC = [[FRLayerController alloc]
-                                                   initWithContentViewController:contentViewController maximumWidth:maxWidth];
+    FRLayerController *newVC =
+        [[FRLayerController alloc] initWithContentViewController:contentViewController maximumWidth:maxWidth];
     const FRLayerController *parentLayerController = [self layerControllerOf:anchorViewController];
 
     if (parentLayerController == nil) {
@@ -592,7 +598,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
         FRWLOG(@"WARNING: View controller to push in front of ('%@') not pushed (yet), pushing on top instead.",
                anchorViewController);
         [self pushViewController:contentViewController
-                       inFrontOf:((FRLayerController *)[self.myViewControllers lastObject]).contentViewController
+                       inFrontOf:((FRLayerController *)[self.layeredViewControllers lastObject]).contentViewController
                     maximumWidth:maxWidth
                         animated:animated
                    configuration:configuration];
@@ -646,7 +652,7 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
                                        CGRectGetHeight(onscreenFrame));
     newVC.view.frame = offscreenFrame;
 
-    [self.myViewControllers addObject:newVC];
+    [self.layeredViewControllers addObject:newVC];
     [self addChildViewController:newVC];
     [self.view addSubview:newVC.view];
 
@@ -704,14 +710,18 @@ configuration:(void (^)(FRLayeredNavigationItem *item))configuration
     }
 }
 
--(NSArray *) viewControllers
+- (NSArray *)viewControllers
 {
-    return [self.myViewControllers copy];
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[self.layeredViewControllers count]];
+    [self.layeredViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [result addObject:((FRLayerController*)obj).contentViewController];
+    }];
+    return [result copy];
 }
 
 #pragma mark - properties
 
-@synthesize myViewControllers = _myViewControllers;
+@synthesize layeredViewControllers = _layeredViewControllers;
 @synthesize panGR = _panGR;
 @synthesize firstTouchedView = _firstTouchedView;
 @synthesize outOfBoundsViewController = _outOfBoundsViewController;

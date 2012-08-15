@@ -42,6 +42,7 @@
     @private
     UIView * __weak _firstTouchedView;
     UIPanGestureRecognizer *_panGR;
+    NSMutableArray *_layeredViewControllers;
     UIViewController * __weak _outOfBoundsViewController;
     BOOL _userInteractionEnabled;
 }
@@ -131,7 +132,8 @@
 @property (nonatomic) BOOL userInteractionEnabled;
 
 /**
- * Returns all the UIViewController objects being managed by the FRNavigationController. Note that, unlike a UINavigationController, this is a readonly property.
+ * Returns all the UIViewController objects being managed by the FRNavigationController. 
+ * Note that, unlike a UINavigationController, this is a readonly property.
  */
 
 @property (nonatomic, readonly) NSArray *viewControllers;
