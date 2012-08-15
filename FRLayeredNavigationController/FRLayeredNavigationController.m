@@ -70,7 +70,8 @@ typedef enum {
 {
     self = [super init];
     if (self) {
-        FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController maximumWidth:NO];
+        FRLayerController *layeredRC =
+            [[FRLayerController alloc] initWithContentViewController:rootViewController maximumWidth:NO];
         _viewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
@@ -86,7 +87,8 @@ typedef enum {
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [self detachGestureRecognizer];
 }
 
@@ -145,7 +147,7 @@ typedef enum {
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+    return YES;
 }
 
 #pragma mark - UIGestureRecognizer delegate interface
@@ -160,8 +162,9 @@ typedef enum {
 
         case UIGestureRecognizerStateBegan: {
             //NSLog(@"UIGestureRecognizerStateBegan");
-            UIView *touchedView = [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
-                                                        withEvent:nil];
+            UIView *touchedView =
+                [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
+                                      withEvent:nil];
             self.firstTouchedView = touchedView;
             break;
         }
@@ -587,8 +590,8 @@ typedef enum {
                   animated:(BOOL)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
-    FRLayerController *newVC = [[FRLayerController alloc]
-                                                   initWithContentViewController:contentViewController maximumWidth:maxWidth];
+    FRLayerController *newVC =
+        [[FRLayerController alloc] initWithContentViewController:contentViewController maximumWidth:maxWidth];
     const FRLayerController *parentLayerController = [self layerControllerOf:anchorViewController];
 
     if (parentLayerController == nil) {

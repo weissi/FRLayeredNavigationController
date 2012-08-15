@@ -38,19 +38,22 @@
 +(FRNavigationBar *) appearance;
 
 
-/** 
- * Returns an object which can be used set the style of an FRNavigationBar when embedded within other appearance containers.
+/**
+ * Returns an object which can be used set the style of an FRNavigationBar when embedded within other appearance
+ * containers.
  */
 
 +(FRNavigationBar *) appearanceWhenContainedIn: (Class <UIAppearanceContainer>)ContainerClass,...;
 /**
- * The default background image of all FRNavigationBars in the application. If none is specified, the default gray gradient of the iPad is used.
+ * The default background image of all FRNavigationBars in the application. If none is specified,
+ * the default gray gradient of the iPad is used.
  */
 @property (nonatomic, strong) UIImage *backgroundImage;
 
 
-/** 
- * The default text attributes for FRNavigationBar titles. Defaults to the etched dark gray look that is default on iPad navigation bars. 
+/**
+ * The default text attributes for FRNavigationBar titles.
+ * Defaults to the etched dark gray look that is default on iPad navigation bars.
  */
 @property (nonatomic, copy) NSDictionary *titleTextAttributes;
 

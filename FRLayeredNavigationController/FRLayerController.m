@@ -51,7 +51,8 @@
 
 #pragma mark - init/dealloc
 
-- (id)initWithContentViewController:(UIViewController *)vc maximumWidth:(BOOL)maxWidth {
+- (id)initWithContentViewController:(UIViewController *)vc maximumWidth:(BOOL)maxWidth
+{
     if ((self = [super init])) {
         _layeredNavigationItem = [[FRLayeredNavigationItem alloc] init];
         _layeredNavigationItem.layerController = self;
@@ -69,7 +70,8 @@
 
 #pragma mark - internal methods
 
-- (void)doViewLayout {
+- (void)doViewLayout
+{
     CGRect contentFrame = CGRectZero;
 
     if (self.layeredNavigationItem.hasChrome) {
@@ -101,7 +103,8 @@
 
 #pragma mark - UIViewController interface methods
 
-- (void)loadView {
+- (void)loadView
+{
     self.view = [[UIView alloc] init];
     self.view.backgroundColor = [UIColor clearColor];
 
@@ -130,7 +133,8 @@
     }
 }
 
-- (void)viewWillLayoutSubviews {
+- (void)viewWillLayoutSubviews
+{
     if (self.layeredNavigationItem.displayShadow) {
         self.view.layer.shadowRadius = 10.0;
         self.view.layer.shadowOffset = CGSizeMake(-2.0, -3.0);
@@ -154,7 +158,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+    return YES;
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent

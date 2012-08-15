@@ -41,24 +41,23 @@ static FRNavigationBar *_appearance = nil;
     if (!_appearance){
         _appearance = [[FRNavigationBar alloc] init];
         _appearance.backgroundImage = nil;
-        
+
         _appearance.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                            [UIFont boldSystemFontOfSize:20.5],
                                            UITextAttributeFont,
-                                           
+
                                            [UIColor whiteColor],
                                            UITextAttributeTextShadowColor,
-                                           
+
                                            [UIColor colorWithRed:111.0f/255.0f
                                                            green:118.0f/255.0f
                                                             blue:126.0f/255.0f
                                                            alpha:1.0f],
                                            UITextAttributeTextColor,
-                                                                                          
+
                                            nil];
     }
 
-    
     return _appearance;
 }
 
