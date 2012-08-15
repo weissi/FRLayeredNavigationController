@@ -41,7 +41,6 @@
 @interface FRLayeredNavigationController : UIViewController<UIGestureRecognizerDelegate> {
     @private
     UIView * __weak _firstTouchedView;
-    NSMutableArray *_viewControllers;
     UIPanGestureRecognizer *_panGR;
     UIViewController * __weak _outOfBoundsViewController;
     BOOL _userInteractionEnabled;
@@ -130,5 +129,11 @@
  * If user interaction on the layered navigation controller is enabled.
  */
 @property (nonatomic) BOOL userInteractionEnabled;
+
+/**
+ * Returns all the UIViewController objects being managed by the FRNavigationController. Note that, unlike a UINavigationController, this is a readonly property.
+ */
+
+@property (nonatomic, readonly) NSArray *viewControllers;
 
 @end
