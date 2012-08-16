@@ -70,7 +70,8 @@ typedef enum {
 {
     self = [super init];
     if (self) {
-        FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController maximumWidth:NO];
+        FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController
+                                                                                   maximumWidth:NO];
         _layeredViewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
@@ -452,7 +453,8 @@ typedef enum {
 }
 
 
-- (void)doLayout {
+- (void)doLayout
+{
     for (FRLayerController *vc in self.layeredViewControllers) {
         CGRect f = vc.view.frame;
         if (vc.layeredNavigationItem.currentViewPosition.x < vc.layeredNavigationItem.initialViewPosition.x) {

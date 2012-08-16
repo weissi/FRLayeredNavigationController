@@ -132,7 +132,7 @@
 @property (nonatomic) BOOL userInteractionEnabled;
 
 /**
- * Returns all the UIViewController objects being managed by the FRNavigationController. 
+ * Returns all the UIViewController objects being managed by the FRNavigationController.
  * Note that, unlike a UINavigationController, this is a readonly property.
  */
 
