@@ -786,6 +786,12 @@ typedef enum {
     return [result copy];
 }
 
+- (UIViewController *)topViewController
+{
+    const FRLayerController *topLayerController = [self.layeredViewControllers lastObject];
+    return topLayerController.contentViewController;
+}
+
 #pragma mark - properties
 
 @synthesize layeredViewControllers = _layeredViewControllers;

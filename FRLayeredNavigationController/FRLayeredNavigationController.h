@@ -144,4 +144,9 @@
  */
 @property (nonatomic) BOOL dropLayersWhenPulledRight;
 
+/**
+ * The view controller in the top layer. (read-only)
+ */
+@property(nonatomic, readonly) UIViewController *topViewController;
+
 @end
