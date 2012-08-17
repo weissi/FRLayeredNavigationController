@@ -44,7 +44,9 @@
     UIPanGestureRecognizer *_panGR;
     NSMutableArray *_layeredViewControllers;
     UIViewController * __weak _outOfBoundsViewController;
+    UIView * __weak _dropNotificationView;
     BOOL _userInteractionEnabled;
+    BOOL _dropLayersWhenPulledRight;
 }
 
 /**
@@ -135,7 +137,11 @@
  * Returns all the UIViewController objects being managed by the FRNavigationController.
  * Note that, unlike a UINavigationController, this is a readonly property.
  */
-
 @property (nonatomic, readonly) NSArray *viewControllers;
+
+/**
+ * Wheater to drop all layers except the root view controller when pulled far enough to the right
+ */
+@property (nonatomic) BOOL dropLayersWhenPulledRight;
 
 @end

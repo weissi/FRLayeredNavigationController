@@ -51,6 +51,7 @@ typedef enum {
 @property (nonatomic, readwrite, strong) NSMutableArray *layeredViewControllers;
 @property (nonatomic, readwrite, weak) UIViewController *outOfBoundsViewController;
 @property (nonatomic, readwrite, weak) UIView *firstTouchedView;
+@property (nonatomic, weak) UIView *dropNotificationView;
 
 @end
 
@@ -80,6 +81,7 @@ typedef enum {
         configuration(layeredRC.layeredNavigationItem);
         _outOfBoundsViewController = nil;
         _userInteractionEnabled = YES;
+        _dropLayersWhenPulledRight = NO;
 
         [self addChildViewController:layeredRC];
         [layeredRC didMoveToParentViewController:self];
@@ -142,6 +144,7 @@ typedef enum {
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.dropNotificationView = nil;
     NSLog(@"FRLayeredNavigationController (%@): viewDidUnload", self);
 }
 
@@ -185,11 +188,32 @@ typedef enum {
                       descendentOfTouched:NO];
              */
             [gestureRecognizer setTranslation:CGPointZero inView:startVc.view];
+
+            if (self.dropLayersWhenPulledRight) {
+                if (self.dropNotificationView == nil) {
+                    if ([self layersInDropZone]) {
+                        [self showDropNotification];
+                    }
+                } else {
+                    if (![self layersInDropZone]) {
+                        [self hideDropNotification];
+                    }
+                }
+            } else {
+                [self hideDropNotification];
+            }
+
             break;
         }
 
         case UIGestureRecognizerStateEnded: {
             //NSLog(@"UIGestureRecognizerStateEnded");
+
+            [self hideDropNotification];
+
+            if (self.dropLayersWhenPulledRight && [self layersInDropZone]) {
+                [self popToRootViewControllerAnimated:YES];
+            }
 
             [UIView animateWithDuration:0.2 animations:^{
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
@@ -520,6 +544,47 @@ typedef enum {
     return nil;
 }
 
+- (BOOL)layersInDropZone
+{
+    if ([self.layeredViewControllers count] > 1) {
+        const FRLayerController *rootVC = [self.layeredViewControllers objectAtIndex:0];
+        const FRLayerController *layer1VC = [self.layeredViewControllers objectAtIndex:1];
+        const FRLayeredNavigationItem *rootNI = rootVC.layeredNavigationItem;
+        const FRLayeredNavigationItem *layer1NI = layer1VC.layeredNavigationItem;
+
+        if (layer1NI.currentViewPosition.x - rootNI.currentViewPosition.x - rootNI.width > 300) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
+- (void)showDropNotification
+{
+    const FRLayerController *rootVC = [self.layeredViewControllers objectAtIndex:0];
+    const FRLayeredNavigationItem *rootNI = rootVC.layeredNavigationItem;
+
+    UILabel *lv = [[UILabel alloc] init];
+    lv.text = @"X";
+    lv.backgroundColor = [UIColor clearColor];
+    lv.textColor = [UIColor redColor];
+    lv.frame = CGRectMake(rootNI.currentViewPosition.x + rootNI.width + 10,
+                          (CGRectGetHeight(self.view.bounds)-100)/2,
+                          100,
+                          100);
+    self.dropNotificationView = lv;
+    [self.view insertSubview:self.dropNotificationView atIndex:0];
+}
+
+- (void)hideDropNotification
+{
+    if (self.dropNotificationView != nil) {
+        [self.dropNotificationView removeFromSuperview];
+        self.dropNotificationView = nil;
+    }
+}
+
 #pragma mark - Public API
 
 - (void)popViewControllerAnimated:(BOOL)animated
@@ -728,5 +793,7 @@ typedef enum {
 @synthesize firstTouchedView = _firstTouchedView;
 @synthesize outOfBoundsViewController = _outOfBoundsViewController;
 @synthesize userInteractionEnabled = _userInteractionEnabled;
+@synthesize dropLayersWhenPulledRight = _dropLayersWhenPulledRight;
+@synthesize dropNotificationView = _dropNotificationView;
 
 @end
