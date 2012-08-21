@@ -189,7 +189,7 @@ typedef enum {
 
             [self moveViewControllersXTranslation:[gestureRecognizer translationInView:self.view].x];
             if ([self.delegate respondsToSelector:@selector(layeredNavigationController:movingViewController:)]) {
-                [self.delegate layeredNavigationController:self willMoveController:_firstTouchedController];
+                [self.delegate layeredNavigationController:self movingViewController:_firstTouchedController];
             }
             /*
             [self moveViewControllersStartIndex:startVcIdx
