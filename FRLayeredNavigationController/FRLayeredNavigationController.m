@@ -169,6 +169,15 @@ typedef enum {
                 [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
                                       withEvent:nil];
             self.firstTouchedView = touchedView;
+            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:willMoveController:)]) {
+                for (FRLayerController *controller in [self.layeredViewControllers reverseObjectEnumerator]) {
+                    if (controller.contentViewController.view == touchedView) {
+                        _firstTouchedController = controller.contentViewController;
+                        [self.delegate layeredNavigationController:self willMoveController:_firstTouchedController];
+                        break;
+                    }
+                }
+            }
             break;
         }
 
@@ -179,7 +188,9 @@ typedef enum {
             const UIViewController *startVc = [self.layeredViewControllers objectAtIndex:startVcIdx];
 
             [self moveViewControllersXTranslation:[gestureRecognizer translationInView:self.view].x];
-
+            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:movingViewController:)]) {
+                [self.delegate layeredNavigationController:self willMoveController:_firstTouchedController];
+            }
             /*
             [self moveViewControllersStartIndex:startVcIdx
                     xTranslation:[gestureRecognizer translationInView:self.view].x
@@ -217,9 +228,15 @@ typedef enum {
 
             [UIView animateWithDuration:0.2 animations:^{
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
+            }
+                             completion:^(BOOL finished) {
+                if ([self.delegate respondsToSelector:@selector(layeredNavigationController:didMoveController:)]) {
+                    [self.delegate layeredNavigationController:self didMoveController:_firstTouchedController];
+                }
             }];
 
             self.firstTouchedView = nil;
+            _firstTouchedController = nil;
 
             break;
         }
@@ -801,5 +818,6 @@ typedef enum {
 @synthesize userInteractionEnabled = _userInteractionEnabled;
 @synthesize dropLayersWhenPulledRight = _dropLayersWhenPulledRight;
 @synthesize dropNotificationView = _dropNotificationView;
+@synthesize delegate = _delegate;
 
 @end

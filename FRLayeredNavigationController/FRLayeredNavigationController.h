@@ -31,6 +31,42 @@
 #import "Utils.h"
 
 @class FRLayeredNavigationItem;
+@class FRLayeredNavigationController;
+/**
+ * The FRLayeredNavigationControllerDelegate protocol is used by delegates of FRLayeredNavigationController
+ * to detect actions such as views starting to move, in the process of moving, and finished moving. This allows
+ * apps which have content 'underneath' the layered controller to adjust it appropriately.
+ */
+@protocol FRLayeredNavigationControllerDelegate <NSObject>
+@optional
+/**
+ * Sent by the layered navigation controller when it is about to begin moving a view controller. This message
+ * is only sent if the controller can be moved.
+ * 
+ * @param layeredController The layered controller being interacted with.
+ * @param controller The view controller which is about to be moved.
+ */
+- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController willMoveController:(UIViewController*)controller;
+
+/**
+ * Sent by the layered navigation controller when it is moving a view controller. This message
+ * may be sent multiple times over the course of an interaction, and so any code implemented by
+ * the delegate here should be efficient.
+ *
+ * @param layeredController The layered controller being interacted with.
+ * @param controller The view controller which is currently being moved.
+ */
+- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController movingViewController:(UIViewController*)controller;
+
+/**
+ * Sent by the layered navigation controller when it has finished moving a view controller. 
+ *
+ * @param layeredController The layered controller being interacted with.
+ * @param controller The view controller which has finished moving.
+ */
+- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController didMoveController:(UIViewController*)controller;
+
+@end
 
 /**
  * The FRLayeredNavigationController class implements a container view controller that manages the navigation
@@ -41,10 +77,12 @@
 @interface FRLayeredNavigationController : UIViewController<UIGestureRecognizerDelegate> {
     @private
     UIView * __weak _firstTouchedView;
+    UIViewController * __weak _firstTouchedController;
     UIPanGestureRecognizer *_panGR;
     NSMutableArray *_layeredViewControllers;
     UIViewController * __weak _outOfBoundsViewController;
     UIView * __weak _dropNotificationView;
+    id<FRLayeredNavigationControllerDelegate> __weak _delegate;
     BOOL _userInteractionEnabled;
     BOOL _dropLayersWhenPulledRight;
 }
@@ -148,5 +186,10 @@
  * The view controller in the top layer. (read-only)
  */
 @property(nonatomic, readonly) UIViewController *topViewController;
+
+/**
+ * The delegate for the controller.
+ */
+@property(nonatomic, weak) id<FRLayeredNavigationControllerDelegate> delegate;
 
 @end
