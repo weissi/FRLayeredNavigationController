@@ -232,7 +232,7 @@ typedef enum {
             [self hideDropNotification];
 
             if (self.dropLayersWhenPulledRight && [self layersInDropZone]) {
-                [self popToRootViewControllerAnimated:YES];
+                [self popToRootViewControllerAnimated:FRLayeredAnimationDirectionRight];
             }
 
             [UIView animateWithDuration:0.2 animations:^{
@@ -620,7 +620,7 @@ typedef enum {
 
 #pragma mark - Public API
 
-- (void)popViewControllerAnimated:(BOOL)animated
+- (void)popViewControllerAnimated:(FRLayeredAnimationDirection)animated
 {
     UIViewController *vc = [self.layeredViewControllers lastObject];
 
@@ -632,9 +632,27 @@ typedef enum {
     [self.layeredViewControllers removeObject:vc];
 
     CGRect goAwayFrame = CGRectMake(CGRectGetMinX(vc.view.frame),
-                                    1024,
+                                    CGRectGetMinY(vc.view.frame),
                                     CGRectGetWidth(vc.view.frame),
                                     CGRectGetHeight(vc.view.frame));
+
+    switch (animated) {
+        case FRLayeredAnimationDirectionDown:
+            goAwayFrame.origin.y = 1024;
+            break;
+        case FRLayeredAnimationDirectionLeft:
+            goAwayFrame.origin.x = -1024;
+            break;
+        case FRLayeredAnimationDirectionUp:
+            goAwayFrame.origin.y = -1024;
+            break;
+        case FRLayeredAnimationDirectionRight:
+            goAwayFrame.origin.x = 1024;
+            break;
+        case FRLayeredAnimationDirectionNone:
+        default:
+            break;
+    }
 
     void (^completeViewRemoval)(BOOL) = ^(BOOL finished) {
         [vc willMoveToParentViewController:nil];
@@ -657,7 +675,7 @@ typedef enum {
     }
 }
 
-- (void)popToViewController:(UIViewController *)vc animated:(BOOL)animated
+- (void)popToViewController:(UIViewController *)vc animated:(FRLayeredAnimationDirection)animated
 {
     UIViewController *currentVc;
 
@@ -678,7 +696,7 @@ typedef enum {
     }
 }
 
-- (void)popToRootViewControllerAnimated:(BOOL)animated
+- (void)popToRootViewControllerAnimated:(FRLayeredAnimationDirection)animated
 {
     [self popToViewController:[self.layeredViewControllers objectAtIndex:0] animated:animated];
 }
@@ -710,9 +728,9 @@ typedef enum {
 
     if (contentViewController.parentViewController.parentViewController == self) {
         /* no animation if the new content view controller is already a child of self */
-        [self popToViewController:anchorViewController animated:NO];
+        [self popToViewController:anchorViewController animated:FRLayeredAnimationDirectionNone];
     } else {
-        [self popToViewController:anchorViewController animated:animated];
+        [self popToViewController:anchorViewController animated:FRLayeredAnimationDirectionDown];
     }
 
     CGFloat anchorInitX = parentNavItem.initialViewPosition.x;

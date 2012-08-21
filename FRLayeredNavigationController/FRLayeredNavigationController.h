@@ -71,6 +71,14 @@
 
 @end
 
+typedef enum {
+    FRLayeredAnimationDirectionNone = 0,
+    FRLayeredAnimationDirectionUp,
+    FRLayeredAnimationDirectionDown,
+    FRLayeredAnimationDirectionLeft,
+    FRLayeredAnimationDirectionRight
+} FRLayeredAnimationDirection;
+
 /**
  * The FRLayeredNavigationController class implements a container view controller that manages the navigation
  * of hierarchical content. This class is not intended for subclassing.
@@ -112,27 +120,30 @@
 /**
  * Pops the top view controller from the navigation stack and updates the display.
  *
- * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
- *                 controller before its view is displayed.
+ * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition. 
+ *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
+ *                 setting up a layered navigation controller before its view is displayed.
  */
-- (void)popViewControllerAnimated:(BOOL)animated;
+- (void)popViewControllerAnimated:(FRLayeredAnimationDirection)animated;
 
 /**
  * Pops all the view controllers on the stack except the root view controller and updates the display.
  *
- * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
- *                 controller before its view is displayed.
+ * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition.
+ *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
+ *                 setting up a layered navigation controller before its view is displayed.
  */
-- (void)popToRootViewControllerAnimated:(BOOL)animated;
+- (void)popToRootViewControllerAnimated:(FRLayeredAnimationDirection)animated;
 
 /**
  * Pops view controllers until the specified view controller is at the top of the navigation stack.
  *
  * @param vc The view controller until which to pop.
- * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
- *                 controller before its view is displayed.
+ * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition.
+ *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
+ *                 setting up a layered navigation controller before its view is displayed.
  */
-- (void)popToViewController:(UIViewController *)vc animated:(BOOL)animated;
+- (void)popToViewController:(UIViewController *)vc animated:(FRLayeredAnimationDirection)animated;
 
 /**
  * Pushes a view controller onto the stack on top of anchorViewController and updates the display.
