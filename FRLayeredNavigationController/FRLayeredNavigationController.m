@@ -169,14 +169,15 @@ typedef enum {
                 [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
                                       withEvent:nil];
             self.firstTouchedView = touchedView;
-            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:willMoveController:)]) {
-                for (FRLayerController *controller in [self.layeredViewControllers reverseObjectEnumerator]) {
-                    if (controller.contentViewController.view == touchedView) {
-                        _firstTouchedController = controller.contentViewController;
-                        [self.delegate layeredNavigationController:self willMoveController:_firstTouchedController];
-                        break;
-                    }
+            for (FRLayerController *controller in [self.layeredViewControllers reverseObjectEnumerator]) {
+                if (controller.contentViewController.view == touchedView) {
+                    _firstTouchedController = controller.contentViewController;
+                    break;
                 }
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:willMoveController:)]) {
+                [self.delegate layeredNavigationController:self willMoveController:_firstTouchedController];
             }
             break;
         }
