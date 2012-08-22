@@ -38,7 +38,7 @@
     UIViewController *here = self;
 
     while (here != nil) {
-        if([here class] == [FRLayeredNavigationController class]) {
+        if([here isKindOfClass:[FRLayeredNavigationController class]]) {
             return (FRLayeredNavigationController *)here;
         }
 
@@ -56,7 +56,7 @@
     UIViewController *here = self;
 
     while (here != nil) {
-        if([here class] == [FRLayerController class]) {
+        if([here isKindOfClass:[FRLayerController class]]) {
             return ((FRLayerController *)here).layeredNavigationItem;
         }
 
