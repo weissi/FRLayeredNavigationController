@@ -120,7 +120,7 @@
  * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
  *                 controller before its view is displayed.
  * @param configuration A block object you can use to control some parameters (such as the width) for the new view
- *                      controller. The block's only parameter is an newly created instance of FRLayeredNavigationItem .
+ *                      controller. The block's only parameter is a newly created instance of FRLayeredNavigationItem .
  */
 - (void)pushViewController:(UIViewController *)viewController
                  inFrontOf:(UIViewController *)anchorViewController
