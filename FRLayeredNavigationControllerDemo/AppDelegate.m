@@ -28,7 +28,6 @@
 
 #import "AppDelegate.h"
 
-#import "FRLayeredNavigation.h"
 #import "SampleListViewController.h"
 
 @implementation AppDelegate
@@ -48,6 +47,7 @@
                                           item.width = 200; //600;
                                           item.nextItemDistance = 64; //2;
                                       }];
+    fvc.delegate = self;
 
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
 
@@ -57,6 +57,22 @@
     [self.window makeKeyAndVisible];
 
     return YES;
+}
+
+// Layered controller delegate
+- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController didMoveController:(UIViewController *)controller
+{
+    NSLog(@"Finished moving controller %@", controller);
+}
+
+- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController movingViewController:(UIViewController *)controller
+{
+    NSLog(@"Moving controller %@", controller);
+}
+
+-(void)layeredNavigationController:(FRLayeredNavigationController *)layeredController willMoveController:(UIViewController *)controller
+{
+    NSLog(@"Going to start moving the view controller %@", controller);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
