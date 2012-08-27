@@ -34,6 +34,7 @@
     UIBarButtonItem *_leftBarButtonItem;
     UIBarButtonItem *_rightBarButtonItem;
     UIView *_titleView;
+    NSString *_title;
 }
 
 - (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText;

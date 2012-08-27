@@ -37,7 +37,7 @@
 
 @implementation FRLayerChromeView
 @synthesize savedBackgroundView = _savedBackgroundView;
-@synthesize title;
+@synthesize title = _title;
 
 - (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
@@ -125,7 +125,7 @@
     if ([self.titleView isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)self.titleView;
         label.text = aTitle;
-        self->title = aTitle;
+        self->_title = aTitle;
         [self setNeedsLayout];
     }
 }
