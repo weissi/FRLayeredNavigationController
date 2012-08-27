@@ -57,15 +57,27 @@
         _layeredNavigationItem = [[FRLayeredNavigationItem alloc] init];
         _layeredNavigationItem.layerController = self;
         _contentViewController = vc;
+        [_contentViewController addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
         _maximumWidth = maxWidth;
     }
 
     return self;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:@"title"]) {
+        self.chromeView.title = [change objectForKey:@"new"];
+    }
+}
+
 - (void)dealloc
 {
     self.layeredNavigationItem.layerController = nil;
+    [_contentViewController removeObserver:self forKeyPath:@"title"];
 }
 
 #pragma mark - internal methods
