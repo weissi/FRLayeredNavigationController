@@ -67,7 +67,8 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
-                       context:(void *)context {
+                       context:(void *)context
+{
     if ([keyPath isEqualToString:@"title"]) {
         self.chromeView.title = [change objectForKey:@"new"];
     }
