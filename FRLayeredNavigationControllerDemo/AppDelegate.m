@@ -28,8 +28,7 @@
 
 #import "AppDelegate.h"
 
-#import "FRLayeredNavigation.h"
-#import "SampleListViewController.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -40,20 +39,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-
-
-    UIViewController *vc = [[SampleListViewController alloc] init];
-    FRLayeredNavigationController *fvc = [[FRLayeredNavigationController alloc] initWithRootViewController:vc
-                                      configuration:^(FRLayeredNavigationItem *item) {
-                                          item.width = 200; //600;
-                                          item.nextItemDistance = 64; //2;
-                                      }];
-
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
-
-    self.window.rootViewController = nvc;
-    fvc.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-
+    MainViewController *vc = [[MainViewController alloc] init];
+    self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 
     return YES;
