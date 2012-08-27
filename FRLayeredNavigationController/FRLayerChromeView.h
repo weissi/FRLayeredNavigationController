@@ -42,5 +42,6 @@
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 @property (nonatomic, readonly, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UIView *titleView;
+@property (nonatomic, strong) NSString *title;
 
 @end
