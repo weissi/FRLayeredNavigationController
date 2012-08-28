@@ -182,7 +182,7 @@ typedef enum {
                     break;
                 }
             }
-            
+
             if ([self.delegate respondsToSelector:@selector(layeredNavigationController:willMoveController:)]) {
                 [self.delegate layeredNavigationController:self willMoveController:self.firstTouchedController];
             }

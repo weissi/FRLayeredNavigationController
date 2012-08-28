@@ -42,11 +42,12 @@
 /**
  * Sent by the layered navigation controller when it is about to begin moving a view controller. This message
  * is only sent if the controller can be moved.
- * 
+ *
  * @param layeredController The layered controller being interacted with.
  * @param controller The view controller which is about to be moved.
  */
-- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController willMoveController:(UIViewController*)controller;
+- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController
+                 willMoveController:(UIViewController*)controller;
 
 /**
  * Sent by the layered navigation controller when it is moving a view controller. This message
@@ -56,15 +57,17 @@
  * @param layeredController The layered controller being interacted with.
  * @param controller The view controller which is currently being moved.
  */
-- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController movingViewController:(UIViewController*)controller;
+- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController
+               movingViewController:(UIViewController*)controller;
 
 /**
- * Sent by the layered navigation controller when it has finished moving a view controller. 
+ * Sent by the layered navigation controller when it has finished moving a view controller.
  *
  * @param layeredController The layered controller being interacted with.
  * @param controller The view controller which has finished moving.
  */
-- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController didMoveController:(UIViewController*)controller;
+- (void)layeredNavigationController:(FRLayeredNavigationController*)layeredController
+                  didMoveController:(UIViewController*)controller;
 
 @end
 
