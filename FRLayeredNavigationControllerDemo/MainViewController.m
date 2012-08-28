@@ -39,6 +39,7 @@
                                                                item.width = 200; //600;
                                                                item.nextItemDistance = 64; //2;
                                                            }];
+        fvc.delegate = self;
         self.rootViewController = fvc;
     }
     return self;
@@ -79,6 +80,22 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+// Layered controller delegate
+- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController didMoveController:(UIViewController *)controller
+{
+    NSLog(@"Finished moving controller %@", controller);
+}
+
+- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController movingViewController:(UIViewController *)controller
+{
+    NSLog(@"Moving controller %@", controller);
+}
+
+-(void)layeredNavigationController:(FRLayeredNavigationController *)layeredController willMoveController:(UIViewController *)controller
+{
+    NSLog(@"Going to start moving the view controller %@", controller);
 }
 
 @end

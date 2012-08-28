@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FRLayeredNavigation.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<FRLayeredNavigationControllerDelegate>
 
 @end

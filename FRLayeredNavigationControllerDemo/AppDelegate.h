@@ -27,8 +27,9 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "FRLayeredNavigation.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, FRLayeredNavigationControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
