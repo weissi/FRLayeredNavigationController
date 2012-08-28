@@ -37,6 +37,7 @@
 
 @implementation FRLayerChromeView
 @synthesize savedBackgroundView = _savedBackgroundView;
+@synthesize title = _title;
 
 - (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
@@ -51,6 +52,8 @@
                   forToolbarPosition:UIToolbarPositionAny
                           barMetrics:UIBarMetricsDefault];
         [self addSubview:_toolbar];
+
+        self.title = titleText;
 
         if (titleView == nil) {
             UILabel *titleLabel = [[UILabel alloc] init];
@@ -115,6 +118,16 @@
 {
     _rightBarButtonItem = rightBarButtonItem;
     [self manageToolbar];
+}
+
+- (void)setTitle:(NSString *)aTitle
+{
+    if ([self.titleView isKindOfClass:[UILabel class]]) {
+        UILabel *label = (UILabel *)self.titleView;
+        label.text = aTitle;
+        self->_title = aTitle;
+        [self setNeedsLayout];
+    }
 }
 
 - (void)layoutSubviews
