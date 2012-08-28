@@ -34,6 +34,7 @@
     UIBarButtonItem *_leftBarButtonItem;
     UIBarButtonItem *_rightBarButtonItem;
     UIView *_titleView;
+    NSString *_title;
 }
 
 - (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText;
@@ -42,5 +43,6 @@
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 @property (nonatomic, readonly, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UIView *titleView;
+@property (nonatomic, strong) NSString *title;
 
 @end

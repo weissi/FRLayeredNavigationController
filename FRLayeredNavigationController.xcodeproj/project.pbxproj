@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52ED6E2615DCC1E900A8FC39 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ED6E2515DCC1E900A8FC39 /* MainViewController.m */; };
 		687661CC15D997BE009DF4A4 /* FRNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 687661CA15D997BE009DF4A4 /* FRNavigationBar.h */; };
 		687661CD15D997BE009DF4A4 /* FRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 687661CB15D997BE009DF4A4 /* FRNavigationBar.m */; };
 		DA4FACCA15591AB300D85A7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4FACC915591AB300D85A7E /* Foundation.framework */; };
@@ -52,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52ED6E2415DCC1E900A8FC39 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		52ED6E2515DCC1E900A8FC39 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		687661CA15D997BE009DF4A4 /* FRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRNavigationBar.h; sourceTree = "<group>"; };
 		687661CB15D997BE009DF4A4 /* FRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRNavigationBar.m; sourceTree = "<group>"; };
 		D98F9C8715C2843E00E1A3FF /* FRDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRDLog.h; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				DA4FAD1D15591C4100D85A7E /* SampleContentViewController.m */,
 				DA4FAD1E15591C4100D85A7E /* SampleListViewController.h */,
 				DA4FAD1F15591C4100D85A7E /* SampleListViewController.m */,
+				52ED6E2415DCC1E900A8FC39 /* MainViewController.h */,
+				52ED6E2515DCC1E900A8FC39 /* MainViewController.m */,
 				DA4FAD0A15591BD500D85A7E /* Supporting Files */,
 			);
 			path = FRLayeredNavigationControllerDemo;
@@ -348,6 +353,7 @@
 				DA4FAD2215591C4100D85A7E /* main.m in Sources */,
 				DA4FAD2415591C4100D85A7E /* SampleContentViewController.m in Sources */,
 				DA4FAD2515591C4100D85A7E /* SampleListViewController.m in Sources */,
+				52ED6E2615DCC1E900A8FC39 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

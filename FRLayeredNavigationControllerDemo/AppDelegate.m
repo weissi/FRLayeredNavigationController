@@ -28,7 +28,7 @@
 
 #import "AppDelegate.h"
 
-#import "SampleListViewController.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -40,39 +40,12 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
-
-    UIViewController *vc = [[SampleListViewController alloc] init];
-    FRLayeredNavigationController *fvc = [[FRLayeredNavigationController alloc] initWithRootViewController:vc
-                                      configuration:^(FRLayeredNavigationItem *item) {
-                                          item.width = 200; //600;
-                                          item.nextItemDistance = 64; //2;
-                                      }];
-    fvc.delegate = self;
-
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
-
-    self.window.rootViewController = nvc;
-    fvc.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    MainViewController *vc = [[MainViewController alloc] init];
+    self.window.rootViewController = vc;
 
     [self.window makeKeyAndVisible];
 
     return YES;
-}
-
-// Layered controller delegate
-- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController didMoveController:(UIViewController *)controller
-{
-    NSLog(@"Finished moving controller %@", controller);
-}
-
-- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController movingViewController:(UIViewController *)controller
-{
-    NSLog(@"Moving controller %@", controller);
-}
-
--(void)layeredNavigationController:(FRLayeredNavigationController *)layeredController willMoveController:(UIViewController *)controller
-{
-    NSLog(@"Going to start moving the view controller %@", controller);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
