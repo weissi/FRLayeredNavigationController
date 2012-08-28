@@ -40,7 +40,15 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
+	<option value="//api/name/dropLayersWhenPulledRight">&nbsp;&nbsp;&nbsp;&nbsp;dropLayersWhenPulledRight</option>
+	
+	<option value="//api/name/topViewController">&nbsp;&nbsp;&nbsp;&nbsp;topViewController</option>
+	
 	<option value="//api/name/userInteractionEnabled">&nbsp;&nbsp;&nbsp;&nbsp;userInteractionEnabled</option>
+	
+	<option value="//api/name/viewControllers">&nbsp;&nbsp;&nbsp;&nbsp;viewControllers</option>
 	
 	
 	
@@ -87,7 +95,15 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dropLayersWhenPulledRight">dropLayersWhenPulledRight</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/topViewController">topViewController</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/userInteractionEnabled">userInteractionEnabled</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/viewControllers">viewControllers</a></span></li>
 	
 </ul></li>
 
@@ -230,6 +246,35 @@ All view controllers already on top of anchorViewController get popped automatic
 	</span>
 	<span class="task-item-suffix">property</span>
 	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/viewControllers">&nbsp;&nbsp;viewControllers</a></code>
+		<span class="tooltip"><p>Returns all the UIViewController objects being managed by the FRNavigationController.
+Note that, unlike a UINavigationController, this is a readonly property.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/dropLayersWhenPulledRight">&nbsp;&nbsp;dropLayersWhenPulledRight</a></code>
+		<span class="tooltip"><p>Wheater to drop all layers except the root view controller when pulled far enough to the right</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/topViewController">&nbsp;&nbsp;topViewController</a></code>
+		<span class="tooltip"><p>The view controller in the top layer. (read-only)</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>The delegate for the controller.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
 </li>
 						</ul>
 						
@@ -242,6 +287,129 @@ All view controllers already on top of anchorViewController get popped automatic
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The delegate for the controller.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;&gt; delegate</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The delegate for the controller.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/dropLayersWhenPulledRight" title="dropLayersWhenPulledRight"></a>
+	<h3 class="subsubtitle method-title">dropLayersWhenPulledRight</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Wheater to drop all layers except the root view controller when pulled far enough to the right</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL dropLayersWhenPulledRight</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Wheater to drop all layers except the root view controller when pulled far enough to the right</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/topViewController" title="topViewController"></a>
+	<h3 class="subsubtitle method-title">topViewController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The view controller in the top layer. (read-only)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) UIViewController *topViewController</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The view controller in the top layer. (read-only)</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/userInteractionEnabled" title="userInteractionEnabled"></a>
@@ -268,6 +436,49 @@ All view controllers already on top of anchorViewController get popped automatic
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>If user interaction on the layered navigation controller is enabled.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/viewControllers" title="viewControllers"></a>
+	<h3 class="subsubtitle method-title">viewControllers</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns all the UIViewController objects being managed by the FRNavigationController.
+Note that, unlike a UINavigationController, this is a readonly property.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *viewControllers</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns all the UIViewController objects being managed by the FRNavigationController.
+Note that, unlike a UINavigationController, this is a readonly property.</p>
 	</div>
 	
 	
@@ -682,7 +893,7 @@ controller before its view is displayed.</p></dd>
 		<dl class="argument-def parameter-def">
 			<dt><em>configuration</em></dt>
 			<dd><p>A block object you can use to control some parameters (such as the width) for the new view
-controller. The block&rsquo;s only parameter is an newly created instance of <a href="../Classes/FRLayeredNavigationItem.html">FRLayeredNavigationItem</a> .</p></dd>
+controller. The block&rsquo;s only parameter is a newly created instance of <a href="../Classes/FRLayeredNavigationItem.html">FRLayeredNavigationItem</a> .</p></dd>
 		</dl>
 		
 	</div>
@@ -726,7 +937,7 @@ All view controllers already on top of anchorViewController get popped automatic
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 factis research GmbH. All rights reserved. (Last updated: 2012-07-29)</span><br />
+						<p><span class="copyright">&copy; 2012 factis research GmbH. All rights reserved. (Last updated: 2012-08-28)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
