@@ -30,6 +30,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * It’s a bar, typically displayed at the top of the screen, containing the view
+ * controller's title and optionally some buttons or other views.
+ */
 @interface FRNavigationBar : NSObject<UIAppearance>
 
 /**
@@ -41,9 +45,12 @@
 /**
  * Returns an object which can be used set the style of an FRNavigationBar when embedded within other appearance
  * containers.
+ *
+ * @param ContainerClass A nil-terminated list of appearance container classes.
+ * @param ... A nil-terminated list of appearance container classes.
  */
-
 +(FRNavigationBar *) appearanceWhenContainedIn: (Class <UIAppearanceContainer>)ContainerClass,...;
+
 /**
  * The default background image of all FRNavigationBars in the application. If none is specified,
  * the default gray gradient of the iPad is used.
