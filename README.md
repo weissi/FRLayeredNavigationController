@@ -45,6 +45,8 @@ Features
  - Correctly handles `view.frame` and `view.bounds` and has therefore no
    problems with `view.transform` (such as rotations) as you can see on this
    [screenshot](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerRotation.png).
+ - *App Store* compatible (uses only Public API and was already approved by
+   Apple)
 
 
 License
@@ -64,6 +66,30 @@ Screenshots
 ===========
 [![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot1.png)
 [![](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerScreenshot2.png)
+
+
+Known Users
+===========
+
+<table>
+  <tr>
+    <td>
+      ![](http://a4.mzstatic.com/us/r1000/093/Purple/v4/50/61/93/50619376-7243-bf68-2192-d11bc8687106/mza_4403044630314584279.175x175-75.jpg)
+    </td>
+    <td align="middle">
+      ![](http://www.lohmann-birkner.de/lohmann/wMedia/headlogos/lub_hcc.gif)
+    </td>
+  </tr>
+  <tr>
+    <td>
+       [RecordBox](http://myrecordbox.com)
+       ([App Store](http://itunes.apple.com/us/app/recordbox/id480534869?mt=8))
+    </td>
+    <td align="middle">
+       [Checkpad MED](http://www.lohmann-birkner.de/lohmann/wDeutsch/HP_Checkpad/Index.php?navanchor=11610074)
+    </td>
+  </tr>
+</table>
 
 
 Adding FRLayeredNavigationController to your project
