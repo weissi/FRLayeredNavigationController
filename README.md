@@ -71,11 +71,11 @@ Screenshots
 Known Users
 ===========
 
-[RecordBox](http://myrecordbox.com) ([App Store](http://itunes.apple.com/us/app/recordbox/id480534869?mt=8))
+#[RecordBox](http://myrecordbox.com) ([App Store](http://itunes.apple.com/us/app/recordbox/id480534869?mt=8))#
 [![](http://a4.mzstatic.com/us/r1000/093/Purple/v4/50/61/93/50619376-7243-bf68-2192-d11bc8687106/mza_4403044630314584279.175x175-75.jpg)](http://myrecordbox.com)
 
-[Checkpad MED](http://www.lohmann-birkner.de/lohmann/wDeutsch/HP_Checkpad/Index.php?navanchor=11610074)
-[![](http://www.lohmann-birkner.de/lohmann/wMedia/headlogos/lub_hcc.gif)](http://www.lohmann-birkner.de/lohmann/wDeutsch/HP_Checkpad/Index.php?navanchor=11610074)
+#[Checkpad MED](http://www.lohmann-birkner.de/lohmann/wDeutsch/HP_Checkpad/Index.php?navanchor=11610074)#
+[![](http://www.lohmann-birkner.de/lohmann/wMedia/headlogos/lub_hcc.gif)](http://www.lohmann-birkner.de/lohmann/wEnglish/HP_Checkpad/index.php?navanchor=13510008)
 
 
 Adding FRLayeredNavigationController to your project
