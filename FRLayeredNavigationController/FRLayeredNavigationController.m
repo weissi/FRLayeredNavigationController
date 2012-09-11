@@ -58,6 +58,8 @@ typedef enum {
 
 @implementation FRLayeredNavigationController
 
+@synthesize minimumLayerWidth = _minimumLayerWidth;
+
 #pragma mark - Initialization/dealloc
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
@@ -226,7 +228,7 @@ typedef enum {
         }
 
         case UIGestureRecognizerStateEnded: {
-            //NSLog(@"UIGestureRecognizerStateEnded");
+            NSLog(@"UIGestureRecognizerStateEnded");
 
             [self hideDropNotification];
 
@@ -260,6 +262,10 @@ typedef enum {
         // prevent recognizing touches on the slider
         return NO;
     }
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
 }
 
@@ -707,12 +713,24 @@ typedef enum {
         [self popToViewController:anchorViewController animated:animated];
     }
 
+    const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
+    CGRectGetWidth(self.view.bounds) :
+    [self getScreenBoundsForCurrentOrientation].size.width;
+    
     CGFloat anchorInitX = parentNavItem.initialViewPosition.x;
     CGFloat anchorCurrentX = parentNavItem.currentViewPosition.x;
     CGFloat anchorWidth = parentNavItem.width;
     CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance >= 0 ?
                                    parentNavItem.nextItemDistance :
                                    FRLayeredNavigationControllerStandardDistance);
+    
+    BOOL relayoutExistingLayers = FALSE;
+    
+    if(initX>overallWidth-_minimumLayerWidth){
+        initX = overallWidth-_minimumLayerWidth;
+        relayoutExistingLayers = TRUE;
+    }
+    
     navItem.initialViewPosition = CGPointMake(initX, 0);
     navItem.currentViewPosition = CGPointMake(anchorCurrentX + anchorWidth, 0);
     navItem.titleView = nil;
@@ -722,11 +740,10 @@ typedef enum {
 
     configuration(newVC.layeredNavigationItem);
 
-    const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
-                                 CGRectGetWidth(self.view.bounds) :
-                                 [self getScreenBoundsForCurrentOrientation].size.width;
+
 
     CGFloat width;
+    
     if (navItem.width > 0) {
         width = navItem.width;
     } else {
@@ -749,12 +766,32 @@ typedef enum {
     [self.view addSubview:newVC.view];
 
     void (^doNewFrameMove)() = ^() {
+        
         CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
         newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
                                       CGRectGetMinY(onscreenFrame),
                                       CGRectGetWidth(onscreenFrame),
                                       CGRectGetHeight(onscreenFrame));
         newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
+
+        //Move existing layers left to make space
+        if(relayoutExistingLayers){
+            
+            CGFloat spacing = (overallWidth-_minimumLayerWidth) /(CGFloat) [self.viewControllers count];
+            CGFloat x=0;
+            
+            for(NSInteger i = 1; i < ([self.viewControllers count] - 1); ++i){
+
+                x=x+spacing;
+
+                UIViewController* viewController = [self.viewControllers objectAtIndex:i];
+                
+                viewController.layeredNavigationItem.currentViewPosition = CGPointMake(x, viewController.layeredNavigationItem.currentViewPosition.y);
+                viewController.layeredNavigationItem.initialViewPosition = viewController.layeredNavigationItem.currentViewPosition;
+            }
+            [self doLayout];
+        }
+
     };
     void (^newFrameMoveCompleted)(BOOL) = ^(BOOL finished) {
         [newVC didMoveToParentViewController:self];

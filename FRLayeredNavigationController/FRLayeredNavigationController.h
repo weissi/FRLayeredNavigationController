@@ -88,6 +88,7 @@
     id<FRLayeredNavigationControllerDelegate> __weak _delegate;
     BOOL _userInteractionEnabled;
     BOOL _dropLayersWhenPulledRight;
+    NSInteger _minimumLayerWidth;
 }
 
 /**
@@ -194,5 +195,11 @@
  * The delegate for the controller.
  */
 @property(nonatomic, weak) id<FRLayeredNavigationControllerDelegate> delegate;
+
+/**
+ * Sets the minumun width of a layer. Existing layers are adjusted to make room for each new layer so that at least minimum width is available for the new layer.
+ *
+ */
+@property (nonatomic) NSInteger minimumLayerWidth;
 
 @end
