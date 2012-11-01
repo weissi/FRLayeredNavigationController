@@ -826,16 +826,17 @@ typedef enum {
         for (FRLayerController* layerController in self.layeredViewControllers) {
             FRLayeredNavigationItem* navigationItem = layerController.layeredNavigationItem;
             if (parentItem != nil) {
-                navigationItem.currentViewPosition =
-                    CGPointMake(parentItem.currentViewPosition.x + parentItem.nextItemDistance,
-                                navigationItem.currentViewPosition.y);
+                CGRect f = layerController.view.frame;
+                f.origin.x = parentItem.currentViewPosition.x + parentItem.nextItemDistance;
+                navigationItem.currentViewPosition = f.origin;
+                layerController.view.frame = f;
             }
             parentItem = navigationItem;
         }
     };
 
     if (animated) {
-        [UIView animateWithDuration:0.1 animations:compact];
+        [UIView animateWithDuration:0.5 animations:compact];
     }
     else {
         compact();
