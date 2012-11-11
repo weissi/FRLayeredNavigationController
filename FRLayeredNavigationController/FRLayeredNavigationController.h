@@ -89,6 +89,7 @@
     BOOL _userInteractionEnabled;
     BOOL _dropLayersWhenPulledRight;
     NSInteger _minimumLayerWidth;
+    BOOL _bounces;
 }
 
 /**
@@ -201,5 +202,10 @@
  * minimum width is available for the new layer. Setting a zero or negative value disables minimum layer width.
  */
 @property (nonatomic) NSInteger minimumLayerWidth;
+
+/**
+ * Should the view controllers bounce when pulled too far left.
+ */
+@property (nonatomic) BOOL bounces;
 
 @end

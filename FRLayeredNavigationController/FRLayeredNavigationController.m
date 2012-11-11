@@ -83,6 +83,7 @@ typedef enum {
         _outOfBoundsViewController = nil;
         _userInteractionEnabled = YES;
         _dropLayersWhenPulledRight = NO;
+        _bounces = YES;
 
         [self addChildViewController:layeredRC];
         [layeredRC didMoveToParentViewController:self];
@@ -427,6 +428,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
         if (parentNavItem == nil || !descendentOfTouched) {
             xTranslation = xTranslationGesture;
+
+            //Limit how much views can be moved to left
+            if (! self.bounces) {
+                xTranslation = MAX(xTranslation,myInitPos.x-myPos.x);
+            }
+
         } else {
             CGFloat newX = myPos.x;
             const CGFloat minDiff = parentInitPos.x - myInitPos.x;
@@ -882,6 +889,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 @synthesize delegate = _delegate;
 @synthesize firstTouchedController = _firstTouchedController;
 @synthesize minimumLayerWidth = _minimumLayerWidth;
-
+@synthesize bounces = _bounces;
 
 @end
