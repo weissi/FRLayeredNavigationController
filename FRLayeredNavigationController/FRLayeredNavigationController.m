@@ -726,14 +726,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                                    parentNavItem.nextItemDistance :
                                    FRLayeredNavigationControllerStandardDistance);
 
-    BOOL relayoutExistingLayers = FALSE;
+    BOOL relayoutExistingLayers = NO;
 
     // If minumumlayer width is set to zero or negative value, it is ignored.
 
-    if(_minimumLayerWidth>0){
-        if(initX>overallWidth-_minimumLayerWidth){
-            initX = overallWidth-_minimumLayerWidth;
-            relayoutExistingLayers = TRUE;
+    if (_minimumLayerWidth > 0) {
+        if(initX>overallWidth-self.minimumLayerWidth){
+            initX = overallWidth-self.minimumLayerWidth;
+            relayoutExistingLayers = YES;
         }
     }
     navItem.initialViewPosition = CGPointMake(initX, 0);
@@ -783,7 +783,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
         if(relayoutExistingLayers){
 
-            CGFloat spacing = (overallWidth-_minimumLayerWidth) /(CGFloat) [self.viewControllers count];
+            CGFloat spacing = (overallWidth-self.minimumLayerWidth) /(CGFloat) [self.viewControllers count];
             CGFloat x=0;
 
             for(NSInteger i = 1; i < ([self.viewControllers count] - 1); ++i){
