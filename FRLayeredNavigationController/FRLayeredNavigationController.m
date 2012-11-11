@@ -58,8 +58,6 @@ typedef enum {
 
 @implementation FRLayeredNavigationController
 
-@synthesize minimumLayerWidth = _minimumLayerWidth;
-
 #pragma mark - Initialization/dealloc
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
@@ -175,8 +173,8 @@ typedef enum {
         case UIGestureRecognizerStateBegan: {
             //NSLog(@"UIGestureRecognizerStateBegan");
             UIView *touchedView =
-                [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
-                                      withEvent:nil];
+            [gestureRecognizer.view hitTest:[gestureRecognizer locationInView:gestureRecognizer.view]
+                                  withEvent:nil];
             self.firstTouchedView = touchedView;
             for (FRLayerController *controller in [self.layeredViewControllers reverseObjectEnumerator]) {
                 if ([touchedView isDescendantOfView:controller.view]) {
@@ -202,11 +200,11 @@ typedef enum {
                 [self.delegate layeredNavigationController:self movingViewController:self.firstTouchedController];
             }
             /*
-            [self moveViewControllersStartIndex:startVcIdx
-                    xTranslation:[gestureRecognizer translationInView:self.view].x
-                          withParentIndex:-1
-                       parentLastPosition:CGPointZero
-                      descendentOfTouched:NO];
+             [self moveViewControllersStartIndex:startVcIdx
+             xTranslation:[gestureRecognizer translationInView:self.view].x
+             withParentIndex:-1
+             parentLastPosition:CGPointZero
+             descendentOfTouched:NO];
              */
             [gestureRecognizer setTranslation:CGPointZero inView:startVc.view];
 
@@ -228,7 +226,7 @@ typedef enum {
         }
 
         case UIGestureRecognizerStateEnded: {
-            NSLog(@"UIGestureRecognizerStateEnded");
+            //NSLog(@"UIGestureRecognizerStateEnded");
 
             [self hideDropNotification];
 
@@ -240,13 +238,15 @@ typedef enum {
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
             }
                              completion:^(BOOL finished) {
-            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:didMoveController:)]) {
-                [self.delegate layeredNavigationController:self didMoveController:self.firstTouchedController];
-            }
+                                 if ([self.delegate respondsToSelector:
+                                      @selector(layeredNavigationController:didMoveController:)]) {
+                                     [self.delegate layeredNavigationController:self
+                                                              didMoveController:self.firstTouchedController];
+                                 }
 
-            self.firstTouchedView = nil;
-            self.firstTouchedController = nil;
-            }];
+                                 self.firstTouchedView = nil;
+                                 self.firstTouchedController = nil;
+                             }];
 
             break;
         }
@@ -265,7 +265,9 @@ typedef enum {
     return YES;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
     return YES;
 }
 
@@ -688,7 +690,7 @@ typedef enum {
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     FRLayerController *newVC =
-        [[FRLayerController alloc] initWithContentViewController:contentViewController maximumWidth:maxWidth];
+    [[FRLayerController alloc] initWithContentViewController:contentViewController maximumWidth:maxWidth];
     const FRLayerController *parentLayerController = [self layerControllerOf:anchorViewController];
 
     if (parentLayerController == nil) {
@@ -716,21 +718,24 @@ typedef enum {
     const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
     CGRectGetWidth(self.view.bounds) :
     [self getScreenBoundsForCurrentOrientation].size.width;
-    
+
     CGFloat anchorInitX = parentNavItem.initialViewPosition.x;
     CGFloat anchorCurrentX = parentNavItem.currentViewPosition.x;
     CGFloat anchorWidth = parentNavItem.width;
     CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance >= 0 ?
                                    parentNavItem.nextItemDistance :
                                    FRLayeredNavigationControllerStandardDistance);
-    
+
     BOOL relayoutExistingLayers = FALSE;
-    
-    if(initX>overallWidth-_minimumLayerWidth){
-        initX = overallWidth-_minimumLayerWidth;
-        relayoutExistingLayers = TRUE;
+
+    // If minumumlayer width is set to zero or negative value, it is ignored.
+
+    if(_minimumLayerWidth>0){
+        if(initX>overallWidth-_minimumLayerWidth){
+            initX = overallWidth-_minimumLayerWidth;
+            relayoutExistingLayers = TRUE;
+        }
     }
-    
     navItem.initialViewPosition = CGPointMake(initX, 0);
     navItem.currentViewPosition = CGPointMake(anchorCurrentX + anchorWidth, 0);
     navItem.titleView = nil;
@@ -743,7 +748,7 @@ typedef enum {
 
 
     CGFloat width;
-    
+
     if (navItem.width > 0) {
         width = navItem.width;
     } else {
@@ -766,7 +771,7 @@ typedef enum {
     [self.view addSubview:newVC.view];
 
     void (^doNewFrameMove)() = ^() {
-        
+
         CGFloat saved = [self savePlaceWanted:CGRectGetMinX(onscreenFrame)+width-overallWidth];
         newVC.view.frame = CGRectMake(CGRectGetMinX(onscreenFrame) - saved,
                                       CGRectGetMinY(onscreenFrame),
@@ -774,20 +779,24 @@ typedef enum {
                                       CGRectGetHeight(onscreenFrame));
         newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
 
-        //Move existing layers left to make space
+        //Move existing layers left to make space.
+
         if(relayoutExistingLayers){
-            
+
             CGFloat spacing = (overallWidth-_minimumLayerWidth) /(CGFloat) [self.viewControllers count];
             CGFloat x=0;
-            
+
             for(NSInteger i = 1; i < ([self.viewControllers count] - 1); ++i){
 
                 x=x+spacing;
 
                 UIViewController* viewController = [self.viewControllers objectAtIndex:i];
-                
-                viewController.layeredNavigationItem.currentViewPosition = CGPointMake(x, viewController.layeredNavigationItem.currentViewPosition.y);
-                viewController.layeredNavigationItem.initialViewPosition = viewController.layeredNavigationItem.currentViewPosition;
+
+                viewController.layeredNavigationItem.currentViewPosition =
+                CGPointMake(x, viewController.layeredNavigationItem.currentViewPosition.y);
+
+                viewController.layeredNavigationItem.initialViewPosition =
+                viewController.layeredNavigationItem.currentViewPosition;
             }
             [self doLayout];
         }
@@ -865,5 +874,7 @@ typedef enum {
 @synthesize dropNotificationView = _dropNotificationView;
 @synthesize delegate = _delegate;
 @synthesize firstTouchedController = _firstTouchedController;
+@synthesize minimumLayerWidth = _minimumLayerWidth;
+
 
 @end

@@ -197,8 +197,8 @@
 @property(nonatomic, weak) id<FRLayeredNavigationControllerDelegate> delegate;
 
 /**
- * Sets the minumun width of a layer. Existing layers are adjusted to make room for each new layer so that at least minimum width is available for the new layer.
- *
+ * Sets the minimun width of a layer. Existing layers are adjusted to make room for each new layer so that at least
+ * minimum width is available for the new layer. Setting a zero or negative value disables minimum layer width.
  */
 @property (nonatomic) NSInteger minimumLayerWidth;
 

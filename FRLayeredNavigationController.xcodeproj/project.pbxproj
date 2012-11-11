@@ -295,7 +295,7 @@
 		DA4FACBD15591AB300D85A7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = DA4FACC015591AB300D85A7E /* Build configuration list for PBXProject "FRLayeredNavigationController" */;
 			compatibilityVersion = "Xcode 3.2";
