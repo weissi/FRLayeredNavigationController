@@ -774,7 +774,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                                       newVC.layeredNavigationItem.currentViewPosition.y,
                                       width,
                                       CGRectGetHeight(self.view.bounds));
-    CGRect offscreenFrame = CGRectMake(MAX(1024, CGRectGetMinX(onscreenFrame)),
+    CGRect offscreenFrame = CGRectMake(MAX(self.view.frame.size.width, CGRectGetMinX(onscreenFrame)),
                                        0,
                                        CGRectGetWidth(onscreenFrame),
                                        CGRectGetHeight(onscreenFrame));
@@ -821,7 +821,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     };
 
     if(animated) {
-        [UIView animateWithDuration:0.5
+        [UIView animateWithDuration:MAX(0.1,self.view.frame.size.width/2048.0)
                               delay:0
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
