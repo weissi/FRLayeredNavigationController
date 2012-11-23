@@ -78,6 +78,7 @@ typedef enum {
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
+        layeredRC.layeredNavigationItem.hasBorder = NO;
         layeredRC.layeredNavigationItem.displayShadow = NO;
         configuration(layeredRC.layeredNavigationItem);
         _outOfBoundsViewController = nil;

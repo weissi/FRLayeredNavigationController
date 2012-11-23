@@ -48,6 +48,7 @@
         self->_nextItemDistance = -1;
         self->_hasChrome = YES;
         self->_displayShadow = YES;
+        self->_hasBorder = YES;
     }
 
     return self;
@@ -81,6 +82,7 @@
 @synthesize width = _width;
 @synthesize nextItemDistance = _nextItemDistance;
 @synthesize hasChrome = _hasChrome;
+@synthesize hasBorder = _hasBorder;
 @synthesize displayShadow = _displayShadow;
 @synthesize layerController = _layerController;
 
