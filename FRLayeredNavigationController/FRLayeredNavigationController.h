@@ -88,6 +88,8 @@
     id<FRLayeredNavigationControllerDelegate> __weak _delegate;
     BOOL _userInteractionEnabled;
     BOOL _dropLayersWhenPulledRight;
+    NSInteger _minimumLayerWidth;
+    BOOL _bounces;
 }
 
 /**
@@ -194,5 +196,16 @@
  * The delegate for the controller.
  */
 @property(nonatomic, weak) id<FRLayeredNavigationControllerDelegate> delegate;
+
+/**
+ * Sets the minimun width of a layer. Existing layers are adjusted to make room for each new layer so that at least
+ * minimum width is available for the new layer. Setting a zero or negative value disables minimum layer width.
+ */
+@property (nonatomic) NSInteger minimumLayerWidth;
+
+/**
+ * Should the view controllers bounce when pulled too far left.
+ */
+@property (nonatomic) BOOL bounces;
 
 @end
