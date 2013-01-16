@@ -750,6 +750,25 @@ typedef enum {
                                        0,
                                        CGRectGetWidth(onscreenFrame),
                                        CGRectGetHeight(onscreenFrame));
+
+    switch (animated) {
+        case FRLayeredAnimationDirectionDown:
+            offscreenFrame.origin.y = MAX(1024, CGRectGetMinY(onscreenFrame));
+            break;
+        case FRLayeredAnimationDirectionLeft:
+            offscreenFrame.origin.x = MIN(-1024, CGRectGetMinX(onscreenFrame));
+            break;
+        case FRLayeredAnimationDirectionUp:
+            offscreenFrame.origin.y = MIN(-1024, CGRectGetMinY(onscreenFrame));
+            break;
+        case FRLayeredAnimationDirectionRight:
+            offscreenFrame.origin.x = MAX(1024, CGRectGetMinX(onscreenFrame));
+            break;
+        case FRLayeredAnimationDirectionNone:
+        default:
+            break;
+    }
+
     newVC.view.frame = offscreenFrame;
 
     [self.layeredViewControllers addObject:newVC];
@@ -768,7 +787,7 @@ typedef enum {
         [newVC didMoveToParentViewController:self];
     };
 
-    if(animated) {
+    if (animated != FRLayeredAnimationDirectionNone) {
         [UIView animateWithDuration:0.5
                               delay:0
                             options: UIViewAnimationCurveEaseOut
@@ -787,7 +806,7 @@ typedef enum {
 - (void)pushViewController:(UIViewController *)contentViewController
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
-                  animated:(BOOL)animated
+                  animated:(FRLayeredAnimationDirection)animated
 {
     [self pushViewController:contentViewController
                    inFrontOf:anchorViewController
