@@ -47,6 +47,7 @@
     BOOL _hasChrome;
     BOOL _hasBorder;
     BOOL _displayShadow;
+    BOOL _autosizeContent;
     FRLayerController __weak * _layerController;
 }
 
@@ -94,6 +95,11 @@
  * If the view should display a shadow
  */
 @property (nonatomic, readwrite) BOOL displayShadow;
+
+/**
+ * If the view should automatically size its content to the layer size
+ */
+@property (nonatomic, readwrite) BOOL autosizeContent;
 
 /**
  * A custom bar button item displayed on the left of the navigation bar.

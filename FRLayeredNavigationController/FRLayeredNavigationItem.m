@@ -49,6 +49,7 @@
         self->_hasChrome = YES;
         self->_displayShadow = YES;
         self->_hasBorder = YES;
+        self->_autosizeContent = YES;
     }
 
     return self;
@@ -84,6 +85,7 @@
 @synthesize hasChrome = _hasChrome;
 @synthesize hasBorder = _hasBorder;
 @synthesize displayShadow = _displayShadow;
+@synthesize autosizeContent = _autosizeContent;
 @synthesize layerController = _layerController;
 
 @end
