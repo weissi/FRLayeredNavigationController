@@ -543,7 +543,7 @@ typedef enum {
 
     if (UIInterfaceOrientationIsLandscape(orientation))
     {
-        CGRect temp;
+        CGRect temp = CGRectZero;
         temp.size.width = fullScreenRect.size.height;
         temp.size.height = fullScreenRect.size.width;
         fullScreenRect = temp;
@@ -647,7 +647,7 @@ typedef enum {
     if (animated) {
         [UIView animateWithDuration:0.5
                               delay:0
-                            options: UIViewAnimationCurveLinear
+                            options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              vc.view.frame = goAwayFrame;
                          }
@@ -718,7 +718,7 @@ typedef enum {
     CGFloat anchorInitX = parentNavItem.initialViewPosition.x;
     CGFloat anchorCurrentX = parentNavItem.currentViewPosition.x;
     CGFloat anchorWidth = parentNavItem.width;
-    CGFloat initX = anchorInitX + (parentNavItem.nextItemDistance >= 0 ?
+    CGFloat initX = anchorInitX + ((parentNavItem.nextItemDistance >= 0) ?
                                    parentNavItem.nextItemDistance :
                                    FRLayeredNavigationControllerStandardDistance);
     navItem.initialViewPosition = CGPointMake(initX, 0);
@@ -730,9 +730,9 @@ typedef enum {
 
     configuration(newVC.layeredNavigationItem);
 
-    const CGFloat overallWidth = CGRectGetWidth(self.view.bounds) > 0 ?
-                                 CGRectGetWidth(self.view.bounds) :
-                                 [self getScreenBoundsForCurrentOrientation].size.width;
+    const CGFloat overallWidth = ((CGRectGetWidth(self.view.bounds) > 0) ?
+                                  CGRectGetWidth(self.view.bounds) :
+                                  CGRectGetWidth([self getScreenBoundsForCurrentOrientation]));
 
     CGFloat width;
     if (navItem.width > 0) {
@@ -790,7 +790,7 @@ typedef enum {
     if (animated != FRLayeredAnimationDirectionNone) {
         [UIView animateWithDuration:0.5
                               delay:0
-                            options: UIViewAnimationCurveEaseOut
+                            options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              doNewFrameMove();
                          }
