@@ -686,7 +686,7 @@ typedef enum {
 - (void)pushViewController:(UIViewController *)contentViewController
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
-                  animated:(BOOL)animated
+                  animated:(FRLayeredAnimationDirection)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration
 {
     FRLayerController *newVC =
