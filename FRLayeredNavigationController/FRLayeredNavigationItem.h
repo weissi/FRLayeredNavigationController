@@ -43,6 +43,7 @@
     NSString *_title;
     UIView *_titleView;
     CGFloat _width;
+    CGFloat _snappingDistance;
     CGFloat _nextItemDistance;
     BOOL _hasChrome;
     BOOL _hasBorder;
@@ -74,6 +75,12 @@
  * The layer's width in points.
  */
 @property (nonatomic, readwrite) CGFloat width;
+
+/**
+ * The maximum distance (when the child layer is being pulled out) to the next layer in points.
+ * If this value is unset, it defaults to the layer's width.
+ */
+@property (nonatomic, readwrite) CGFloat snappingDistance;
 
 /**
  * The minimal distance (when the child layer is as far on the left as possible) to the next layer in points.
