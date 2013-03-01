@@ -543,7 +543,7 @@ typedef enum {
 
     if (UIInterfaceOrientationIsLandscape(orientation))
     {
-        CGRect temp;
+        CGRect temp = CGRectMake(0, 0, 0, 0);
         temp.size.width = fullScreenRect.size.height;
         temp.size.height = fullScreenRect.size.width;
         fullScreenRect = temp;
@@ -647,7 +647,7 @@ typedef enum {
     if (animated) {
         [UIView animateWithDuration:0.5
                               delay:0
-                            options: UIViewAnimationCurveLinear
+                            options: UIViewAnimationOptionCurveLinear
                          animations:^{
                              vc.view.frame = goAwayFrame;
                          }
@@ -771,7 +771,7 @@ typedef enum {
     if(animated) {
         [UIView animateWithDuration:0.5
                               delay:0
-                            options: UIViewAnimationCurveEaseOut
+                            options: UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              doNewFrameMove();
                          }

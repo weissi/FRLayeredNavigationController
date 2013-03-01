@@ -33,7 +33,7 @@
 BOOL CGFloatEquals(CGFloat l, CGFloat r);
 BOOL CGFloatNotEqual(CGFloat l, CGFloat r);
 
-@interface Utils
+@interface Utils : NSObject
 
 + (UIImage *)transparentImage;
 
