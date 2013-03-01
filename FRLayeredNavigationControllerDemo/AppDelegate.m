@@ -30,6 +30,11 @@
 
 #import "MainViewController.h"
 
+#import "SampleListViewController.h"
+
+//Wheather to demo size changes or not...
+//#define DEMO_SIZE_CHANGES
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -40,9 +45,20 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
+#ifdef DEMO_SIZE_CHANGES
     MainViewController *vc = [[MainViewController alloc] init];
     self.window.rootViewController = vc;
-
+#else
+    UIViewController *vc = [[SampleListViewController alloc] init];
+    FRLayeredNavigationController *fvc = [[FRLayeredNavigationController alloc]
+                                          initWithRootViewController:vc
+                                          configuration:^(FRLayeredNavigationItem *item) {
+                                              item.width = 200; //600;
+                                              item.nextItemDistance = 64; //2;
+                                          }];
+    self.window.rootViewController = fvc;
+    self.window.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+#endif
     [self.window makeKeyAndVisible];
 
     return YES;
