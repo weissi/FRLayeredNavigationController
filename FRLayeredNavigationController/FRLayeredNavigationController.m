@@ -287,7 +287,7 @@ typedef enum {
     BOOL didMoveOutOfBounds = NO;
     const FRLayeredNavigationItem *navItem = vc.layeredNavigationItem;
     const CGPoint initPos = navItem.initialViewPosition;
-    
+
     CGRect f = vc.view.frame;
     if (bounded) {
         /* apply translation to fancy item position first and then apply to view */
