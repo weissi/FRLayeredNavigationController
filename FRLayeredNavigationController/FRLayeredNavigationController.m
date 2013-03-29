@@ -42,7 +42,7 @@
 typedef enum {
     SnappingPointsMethodNearest,
     SnappingPointsMethodCompact,
-    SnappingPointsMehtodExpand
+    SnappingPointsMethodExpand
 } SnappingPointsMethod;
 
 @interface FRLayeredNavigationController ()
@@ -366,12 +366,13 @@ typedef enum {
                     xTranslation = initDiff - curDiff;
                     break;
                 }
-                case SnappingPointsMehtodExpand: {
+                case SnappingPointsMethodExpand: {
                     xTranslation = maxDiff - curDiff;
                     break;
                 }
             }
         }
+
         [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
         last = vc;
     }
@@ -384,13 +385,14 @@ typedef enum {
 
     if (abs(velocity) > FRLayeredNavigationControllerSnappingVelocityThreshold) {
         if (velocity > 0) {
-            method = SnappingPointsMehtodExpand;
+            method = SnappingPointsMethodExpand;
         } else {
             method = SnappingPointsMethodCompact;
         }
     } else {
         method = SnappingPointsMethodNearest;
     }
+
     [self viewControllersToSnappingPointsMethod:method];
 }
 
@@ -823,6 +825,30 @@ typedef enum {
 {
     const FRLayerController *topLayerController = [self.layeredViewControllers lastObject];
     return topLayerController.contentViewController;
+}
+
+- (void)compressViewControllers:(BOOL)animated;
+{
+    void (^compact)(void) = ^{
+        FRLayeredNavigationItem* parentItem = nil;
+        for (FRLayerController* layerController in self.layeredViewControllers) {
+            FRLayeredNavigationItem* navigationItem = layerController.layeredNavigationItem;
+            if (parentItem != nil) {
+                CGRect f = layerController.view.frame;
+                f.origin.x = parentItem.currentViewPosition.x + parentItem.nextItemDistance;
+                navigationItem.currentViewPosition = f.origin;
+                layerController.view.frame = f;
+            }
+            parentItem = navigationItem;
+        }
+    };
+
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:compact];
+    }
+    else {
+        compact();
+    }
 }
 
 #pragma mark - properties
