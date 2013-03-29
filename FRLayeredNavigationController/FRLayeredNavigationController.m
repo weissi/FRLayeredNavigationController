@@ -78,6 +78,7 @@ typedef enum {
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
+        layeredRC.layeredNavigationItem.hasBorder = NO;
         layeredRC.layeredNavigationItem.displayShadow = NO;
         configuration(layeredRC.layeredNavigationItem);
         _outOfBoundsViewController = nil;
@@ -256,8 +257,15 @@ typedef enum {
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if ([touch.view isKindOfClass:[UISlider class]]) {
-        // prevent recognizing touches on the slider
+    /* get a static reference to the "hidden" UITableViewCellReorderControl class */
+    static Class reorderControlClass = nil;
+    if (reorderControlClass == nil) {
+        reorderControlClass = NSClassFromString(@"UITableViewCellReorderControl");
+    }
+
+    if ([touch.view isKindOfClass:[UISlider class]] ||
+        [touch.view isKindOfClass:reorderControlClass]) {
+        // prevent recognizing touches on the slider / table view reorder control
         return NO;
     }
     return YES;

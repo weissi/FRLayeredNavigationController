@@ -85,30 +85,37 @@
 - (void)doViewLayout
 {
     CGRect contentFrame = CGRectZero;
+    CGRect borderFrame = CGRectZero;
+    const CGFloat borderSpacing = self.layeredNavigationItem.hasBorder ? 1 : 0;
 
     if (self.layeredNavigationItem.hasChrome) {
         CGRect chromeFrame = CGRectMake(0,
                                         0,
                                         CGRectGetWidth(self.view.bounds),
                                         FRLayerChromeHeight);
-        CGRect borderFrame = CGRectMake(0,
-                                        FRLayerChromeHeight,
-                                        CGRectGetWidth(self.view.bounds),
-                                        CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight);
-        contentFrame = CGRectMake(1,
-                                  FRLayerChromeHeight + 1,
-                                  CGRectGetWidth(self.view.bounds)-2,
-                                  CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight-2);
-        self.borderView.frame = borderFrame;
+        borderFrame = CGRectMake(0,
+                                 FRLayerChromeHeight,
+                                 CGRectGetWidth(self.view.bounds),
+                                 CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight);
+        contentFrame = CGRectMake(borderSpacing,
+                                  FRLayerChromeHeight + borderSpacing,
+                                  CGRectGetWidth(self.view.bounds)-(2*borderSpacing),
+                                  CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight-(2*borderSpacing));
         self.chromeView.frame = chromeFrame;
     } else {
-        contentFrame = CGRectMake(0,
-                                  0,
-                                  CGRectGetWidth(self.view.bounds),
-                                  CGRectGetHeight(self.view.bounds));
+        borderFrame = CGRectMake(0,
+                                 0,
+                                 CGRectGetWidth(self.view.bounds),
+                                 CGRectGetHeight(self.view.bounds));
+        contentFrame = CGRectMake(borderSpacing,
+                                  borderSpacing,
+                                  CGRectGetWidth(self.view.bounds)-(2*borderSpacing),
+                                  CGRectGetHeight(self.view.bounds)-(2*borderSpacing));
     }
 
-
+    if (self.layeredNavigationItem.hasBorder) {
+        self.borderView.frame = borderFrame;
+    }
     self.contentView.frame = contentFrame;
 }
 
@@ -122,17 +129,21 @@
 
     const FRLayeredNavigationItem *navItem = self.layeredNavigationItem;
 
+    if (navItem.hasBorder) {
+        self.borderView = [[UIView alloc] init];
+        self.borderView.backgroundColor = [UIColor clearColor];
+        self.borderView.layer.borderWidth = 1;
+        self.borderView.layer.borderColor = [UIColor colorWithWhite:236.0f/255.0f alpha:1].CGColor;
+        [self.view addSubview:self.borderView];
+    }
+
     if (self.layeredNavigationItem.hasChrome) {
         self.chromeView = [[FRLayerChromeView alloc] initWithFrame:CGRectZero
                                                          titleView:navItem.titleView
                                                              title:navItem.title == nil ?
                            self.contentViewController.title : navItem.title];
 
-        self.borderView = [[UIView alloc] init];
-        self.borderView.backgroundColor = [UIColor colorWithWhite:236.0f/255.0f alpha:1];
-
         [self.view addSubview:self.chromeView];
-        [self.view addSubview:self.borderView];
     }
 
     if (self.contentView == nil && self.contentViewController.parentViewController == self) {
