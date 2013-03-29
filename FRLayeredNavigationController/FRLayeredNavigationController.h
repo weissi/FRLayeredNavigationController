@@ -159,8 +159,8 @@
  * @param anchorViewController The UIViewController on top of which the new view controller should get pushed.
  * @param maxWidth `YES` if viewController is a content view controller and should therefore use all the remaining
  *                 screen width.
- * @param animated Set this value to an FRLayeredAnimationDirection to animate the transition IN FROM that direction. 
- *                 Pass FRLayeredAnimationDirectionNone if you are setting up a layered navigation controller before 
+ * @param animated Set this value to an FRLayeredAnimationDirection to animate the transition IN FROM that direction.
+ *                 Pass FRLayeredAnimationDirectionNone if you are setting up a layered navigation controller before
  *                 its view is displayed.
  * @param configuration A block object you can use to control some parameters (such as the width) for the new view
  *                      controller. The block's only parameter is a newly created instance of FRLayeredNavigationItem .
