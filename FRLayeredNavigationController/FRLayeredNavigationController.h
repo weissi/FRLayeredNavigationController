@@ -120,7 +120,7 @@ typedef enum {
 /**
  * Pops the top view controller from the navigation stack and updates the display.
  *
- * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition. 
+ * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition.
  *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
  *                 setting up a layered navigation controller before its view is displayed.
  */
