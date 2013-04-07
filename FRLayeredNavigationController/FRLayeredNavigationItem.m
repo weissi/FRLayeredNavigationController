@@ -46,6 +46,7 @@
     if ((self = [super init])) {
         self->_width = -1;
         self->_nextItemDistance = -1;
+        self->_snappingDistance = -1;
         self->_hasChrome = YES;
         self->_displayShadow = YES;
         self->_hasBorder = YES;
@@ -80,6 +81,7 @@
 @synthesize title = _title;
 @synthesize titleView = _titleView;
 @synthesize width = _width;
+@synthesize snappingDistance = _snappingDistance;
 @synthesize nextItemDistance = _nextItemDistance;
 @synthesize hasChrome = _hasChrome;
 @synthesize hasBorder = _hasBorder;
