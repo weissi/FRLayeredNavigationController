@@ -43,10 +43,12 @@
     NSString *_title;
     UIView *_titleView;
     CGFloat _width;
+    CGFloat _snappingDistance;
     CGFloat _nextItemDistance;
     BOOL _hasChrome;
     BOOL _hasBorder;
     BOOL _displayShadow;
+    BOOL _autosizeContent;
     FRLayerController __weak * _layerController;
 }
 
@@ -76,6 +78,12 @@
 @property (nonatomic, readwrite) CGFloat width;
 
 /**
+ * The maximum distance (when the child layer is being pulled out) to the next layer in points.
+ * If this value is unset, it defaults to the layer's width.
+ */
+@property (nonatomic, readwrite) CGFloat snappingDistance;
+
+/**
  * The minimal distance (when the child layer is as far on the left as possible) to the next layer in points.
  */
 @property (nonatomic, readwrite) CGFloat nextItemDistance;
@@ -94,6 +102,11 @@
  * If the view should display a shadow
  */
 @property (nonatomic, readwrite) BOOL displayShadow;
+
+/**
+ * If the view should automatically size its content to the layer size
+ */
+@property (nonatomic, readwrite) BOOL autosizeContent;
 
 /**
  * A custom bar button item displayed on the left of the navigation bar.

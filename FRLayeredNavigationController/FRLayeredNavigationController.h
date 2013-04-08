@@ -183,6 +183,13 @@ typedef enum {
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration;
 
 /**
+ * Compresses all visible view controllers together, so they're all separated by the minimum distance.
+ *
+ * @param animated Set this value to `YES` to animate any layer movement that occurs as a result of the compacting.
+ */
+- (void)compressViewControllers:(BOOL)animated;
+
+/**
  * If user interaction on the layered navigation controller is enabled.
  */
 @property (nonatomic) BOOL userInteractionEnabled;

@@ -42,7 +42,7 @@
 typedef enum {
     SnappingPointsMethodNearest,
     SnappingPointsMethodCompact,
-    SnappingPointsMehtodExpand
+    SnappingPointsMethodExpand
 } SnappingPointsMethod;
 
 @interface FRLayeredNavigationController ()
@@ -288,9 +288,9 @@ typedef enum {
     const FRLayeredNavigationItem *navItem = vc.layeredNavigationItem;
     const CGPoint initPos = navItem.initialViewPosition;
 
+    CGRect f = vc.view.frame;
     if (bounded) {
         /* apply translation to fancy item position first and then apply to view */
-        CGRect f = vc.view.frame;
         f.origin = navItem.currentViewPosition;
         f.origin.x += origXTranslation;
 
@@ -301,7 +301,6 @@ typedef enum {
         vc.view.frame = f;
         navItem.currentViewPosition = f.origin;
     } else {
-        CGRect f = vc.view.frame;
         CGFloat xTranslation;
         if (f.origin.x < initPos.x && origXTranslation < 0) {
             /* if view already left from left bound and still moving left, half moving speed */
@@ -348,7 +347,9 @@ typedef enum {
 
         const CGFloat curDiff = myPos.x - last.layeredNavigationItem.currentViewPosition.x;
         const CGFloat initDiff = myInitPos.x - last.layeredNavigationItem.initialViewPosition.x;
-        const CGFloat maxDiff = CGRectGetWidth(last.view.frame);
+        const CGFloat maxDiff = ((last.layeredNavigationItem.snappingDistance >= 0) ?
+                                 last.layeredNavigationItem.snappingDistance :
+                                 CGRectGetWidth(last.view.frame));
 
         if (xTranslation == 0 && (CGFloatNotEqual(curDiff, initDiff) && CGFloatNotEqual(curDiff, maxDiff))) {
             switch (method) {
@@ -366,12 +367,13 @@ typedef enum {
                     xTranslation = initDiff - curDiff;
                     break;
                 }
-                case SnappingPointsMehtodExpand: {
+                case SnappingPointsMethodExpand: {
                     xTranslation = maxDiff - curDiff;
                     break;
                 }
             }
         }
+
         [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
         last = vc;
     }
@@ -384,13 +386,14 @@ typedef enum {
 
     if (abs(velocity) > FRLayeredNavigationControllerSnappingVelocityThreshold) {
         if (velocity > 0) {
-            method = SnappingPointsMehtodExpand;
+            method = SnappingPointsMethodExpand;
         } else {
             method = SnappingPointsMethodCompact;
         }
     } else {
         method = SnappingPointsMethodNearest;
     }
+
     [self viewControllersToSnappingPointsMethod:method];
 }
 
@@ -409,7 +412,9 @@ typedef enum {
 
         const CGPoint myPos = meNavItem.currentViewPosition;
         const CGPoint myInitPos = meNavItem.initialViewPosition;
-        const CGFloat myWidth = CGRectGetWidth(me.view.frame);
+        const CGFloat myWidth = ((meNavItem.snappingDistance >= 0) ?
+                                 meNavItem.snappingDistance :
+                                 CGRectGetWidth(me.view.frame));
         CGPoint myNewPos = myPos;
 
         const CGPoint myOldPos = myPos;
@@ -860,6 +865,30 @@ typedef enum {
 {
     const FRLayerController *topLayerController = [self.layeredViewControllers lastObject];
     return topLayerController.contentViewController;
+}
+
+- (void)compressViewControllers:(BOOL)animated;
+{
+    void (^compact)(void) = ^{
+        FRLayeredNavigationItem* parentItem = nil;
+        for (FRLayerController* layerController in self.layeredViewControllers) {
+            FRLayeredNavigationItem* navigationItem = layerController.layeredNavigationItem;
+            if (parentItem != nil) {
+                CGRect f = layerController.view.frame;
+                f.origin.x = parentItem.currentViewPosition.x + parentItem.nextItemDistance;
+                navigationItem.currentViewPosition = f.origin;
+                layerController.view.frame = f;
+            }
+            parentItem = navigationItem;
+        }
+    };
+
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:compact];
+    }
+    else {
+        compact();
+    }
 }
 
 #pragma mark - properties

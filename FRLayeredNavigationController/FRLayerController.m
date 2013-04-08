@@ -116,7 +116,9 @@
     if (self.layeredNavigationItem.hasBorder) {
         self.borderView.frame = borderFrame;
     }
-    self.contentView.frame = contentFrame;
+    if (self.layeredNavigationItem.autosizeContent) {
+        self.contentView.frame = contentFrame;
+    }
 }
 
 

@@ -46,9 +46,11 @@
     if ((self = [super init])) {
         self->_width = -1;
         self->_nextItemDistance = -1;
+        self->_snappingDistance = -1;
         self->_hasChrome = YES;
         self->_displayShadow = YES;
         self->_hasBorder = YES;
+        self->_autosizeContent = YES;
     }
 
     return self;
@@ -80,10 +82,12 @@
 @synthesize title = _title;
 @synthesize titleView = _titleView;
 @synthesize width = _width;
+@synthesize snappingDistance = _snappingDistance;
 @synthesize nextItemDistance = _nextItemDistance;
 @synthesize hasChrome = _hasChrome;
 @synthesize hasBorder = _hasBorder;
 @synthesize displayShadow = _displayShadow;
+@synthesize autosizeContent = _autosizeContent;
 @synthesize layerController = _layerController;
 
 @end
