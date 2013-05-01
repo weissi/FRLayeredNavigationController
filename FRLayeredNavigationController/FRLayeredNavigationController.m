@@ -567,6 +567,7 @@ typedef enum {
 
 - (void)detachGestureRecognizer
 {
+    [self.view removeGestureRecognizer:self.panGR];
     [self.panGR removeTarget:self action:NULL];
     self.panGR.delegate = nil;
     self.panGR = nil;
