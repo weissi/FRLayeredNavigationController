@@ -220,7 +220,11 @@
         /* push a content view controller */
         svc = [[SampleContentViewController alloc] init];
         svc.title = title;
-        [self.layeredNavigationController pushViewController:svc inFrontOf:self maximumWidth:YES animated:NO configuration:^(FRLayeredNavigationItem *item) {
+        [self.layeredNavigationController pushViewController:svc
+                                                   inFrontOf:self
+                                                maximumWidth:YES
+                                                    animated:NO
+                                               configuration:^(FRLayeredNavigationItem *item) {
             item.hasChrome = NO;
         }];
     } else if (indexPath.row == 2) {
