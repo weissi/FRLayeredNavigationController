@@ -6,7 +6,8 @@ similar to UINavigationController. Influenced by the UI of the Twitter and
 Soundcloud iPad apps, the user will think of a stack of paper and has similar
 interaction options.
 
-Official Project Home: https://github.com/weissi/FRLayeredNavigationController
+Official Project Home: https://github.com/weissi/FRLayeredNavigationController . You can also find [FRLayeredNavigationController at
+Ohloh](https://www.ohloh.net/p/frlayerednavigationcontroller).
 
 See below for documentation and instructions (including a screencast) on how
 to add FRLayeredNavigationController to your project.
@@ -15,7 +16,7 @@ If you have further questions, feel free to [mail me](mailto:weiss@tux4u.de)!
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=JohannesWeiss&url=https://github.com/weissi/FRLayeredNavigationController&title=FRLayeredNavigationController&language=&tags=github&category=software)
 
-©2012, [Johannes Weiß](mailto:weiss@tux4u.de) for
+©2012-2013, [Johannes Weiß](mailto:weiss@tux4u.de) for
 [factis research GmbH](http://www.factisresearch.com).
 
 
@@ -74,8 +75,11 @@ Known Users
 ###[RecordBox](http://myrecordbox.com) ([App Store](http://itunes.apple.com/us/app/recordbox/id480534869?mt=8))###
 [![](http://a4.mzstatic.com/us/r1000/093/Purple/v4/50/61/93/50619376-7243-bf68-2192-d11bc8687106/mza_4403044630314584279.175x175-75.jpg)](http://myrecordbox.com)
 
-###[Checkpad MED](http://www.lohmann-birkner.de/lohmann/wDeutsch/HP_Checkpad/Index.php?navanchor=11610074)###
-[![](http://www.lohmann-birkner.de/lohmann/wMedia/headlogos/lub_hcc.gif)](http://www.lohmann-birkner.de/lohmann/wEnglish/HP_Checkpad/index.php?navanchor=13510008)
+###[Checkpad MED](http://www.lohmann-birkner.de/en/Checkpad-MED/index.php)###
+[![](http://www.lohmann-birkner.de/de-wGlobal/wGlobal/layout/images/headlogos/lub_hcc.gif)](http://www.lohmann-birkner.de/en/Checkpad-MED/index.php)
+
+###[Wunderlist](http://www.6wunderkinder.com/wunderlist) ([App Store](https://itunes.apple.com/gb/app/wunderlist/id406644151?mt=8))###
+[![](http://a3.mzstatic.com/us/r1000/074/Purple/v4/e9/90/93/e99093fd-6f74-c579-6626-ccb83c0b9554/mzl.oppuszqm.175x175-75.jpg)](http://www.6wunderkinder.com/wunderlist)
 
 
 Adding FRLayeredNavigationController to your project
