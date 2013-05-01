@@ -72,8 +72,7 @@
 @end
 
 typedef enum {
-    FRLayeredAnimationDirectionNone = 0,
-    FRLayeredAnimationDirectionUp,
+    FRLayeredAnimationDirectionUp = 1,
     FRLayeredAnimationDirectionDown,
     FRLayeredAnimationDirectionLeft,
     FRLayeredAnimationDirectionRight
@@ -120,30 +119,62 @@ typedef enum {
 /**
  * Pops the top view controller from the navigation stack and updates the display.
  *
- * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition.
- *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
- *                 setting up a layered navigation controller before its view is displayed.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
  */
-- (void)popViewControllerAnimated:(FRLayeredAnimationDirection)animated;
+- (void)popViewControllerAnimated:(BOOL)animated;
+
+/**
+ * Pops the top view controller from the navigation stack and updates the display.
+ *
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
+ *
+ * @param direction Set this value to an FRLayeredAnimationDirection indicating the direction that layer
+ *                  will animate off the screen. This parameter is ignored if animated is NO.
+ */
+- (void)popViewControllerAnimated:(BOOL)animated direction:(FRLayeredAnimationDirection)direction;
 
 /**
  * Pops all the view controllers on the stack except the root view controller and updates the display.
  *
- * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition.
- *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
- *                 setting up a layered navigation controller before its view is displayed.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
  */
-- (void)popToRootViewControllerAnimated:(FRLayeredAnimationDirection)animated;
+- (void)popToRootViewControllerAnimated:(BOOL)animated;
+
+/**
+ * Pops all the view controllers on the stack except the root view controller and updates the display.
+ *
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
+ *
+ * @param direction Set this value to an FRLayeredAnimationDirection indicating the direction that layers
+ *                  will animate off the screen. This parameter is ignored if animated is NO.
+ */
+- (void)popToRootViewControllerAnimated:(BOOL)animated direction:(FRLayeredAnimationDirection)direction;
 
 /**
  * Pops view controllers until the specified view controller is at the top of the navigation stack.
  *
  * @param vc The view controller until which to pop.
- * @param animated Set this value to an FRLayeredAnimationDirection constant to animate the transition.
- *                 Pass FRLayeredAnimationDirectionNone to not animation the transition, which is useful for
- *                 setting up a layered navigation controller before its view is displayed.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
  */
-- (void)popToViewController:(UIViewController *)vc animated:(FRLayeredAnimationDirection)animated;
+- (void)popToViewController:(UIViewController *)vc animated:(BOOL)animated;
+
+/**
+ * Pops view controllers until the specified view controller is at the top of the navigation stack.
+ *
+ * @param vc The view controller until which to pop.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
+ * @param direction Set this value to an FRLayeredAnimationDirection indicating the direction that layers
+ *                  will animate off the screen. This parameter is ignored if animated is NO.
+ */
+- (void)popToViewController:(UIViewController *)vc
+                   animated:(BOOL)animated
+                  direction:(FRLayeredAnimationDirection)direction;
 
 /**
  * Pushes a view controller onto the stack on top of anchorViewController and updates the display.
@@ -153,14 +184,13 @@ typedef enum {
  * @param anchorViewController The UIViewController on top of which the new view controller should get pushed.
  * @param maxWidth `YES` if viewController is a content view controller and should therefore use all the remaining
  *                 screen width.
- * @param animated Set this value to an FRLayeredAnimationDirection to animate the transition IN FROM that direction.
- *                 Pass FRLayeredAnimationDirectionNone if you are setting up a layered navigation controller before
- *                 its view is displayed.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
  */
 - (void)pushViewController:(UIViewController *)viewController
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
-                  animated:(FRLayeredAnimationDirection)animated;
+                  animated:(BOOL)animated;
 
 /**
  * Pushes a view controller onto the stack on top of anchorViewController and updates the display.
@@ -170,17 +200,38 @@ typedef enum {
  * @param anchorViewController The UIViewController on top of which the new view controller should get pushed.
  * @param maxWidth `YES` if viewController is a content view controller and should therefore use all the remaining
  *                 screen width.
- * @param animated Set this value to an FRLayeredAnimationDirection to animate the transition IN FROM that direction.
- *                 Pass FRLayeredAnimationDirectionNone if you are setting up a layered navigation controller before
- *                 its view is displayed.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
  * @param configuration A block object you can use to control some parameters (such as the width) for the new view
  *                      controller. The block's only parameter is a newly created instance of FRLayeredNavigationItem .
  */
 - (void)pushViewController:(UIViewController *)viewController
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
-                  animated:(FRLayeredAnimationDirection)animated
+                  animated:(BOOL)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration;
+
+/**
+ * Pushes a view controller onto the stack on top of anchorViewController and updates the display.
+ * All view controllers already on top of anchorViewController get popped automatically first.
+ *
+ * @param viewController The UIViewController to push on the navigation stack.
+ * @param anchorViewController The UIViewController on top of which the new view controller should get pushed.
+ * @param maxWidth `YES` if viewController is a content view controller and should therefore use all the remaining
+ *                 screen width.
+ * @param animated Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+ *                 controller before its view is displayed.
+ * @param configuration A block object you can use to control some parameters (such as the width) for the new view
+ *                      controller. The block's only parameter is a newly created instance of FRLayeredNavigationItem .
+ * @param direction Set this value to an FRLayeredAnimationDirection indicating the direction that layer
+ *                  will animate in from on the screen. This parameter is ignored if animated is NO.
+ */
+- (void)pushViewController:(UIViewController *)viewController
+                 inFrontOf:(UIViewController *)anchorViewController
+              maximumWidth:(BOOL)maxWidth
+                  animated:(BOOL)animated
+             configuration:(void (^)(FRLayeredNavigationItem *item))configuration
+                 direction:(FRLayeredAnimationDirection)direction;
 
 /**
  * Compresses all visible view controllers together, so they're all separated by the minimum distance.

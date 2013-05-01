@@ -626,7 +626,12 @@ typedef enum {
 
 #pragma mark - Public API
 
-- (void)popViewControllerAnimated:(FRLayeredAnimationDirection)animated
+- (void)popViewControllerAnimated:(BOOL)animated
+{
+    [self popViewControllerAnimated:animated direction:FRLayeredAnimationDirectionDown];
+}
+
+- (void)popViewControllerAnimated:(BOOL)animated direction:(FRLayeredAnimationDirection)direction
 {
     UIViewController *vc = [self.layeredViewControllers lastObject];
 
@@ -642,22 +647,23 @@ typedef enum {
                                     CGRectGetWidth(vc.view.frame),
                                     CGRectGetHeight(vc.view.frame));
 
-    switch (animated) {
-        case FRLayeredAnimationDirectionDown:
-            goAwayFrame.origin.y = 1024;
-            break;
-        case FRLayeredAnimationDirectionLeft:
-            goAwayFrame.origin.x = -1024;
-            break;
-        case FRLayeredAnimationDirectionUp:
-            goAwayFrame.origin.y = -1024;
-            break;
-        case FRLayeredAnimationDirectionRight:
-            goAwayFrame.origin.x = 1024;
-            break;
-        case FRLayeredAnimationDirectionNone:
-        default:
-            break;
+    if (animated) {
+        switch (direction) {
+            case FRLayeredAnimationDirectionDown:
+                goAwayFrame.origin.y = 1024;
+                break;
+            case FRLayeredAnimationDirectionLeft:
+                goAwayFrame.origin.x = -1024;
+                break;
+            case FRLayeredAnimationDirectionUp:
+                goAwayFrame.origin.y = -1024;
+                break;
+            case FRLayeredAnimationDirectionRight:
+                goAwayFrame.origin.x = 1024;
+                break;
+            default:
+                break;
+        }
     }
 
     void (^completeViewRemoval)(BOOL) = ^(BOOL finished) {
@@ -681,7 +687,14 @@ typedef enum {
     }
 }
 
-- (void)popToViewController:(UIViewController *)vc animated:(FRLayeredAnimationDirection)animated
+- (void)popToViewController:(UIViewController *)vc animated:(BOOL)animated
+{
+    [self popToViewController:vc animated:animated direction:FRLayeredAnimationDirectionDown];
+}
+
+- (void)popToViewController:(UIViewController *)vc
+                   animated:(BOOL)animated
+                  direction:(FRLayeredAnimationDirection)direction
 {
     UIViewController *currentVc;
 
@@ -698,20 +711,26 @@ typedef enum {
             return;
         }
 
-        [self popViewControllerAnimated:animated];
+        [self popViewControllerAnimated:animated direction:direction];
     }
 }
 
-- (void)popToRootViewControllerAnimated:(FRLayeredAnimationDirection)animated
+- (void)popToRootViewControllerAnimated:(BOOL)animated
 {
     [self popToViewController:[self.layeredViewControllers objectAtIndex:0] animated:animated];
+}
+
+- (void)popToRootViewControllerAnimated:(BOOL)animated direction:(FRLayeredAnimationDirection)direction
+{
+    [self popToViewController:[self.layeredViewControllers objectAtIndex:0] animated:animated direction:direction];
 }
 
 - (void)pushViewController:(UIViewController *)contentViewController
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
-                  animated:(FRLayeredAnimationDirection)animated
+                  animated:(BOOL)animated
              configuration:(void (^)(FRLayeredNavigationItem *item))configuration
+                 direction:(FRLayeredAnimationDirection)direction
 {
     FRLayerController *newVC =
         [[FRLayerController alloc] initWithContentViewController:contentViewController maximumWidth:maxWidth];
@@ -725,7 +744,8 @@ typedef enum {
                        inFrontOf:((FRLayerController *)[self.layeredViewControllers lastObject]).contentViewController
                     maximumWidth:maxWidth
                         animated:animated
-                   configuration:configuration];
+                   configuration:configuration
+                       direction:direction];
         return;
     }
 
@@ -734,9 +754,9 @@ typedef enum {
 
     if (contentViewController.parentViewController.parentViewController == self) {
         /* no animation if the new content view controller is already a child of self */
-        [self popToViewController:anchorViewController animated:FRLayeredAnimationDirectionNone];
+        [self popToViewController:anchorViewController animated:NO];
     } else {
-        [self popToViewController:anchorViewController animated:FRLayeredAnimationDirectionDown];
+        [self popToViewController:anchorViewController animated:direction];
     }
 
     CGFloat anchorInitX = parentNavItem.initialViewPosition.x;
@@ -775,22 +795,21 @@ typedef enum {
                                        CGRectGetWidth(onscreenFrame),
                                        CGRectGetHeight(onscreenFrame));
 
-    switch (animated) {
-        case FRLayeredAnimationDirectionDown:
-            offscreenFrame.origin.y = MAX(1024, CGRectGetMinY(onscreenFrame));
-            break;
-        case FRLayeredAnimationDirectionLeft:
-            offscreenFrame.origin.x = MIN(-1024, CGRectGetMinX(onscreenFrame));
-            break;
-        case FRLayeredAnimationDirectionUp:
-            offscreenFrame.origin.y = MIN(-1024, CGRectGetMinY(onscreenFrame));
-            break;
-        case FRLayeredAnimationDirectionRight:
-            offscreenFrame.origin.x = MAX(1024, CGRectGetMinX(onscreenFrame));
-            break;
-        case FRLayeredAnimationDirectionNone:
-        default:
-            break;
+    if (animated) {
+        switch (direction) {
+            case FRLayeredAnimationDirectionDown:
+                offscreenFrame.origin.y = MAX(1024, CGRectGetMinY(onscreenFrame));
+                break;
+            case FRLayeredAnimationDirectionLeft:
+                offscreenFrame.origin.x = MIN(-1024, CGRectGetMinX(onscreenFrame));
+                break;
+            case FRLayeredAnimationDirectionUp:
+                offscreenFrame.origin.y = MIN(-1024, CGRectGetMinY(onscreenFrame));
+                break;
+            case FRLayeredAnimationDirectionRight:
+                offscreenFrame.origin.x = MAX(1024, CGRectGetMinX(onscreenFrame));
+                break;
+        }
     }
 
     newVC.view.frame = offscreenFrame;
@@ -811,7 +830,7 @@ typedef enum {
         [newVC didMoveToParentViewController:self];
     };
 
-    if (animated != FRLayeredAnimationDirectionNone) {
+    if (animated) {
         [UIView animateWithDuration:0.5
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
@@ -830,14 +849,29 @@ typedef enum {
 - (void)pushViewController:(UIViewController *)contentViewController
                  inFrontOf:(UIViewController *)anchorViewController
               maximumWidth:(BOOL)maxWidth
-                  animated:(FRLayeredAnimationDirection)animated
+                  animated:(BOOL)animated
 {
     [self pushViewController:contentViewController
                    inFrontOf:anchorViewController
                 maximumWidth:maxWidth
                     animated:animated
                configuration:^(FRLayeredNavigationItem *item) {
-               }];
+               }
+                   direction:FRLayeredAnimationDirectionRight];
+}
+
+- (void)pushViewController:(UIViewController *)contentViewController
+                 inFrontOf:(UIViewController *)anchorViewController
+              maximumWidth:(BOOL)maxWidth
+                  animated:(BOOL)animated
+             configuration:(void (^)(FRLayeredNavigationItem *))configuration
+{
+    [self pushViewController:contentViewController
+                   inFrontOf:anchorViewController
+                maximumWidth:maxWidth
+                    animated:animated
+               configuration:configuration
+                   direction:FRLayeredAnimationDirectionRight];
 }
 
 - (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
