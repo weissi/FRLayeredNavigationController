@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -57,19 +57,29 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/compressViewControllers:">&nbsp;&nbsp;&nbsp;&nbsp;- compressViewControllers:</option>
+	
 	<option value="//api/name/initWithRootViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRootViewController:</option>
 	
 	<option value="//api/name/initWithRootViewController:configuration:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRootViewController:configuration:</option>
 	
 	<option value="//api/name/popToRootViewControllerAnimated:">&nbsp;&nbsp;&nbsp;&nbsp;- popToRootViewControllerAnimated:</option>
 	
+	<option value="//api/name/popToRootViewControllerAnimated:direction:">&nbsp;&nbsp;&nbsp;&nbsp;- popToRootViewControllerAnimated:direction:</option>
+	
 	<option value="//api/name/popToViewController:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- popToViewController:animated:</option>
 	
+	<option value="//api/name/popToViewController:animated:direction:">&nbsp;&nbsp;&nbsp;&nbsp;- popToViewController:animated:direction:</option>
+	
 	<option value="//api/name/popViewControllerAnimated:">&nbsp;&nbsp;&nbsp;&nbsp;- popViewControllerAnimated:</option>
+	
+	<option value="//api/name/popViewControllerAnimated:direction:">&nbsp;&nbsp;&nbsp;&nbsp;- popViewControllerAnimated:direction:</option>
 	
 	<option value="//api/name/pushViewController:inFrontOf:maximumWidth:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- pushViewController:inFrontOf:maximumWidth:animated:</option>
 	
 	<option value="//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:">&nbsp;&nbsp;&nbsp;&nbsp;- pushViewController:inFrontOf:maximumWidth:animated:configuration:</option>
+	
+	<option value="//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:">&nbsp;&nbsp;&nbsp;&nbsp;- pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:</option>
 	
 	
 	
@@ -113,19 +123,29 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/compressViewControllers:">compressViewControllers:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRootViewController:">initWithRootViewController:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRootViewController:configuration:">initWithRootViewController:configuration:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popToRootViewControllerAnimated:">popToRootViewControllerAnimated:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popToRootViewControllerAnimated:direction:">popToRootViewControllerAnimated:direction:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popToViewController:animated:">popToViewController:animated:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popToViewController:animated:direction:">popToViewController:animated:direction:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popViewControllerAnimated:">popViewControllerAnimated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popViewControllerAnimated:direction:">popViewControllerAnimated:direction:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pushViewController:inFrontOf:maximumWidth:animated:">pushViewController:inFrontOf:maximumWidth:animated:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:">pushViewController:inFrontOf:maximumWidth:animated:configuration:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:">pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:</a></span></li>
 	
 </ul></li>
 
@@ -211,6 +231,13 @@ root view controller.</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/popViewControllerAnimated:direction:">&ndash;&nbsp;popViewControllerAnimated:direction:</a></code>
+		<span class="tooltip"><p>Pops the top view controller from the navigation stack and updates the display.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/popToRootViewControllerAnimated:">&ndash;&nbsp;popToRootViewControllerAnimated:</a></code>
 		<span class="tooltip"><p>Pops all the view controllers on the stack except the root view controller and updates the display.</p></span>
 	</span>
@@ -218,7 +245,21 @@ root view controller.</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/popToRootViewControllerAnimated:direction:">&ndash;&nbsp;popToRootViewControllerAnimated:direction:</a></code>
+		<span class="tooltip"><p>Pops all the view controllers on the stack except the root view controller and updates the display.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/popToViewController:animated:">&ndash;&nbsp;popToViewController:animated:</a></code>
+		<span class="tooltip"><p>Pops view controllers until the specified view controller is at the top of the navigation stack.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/popToViewController:animated:direction:">&ndash;&nbsp;popToViewController:animated:direction:</a></code>
 		<span class="tooltip"><p>Pops view controllers until the specified view controller is at the top of the navigation stack.</p></span>
 	</span>
 	
@@ -236,6 +277,21 @@ All view controllers already on top of anchorViewController get popped automatic
 		<code><a href="#//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:">&ndash;&nbsp;pushViewController:inFrontOf:maximumWidth:animated:configuration:</a></code>
 		<span class="tooltip"><p>Pushes a view controller onto the stack on top of anchorViewController and updates the display.
 All view controllers already on top of anchorViewController get popped automatically first.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:">&ndash;&nbsp;pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:</a></code>
+		<span class="tooltip"><p>Pushes a view controller onto the stack on top of anchorViewController and updates the display.
+All view controllers already on top of anchorViewController get popped automatically first.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/compressViewControllers:">&ndash;&nbsp;compressViewControllers:</a></code>
+		<span class="tooltip"><p>Compresses all visible view controllers together, so they&rsquo;re all separated by the minimum distance.</p></span>
 	</span>
 	
 	
@@ -300,7 +356,7 @@ Note that, unlike a UINavigationController, this is a readonly property.</p></sp
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;&gt; delegate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;FRLayeredNavigationControllerDelegate&gt; delegate</code></div>
 
     
 	
@@ -506,6 +562,57 @@ Note that, unlike a UINavigationController, this is a readonly property.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/compressViewControllers:" title="compressViewControllers:"></a>
+	<h3 class="subsubtitle method-title">compressViewControllers:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Compresses all visible view controllers together, so they&rsquo;re all separated by the minimum distance.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)compressViewControllers:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>Set this value to <code>YES</code> to animate any layer movement that occurs as a result of the compacting.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Compresses all visible view controllers together, so they&rsquo;re all separated by the minimum distance.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/initWithRootViewController:" title="initWithRootViewController:"></a>
 	<h3 class="subsubtitle method-title">initWithRootViewController:</h3>
 	
@@ -670,6 +777,64 @@ controller before its view is displayed.</p></dd>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/popToRootViewControllerAnimated:direction:" title="popToRootViewControllerAnimated:direction:"></a>
+	<h3 class="subsubtitle method-title">popToRootViewControllerAnimated:direction:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pops all the view controllers on the stack except the root view controller and updates the display.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)popToRootViewControllerAnimated:(BOOL)<em>animated</em> direction:(FRLayeredAnimationDirection)<em>direction</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+controller before its view is displayed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>direction</em></dt>
+			<dd><p>Set this value to an FRLayeredAnimationDirection indicating the direction that layers
+will animate off the screen. This parameter is ignored if animated is NO.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Pops all the view controllers on the stack except the root view controller and updates the display.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/popToViewController:animated:" title="popToViewController:animated:"></a>
 	<h3 class="subsubtitle method-title">popToViewController:animated:</h3>
 	
@@ -727,6 +892,69 @@ controller before its view is displayed.</p></dd>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/popToViewController:animated:direction:" title="popToViewController:animated:direction:"></a>
+	<h3 class="subsubtitle method-title">popToViewController:animated:direction:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pops view controllers until the specified view controller is at the top of the navigation stack.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)popToViewController:(UIViewController *)<em>vc</em> animated:(BOOL)<em>animated</em> direction:(FRLayeredAnimationDirection)<em>direction</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>vc</em></dt>
+			<dd><p>The view controller until which to pop.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+controller before its view is displayed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>direction</em></dt>
+			<dd><p>Set this value to an FRLayeredAnimationDirection indicating the direction that layers
+will animate off the screen. This parameter is ignored if animated is NO.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Pops view controllers until the specified view controller is at the top of the navigation stack.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/popViewControllerAnimated:" title="popViewControllerAnimated:"></a>
 	<h3 class="subsubtitle method-title">popViewControllerAnimated:</h3>
 	
@@ -749,6 +977,64 @@ controller before its view is displayed.</p></dd>
 			<dt><em>animated</em></dt>
 			<dd><p>Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
 controller before its view is displayed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Pops the top view controller from the navigation stack and updates the display.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/popViewControllerAnimated:direction:" title="popViewControllerAnimated:direction:"></a>
+	<h3 class="subsubtitle method-title">popViewControllerAnimated:direction:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pops the top view controller from the navigation stack and updates the display.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)popViewControllerAnimated:(BOOL)<em>animated</em> direction:(FRLayeredAnimationDirection)<em>direction</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+controller before its view is displayed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>direction</em></dt>
+			<dd><p>Set this value to an FRLayeredAnimationDirection indicating the direction that layer
+will animate off the screen. This parameter is ignored if animated is NO.</p></dd>
 		</dl>
 		
 	</div>
@@ -924,6 +1210,88 @@ All view controllers already on top of anchorViewController get popped automatic
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:" title="pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:"></a>
+	<h3 class="subsubtitle method-title">pushViewController:inFrontOf:maximumWidth:animated:configuration:direction:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pushes a view controller onto the stack on top of anchorViewController and updates the display.
+All view controllers already on top of anchorViewController get popped automatically first.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)pushViewController:(UIViewController *)<em>viewController</em> inFrontOf:(UIViewController *)<em>anchorViewController</em> maximumWidth:(BOOL)<em>maxWidth</em> animated:(BOOL)<em>animated</em> configuration:(void ( ^ ) ( FRLayeredNavigationItem *item ))<em>configuration</em> direction:(FRLayeredAnimationDirection)<em>direction</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>viewController</em></dt>
+			<dd><p>The UIViewController to push on the navigation stack.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>anchorViewController</em></dt>
+			<dd><p>The UIViewController on top of which the new view controller should get pushed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>maxWidth</em></dt>
+			<dd><p><code>YES</code> if viewController is a content view controller and should therefore use all the remaining
+screen width.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>Set this value to YES to animate the transition. Pass NO if you are setting up a layered navigation
+controller before its view is displayed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>configuration</em></dt>
+			<dd><p>A block object you can use to control some parameters (such as the width) for the new view
+controller. The block&rsquo;s only parameter is a newly created instance of <a href="../Classes/FRLayeredNavigationItem.html">FRLayeredNavigationItem</a> .</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>direction</em></dt>
+			<dd><p>Set this value to an FRLayeredAnimationDirection indicating the direction that layer
+will animate in from on the screen. This parameter is ignored if animated is NO.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Pushes a view controller onto the stack on top of anchorViewController and updates the display.
+All view controllers already on top of anchorViewController get popped automatically first.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FRLayeredNavigationController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -937,9 +1305,9 @@ All view controllers already on top of anchorViewController get popped automatic
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 factis research GmbH. All rights reserved. (Last updated: 2012-08-28)</span><br />
+						<p><span class="copyright">&copy; 2013 factis research GmbH. All rights reserved. (Last updated: 2013-05-27)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
