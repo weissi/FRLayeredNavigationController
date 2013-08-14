@@ -161,10 +161,25 @@ typedef enum {
     return YES;
 }
 
+
+- (BOOL)isAllowGesture{
+    BOOL allow = YES;
+    UIViewController *viewController = self.topViewController;
+    for (Class cls in _disableMoveControllerClassArray) {
+        if (cls == viewController.class) {
+            allow = NO;
+            break;
+        }
+    }
+    return allow;
+}
 #pragma mark - UIGestureRecognizer delegate interface
 
 - (void)handleGesture:(UIPanGestureRecognizer *)gestureRecognizer
 {
+    if (![self isAllowGesture]) {
+        return;
+    }
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStatePossible: {
             //NSLog(@"UIGestureRecognizerStatePossible");
@@ -257,6 +272,9 @@ typedef enum {
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+    if (![self isAllowGesture]) {
+        return NO;
+    }
     /* get a static reference to the "hidden" UITableViewCellReorderControl class */
     static Class reorderControlClass = nil;
     if (reorderControlClass == nil) {

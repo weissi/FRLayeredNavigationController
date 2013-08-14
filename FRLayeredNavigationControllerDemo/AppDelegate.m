@@ -56,6 +56,7 @@
                                               item.width = 200; //600;
                                               item.nextItemDistance = 64; //2;
                                           }];
+    fvc.disableMoveControllerClassArray = @[[NSClassFromString(@"SampleListViewController") class]];
     self.window.rootViewController = fvc;
     self.window.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 #endif

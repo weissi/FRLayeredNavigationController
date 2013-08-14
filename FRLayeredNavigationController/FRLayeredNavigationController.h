@@ -265,5 +265,10 @@ typedef enum {
  * The delegate for the controller.
  */
 @property(nonatomic, weak) id<FRLayeredNavigationControllerDelegate> delegate;
+/**
+ *	the array of classes that not alllow gesture move.
+ *  creat like this @[[exsample class],[exsamp2 class]];
+ */
+@property(nonatomic, strong) NSArray *disableMoveControllerClassArray;
 
 @end
