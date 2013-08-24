@@ -28,10 +28,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SampleContentViewController : UIViewController<UIScrollViewDelegate> {
-    UIImageView *imageView;
-    UIScrollView *scrollView;
-}
+@interface SampleContentViewController : UIViewController<UIScrollViewDelegate>
 
 - (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sc;
 

@@ -5,6 +5,7 @@ Coding Conventions
  - 4 spaces instead of tabs
  - no trailing whitespace (or other whitespace errors)
  - define methods like in the code sample below
+ - Use autosynthesization (instead of old `@synthesize`)
 
 Sample code
 -----------

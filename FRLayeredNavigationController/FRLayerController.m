@@ -70,7 +70,7 @@
                        context:(void *)context
 {
     if ([keyPath isEqualToString:@"title"]) {
-        self.chromeView.title = [change objectForKey:@"new"];
+        self.chromeView.title = change[@"new"];
     }
 }
 
@@ -217,12 +217,5 @@
         [self.contentViewController removeFromParentViewController];
     }
 }
-
-@synthesize contentViewController = _contentViewController;
-@synthesize maximumWidth = _maximumWidth;
-@synthesize borderView = _borderView;
-@synthesize chromeView = _chromeView;
-@synthesize layeredNavigationItem = _layeredNavigationItem;
-@synthesize contentView = _contentView;
 
 @end

@@ -205,8 +205,8 @@
                                                     animated:YES
                                                configuration:^(FRLayeredNavigationItem *item) {
                                                    UISegmentedControl *segControl = [[UISegmentedControl alloc]
-                                                                                     initWithItems:[NSArray
-                                                                                                    arrayWithObjects:@"foo", @"bar", @"buz", nil]];
+                                                                                     initWithItems:@[@"foo", @"bar",
+                                                                                                     @"buz"]];
                                                    segControl.segmentedControlStyle = UISegmentedControlStyleBar;
                                                    segControl.selectedSegmentIndex = 0;
 

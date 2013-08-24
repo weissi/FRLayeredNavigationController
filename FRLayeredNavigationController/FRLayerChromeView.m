@@ -30,14 +30,15 @@
 #import "Utils.h"
 #import "FRNavigationBar.h"
 
-@interface FRLayerChromeView ()
+@interface FRLayerChromeView () {
+    UIView *_savedBackgroundView;
+}
+
 @property (nonatomic, readonly, strong) UIView *savedBackgroundView;
 
 @end
 
 @implementation FRLayerChromeView
-@synthesize savedBackgroundView = _savedBackgroundView;
-@synthesize title = _title;
 
 - (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
 {
@@ -64,14 +65,14 @@
             titleLabel.textAlignment = UITextAlignmentCenter;
 
 
-            titleLabel.font = [titleTextAttrs objectForKey:UITextAttributeFont];
+            titleLabel.font = titleTextAttrs[UITextAttributeFont];
 
-            titleLabel.textColor = [titleTextAttrs objectForKey:UITextAttributeTextColor];
+            titleLabel.textColor = titleTextAttrs[UITextAttributeTextColor];
 
-            titleLabel.shadowColor = [titleTextAttrs objectForKey:UITextAttributeTextShadowColor];
+            titleLabel.shadowColor = titleTextAttrs[UITextAttributeTextShadowColor];
 
-            if ([titleTextAttrs objectForKey:UITextAttributeTextShadowOffset]){
-                titleLabel.shadowOffset = [[titleTextAttrs objectForKey:UITextAttributeTextShadowOffset] CGSizeValue];
+            if (titleTextAttrs[UITextAttributeTextShadowOffset]){
+                titleLabel.shadowOffset = [titleTextAttrs[UITextAttributeTextShadowOffset] CGSizeValue];
             }
 
             self.titleView = titleLabel;
@@ -97,12 +98,12 @@
                                                       target:nil
                                                       action:nil];
 
-    if (self.leftBarButtonItem != nil && self.rightBarButtonItem != nil) {
-        [self.toolbar setItems:[NSArray arrayWithObjects:_leftBarButtonItem, flexibleSpace, _rightBarButtonItem, nil]];
-    } else if(self.leftBarButtonItem != nil && self.rightBarButtonItem == nil) {
-        [self.toolbar setItems:[NSArray arrayWithObject:_leftBarButtonItem]];
-    } else {
-        [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, _rightBarButtonItem, nil]];
+    if (self.leftBarButtonItem && self.rightBarButtonItem) {
+        [self.toolbar setItems:@[_leftBarButtonItem, flexibleSpace, _rightBarButtonItem]];
+    } else if (self.leftBarButtonItem) {
+        [self.toolbar setItems:@[_leftBarButtonItem]];
+    } else if (self.rightBarButtonItem) {
+        [self.toolbar setItems:@[flexibleSpace, _rightBarButtonItem]];
     }
 
     [self setNeedsLayout];
@@ -210,10 +211,5 @@
         CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
     }
 }
-
-@synthesize leftBarButtonItem = _leftBarButtonItem;
-@synthesize rightBarButtonItem = _rightBarButtonItem;
-@synthesize toolbar = _toolbar;
-@synthesize titleView = _titleView;
 
 @end

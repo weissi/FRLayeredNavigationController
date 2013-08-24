@@ -5,7 +5,7 @@ set -e
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)
 PROG=syncheck.sh
 
-trap bug_found ERR 
+trap bug_found ERR
 
 function usage() {
     echo "$PROG"
@@ -29,7 +29,7 @@ function check() {
         done
         echo
         RET=1
-    fi  
+    fi
     return 0
 }
 
@@ -39,6 +39,7 @@ while read file; do
     check "$file" '	' -Hn "tab found"
     check "$file" '^ +[+-]' -EHn "method declaration/definition not on line start"
     check "$file" '^[+-]\([a-z *]+\)' -EHn "method declaration/definition syntax"
+    check "$file" '@synthesize' -Hn "@synthesize found"
     check "$file" '^[+-] \(.*\).*\{' -EHn "method definition: { not on next line"
 done < <(find FRLayeredNavigationController -name '*.h' \
               -or -name '*.m' -type f)

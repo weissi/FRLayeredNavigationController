@@ -76,18 +76,4 @@
     return self.layerController.chromeView.rightBarButtonItem;
 }
 
-
-@synthesize initialViewPosition = _initialViewPosition;
-@synthesize currentViewPosition = _currentViewPosition;
-@synthesize title = _title;
-@synthesize titleView = _titleView;
-@synthesize width = _width;
-@synthesize snappingDistance = _snappingDistance;
-@synthesize nextItemDistance = _nextItemDistance;
-@synthesize hasChrome = _hasChrome;
-@synthesize hasBorder = _hasBorder;
-@synthesize displayShadow = _displayShadow;
-@synthesize autosizeContent = _autosizeContent;
-@synthesize layerController = _layerController;
-
 @end

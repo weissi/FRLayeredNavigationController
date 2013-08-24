@@ -82,7 +82,7 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
+    _scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,8 +131,5 @@
 {
     NSLog(@"SC changed");
 }
-
-@synthesize imageView;
-@synthesize scrollView;
 
 @end

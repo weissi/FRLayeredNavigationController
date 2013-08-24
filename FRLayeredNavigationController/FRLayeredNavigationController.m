@@ -74,7 +74,7 @@ typedef enum {
     if (self) {
         FRLayerController *layeredRC = [[FRLayerController alloc] initWithContentViewController:rootViewController
                                                                                    maximumWidth:NO];
-        _layeredViewControllers = [[NSMutableArray alloc] initWithObjects:layeredRC, nil];
+        _layeredViewControllers = [[NSMutableArray alloc] initWithArray:@[layeredRC]];
         layeredRC.layeredNavigationItem.nextItemDistance = FRLayeredNavigationControllerStandardDistance;
         layeredRC.layeredNavigationItem.width = FRLayeredNavigationControllerStandardWidth;
         layeredRC.layeredNavigationItem.hasChrome = NO;
@@ -927,15 +927,5 @@ typedef enum {
 }
 
 #pragma mark - properties
-
-@synthesize layeredViewControllers = _layeredViewControllers;
-@synthesize panGR = _panGR;
-@synthesize firstTouchedView = _firstTouchedView;
-@synthesize outOfBoundsViewController = _outOfBoundsViewController;
-@synthesize userInteractionEnabled = _userInteractionEnabled;
-@synthesize dropLayersWhenPulledRight = _dropLayersWhenPulledRight;
-@synthesize dropNotificationView = _dropNotificationView;
-@synthesize delegate = _delegate;
-@synthesize firstTouchedController = _firstTouchedController;
 
 @end
