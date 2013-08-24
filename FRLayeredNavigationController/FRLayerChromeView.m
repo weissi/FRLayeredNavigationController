@@ -134,7 +134,7 @@
 {
     [super layoutSubviews];
 
-    CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?44:0) + (self.rightBarButtonItem!=nil?44:0);
+    CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?48:0) + (self.rightBarButtonItem!=nil?48:0);
 
     self.toolbar.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
 
@@ -144,14 +144,14 @@
                                           CGRectGetHeight(self.bounds));
 
     CGSize titleFittingSize = [self.titleView sizeThatFits:headerMiddleFrame.size];
-    CGRect titleFrame = CGRectMake(MAX((headerMiddleFrame.size.width - titleFittingSize.width)/2,
-                                       headerMiddleFrame.origin.x),
+    CGRect titleFrame = CGRectMake(0 /* irrelevant, will be overriden by centering it */,
                                    MAX((headerMiddleFrame.size.height - titleFittingSize.height)/2,
                                        headerMiddleFrame.origin.y),
                                    MIN(titleFittingSize.width, headerMiddleFrame.size.width),
                                    MIN(titleFittingSize.height, headerMiddleFrame.size.height));
 
     self.titleView.frame = titleFrame;
+    self.titleView.center = self.center;
 }
 
 - (CGGradientRef)gradient
