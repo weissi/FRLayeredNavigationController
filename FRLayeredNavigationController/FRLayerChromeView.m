@@ -159,9 +159,9 @@
 {
     if (NULL == _savedGradient) {
         CGFloat colors[12] = {
-            244.0/255.0, 245.0/255.0, 247.0/255.0, 1.0,
-            223.0/255.0, 225.0/255.0, 230.0/255.0, 1.0,
-            167.0/244.0, 171.0/255.0, 184.0/255.0, 1.0,
+            244.0f/255.0f, 245.0f/255.0f, 247.0f/255.0f, 1.0,
+            223.0f/255.0f, 225.0f/255.0f, 230.0f/255.0f, 1.0,
+            167.0f/244.0f, 171.0f/255.0f, 184.0f/255.0f, 1.0,
         };
         CGFloat locations[3] = { 0.05f, 0.45f, 0.95f };
 
@@ -189,7 +189,7 @@
     return _savedBackgroundView;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(__unused CGRect)rect
 {
     if (self.savedBackgroundView && self.savedBackgroundView.superview == nil) {
         [self insertSubview:self.savedBackgroundView atIndex:0];

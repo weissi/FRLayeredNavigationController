@@ -35,9 +35,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define FRLayeredNavigationControllerStandardDistance ((float)64)
-#define FRLayeredNavigationControllerStandardWidth ((float)400)
-#define FRLayeredNavigationControllerSnappingVelocityThreshold ((float)100)
+#define FRLayeredNavigationControllerStandardDistance ((float)64.0f)
+#define FRLayeredNavigationControllerStandardWidth ((float)400.0f)
+#define FRLayeredNavigationControllerSnappingVelocityThreshold ((float)100.0f)
 
 typedef enum {
     SnappingPointsMethodNearest,
@@ -62,7 +62,7 @@ typedef enum {
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
-    return [self initWithRootViewController:rootViewController configuration:^(FRLayeredNavigationItem *item) {
+    return [self initWithRootViewController:rootViewController configuration:^(__unused FRLayeredNavigationItem *item) {
         /* nothing */
     }];
 }
@@ -156,7 +156,7 @@ typedef enum {
     NSLog(@"FRLayeredNavigationController (%@): viewDidUnload", self);
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(__unused UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
@@ -192,8 +192,9 @@ typedef enum {
 
         case UIGestureRecognizerStateChanged: {
             //NSLog(@"UIGestureRecognizerStateChanged, vel=%f", [gestureRecognizer velocityInView:firstView].x);
+            NSAssert([self.layeredViewControllers count] > 0, @"no layered view controllers");
 
-            const NSInteger startVcIdx = [self.layeredViewControllers count]-1;
+            const NSUInteger startVcIdx = [self.layeredViewControllers count]-1;
             const UIViewController *startVc = [self.layeredViewControllers objectAtIndex:startVcIdx];
 
             [self moveViewControllersXTranslation:[gestureRecognizer translationInView:self.view].x];
@@ -238,7 +239,7 @@ typedef enum {
             [UIView animateWithDuration:0.2 animations:^{
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
             }
-                             completion:^(BOOL finished) {
+                             completion:^(__unused BOOL finished) {
             if ([self.delegate respondsToSelector:@selector(layeredNavigationController:didMoveController:)]) {
                 [self.delegate layeredNavigationController:self didMoveController:self.firstTouchedController];
             }
@@ -255,7 +256,7 @@ typedef enum {
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+- (BOOL)gestureRecognizer:(__unused UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     /* get a static reference to the "hidden" UITableViewCellReorderControl class */
     static Class reorderControlClass = nil;
@@ -384,7 +385,7 @@ typedef enum {
     const CGFloat velocity = [g velocityInView:self.view].x;
     SnappingPointsMethod method;
 
-    if (abs(velocity) > FRLayeredNavigationControllerSnappingVelocityThreshold) {
+    if (fabs(velocity) > FRLayeredNavigationControllerSnappingVelocityThreshold) {
         if (velocity > 0) {
             method = SnappingPointsMethodExpand;
         } else {
@@ -500,7 +501,7 @@ typedef enum {
             xTranslation += initX - (currentX + xTranslation);
         }
 
-        if (abs(xTranslation) >= pointsWanted) {
+        if (fabs(xTranslation) >= pointsWanted) {
             break;
         }
     }
@@ -511,7 +512,7 @@ typedef enum {
         }
         [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
     }
-    return abs(xTranslation);
+    return fabsf(xTranslation);
 }
 
 
@@ -666,7 +667,7 @@ typedef enum {
         }
     }
 
-    void (^completeViewRemoval)(BOOL) = ^(BOOL finished) {
+    void (^completeViewRemoval)(BOOL) = ^(__unused BOOL finished) {
         [vc willMoveToParentViewController:nil];
 
         [vc.view removeFromSuperview];
@@ -826,7 +827,7 @@ typedef enum {
                                       CGRectGetHeight(onscreenFrame));
         newVC.layeredNavigationItem.currentViewPosition = newVC.view.frame.origin;
     };
-    void (^newFrameMoveCompleted)(BOOL) = ^(BOOL finished) {
+    void (^newFrameMoveCompleted)(BOOL) = ^(__unused BOOL finished) {
         [newVC didMoveToParentViewController:self];
     };
 
@@ -855,7 +856,7 @@ typedef enum {
                    inFrontOf:anchorViewController
                 maximumWidth:maxWidth
                     animated:animated
-               configuration:^(FRLayeredNavigationItem *item) {
+               configuration:^(__unused FRLayeredNavigationItem *item) {
                }
                    direction:FRLayeredAnimationDirectionRight];
 }
@@ -890,7 +891,7 @@ typedef enum {
 - (NSArray *)viewControllers
 {
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:[self.layeredViewControllers count]];
-    [self.layeredViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.layeredViewControllers enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
         [result addObject:((FRLayerController*)obj).contentViewController];
     }];
     return [result copy];

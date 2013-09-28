@@ -52,7 +52,7 @@
     return self;
 }
 
--(UIView *) viewForZoomingInScrollView:(UIScrollView *)inScroll {
+-(UIView *) viewForZoomingInScrollView:(__unused UIScrollView *)inScroll {
     return self.imageView;
 }
 
@@ -85,7 +85,7 @@
     _scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(__unused BOOL)animated
 {
     self.layeredNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                                     initWithImage:[UIImage imageNamed:@"back.png"]
@@ -122,12 +122,12 @@
     self.imageView = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(__unused UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
 }
 
-- (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sc
+- (void)indexDidChangeForSegmentedControl:(__unused UISegmentedControl *)sc
 {
     NSLog(@"SC changed");
 }

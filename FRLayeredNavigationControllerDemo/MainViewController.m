@@ -25,7 +25,7 @@
         self.widthLabel.text = [NSString stringWithFormat:@"Width: %.0f", newWidth];
         CGRect frame = CGRectMake(v.frame.origin.x, v.frame.origin.y, newWidth, v.frame.size.height);
         v.frame = frame;
-    } completion:^(BOOL finished) {
+    } completion:^(__unused BOOL finished) {
         // do nothing
     }];
 }
@@ -77,25 +77,25 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(__unused UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 
 // Layered controller delegate
-- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController
+- (void)layeredNavigationController:(__unused FRLayeredNavigationController *)layeredController
                   didMoveController:(UIViewController *)controller
 {
     NSLog(@"Finished moving controller %@", controller);
 }
 
-- (void)layeredNavigationController:(FRLayeredNavigationController *)layeredController
+- (void)layeredNavigationController:(__unused FRLayeredNavigationController *)layeredController
                movingViewController:(UIViewController *)controller
 {
     NSLog(@"Moving controller %@", controller);
 }
 
--(void)layeredNavigationController:(FRLayeredNavigationController *)layeredController
+-(void)layeredNavigationController:(__unused FRLayeredNavigationController *)layeredController
                 willMoveController:(UIViewController *)controller
 {
     NSLog(@"Going to start moving the view controller %@", controller);

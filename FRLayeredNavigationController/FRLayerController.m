@@ -65,9 +65,9 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
+                      ofObject:(__unused id)object
                         change:(NSDictionary *)change
-                       context:(void *)context
+                       context:(__unused void *)context
 {
     if ([keyPath isEqualToString:@"title"]) {
         self.chromeView.title = change[@"new"];
@@ -181,7 +181,7 @@
     self.contentView = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(__unused UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }

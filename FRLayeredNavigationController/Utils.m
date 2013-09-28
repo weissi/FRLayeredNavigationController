@@ -32,7 +32,7 @@
 
 BOOL CGFloatEquals(CGFloat l, CGFloat r)
 {
-    return abs(l-r) < 0.1;
+    return fabs(l-r) < 0.1;
 }
 
 BOOL CGFloatNotEqual(CGFloat l, CGFloat r)
