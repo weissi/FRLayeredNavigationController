@@ -176,11 +176,11 @@
 				DAB8C67C155E8F6900340CB7 /* FRLayeredNavigationItem+Protected.h */,
 				DA4FACF215591B6700D85A7E /* UIViewController+FRLayeredNavigationController.h */,
 				DA4FACF315591B6700D85A7E /* UIViewController+FRLayeredNavigationController.m */,
-				DA4FACCC15591AB300D85A7E /* Supporting Files */,
 				DA5B05A11559267000C93809 /* FRLayeredNavigation.h */,
 				D98F9C8715C2843E00E1A3FF /* FRDLog.h */,
 				687661CA15D997BE009DF4A4 /* FRNavigationBar.h */,
 				687661CB15D997BE009DF4A4 /* FRNavigationBar.m */,
+				DA4FACCC15591AB300D85A7E /* Supporting Files */,
 			);
 			path = FRLayeredNavigationController;
 			sourceTree = "<group>";
