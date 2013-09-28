@@ -141,7 +141,10 @@
 
     CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?48:0) + (self.rightBarButtonItem!=nil?48:0);
 
-    self.toolbar.frame = CGRectMake(0, self.yOffset, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds)-self.yOffset);
+    self.toolbar.frame = CGRectMake(0,
+                                    self.yOffset,
+                                    CGRectGetWidth(self.bounds),
+                                    CGRectGetHeight(self.bounds)-self.yOffset);
 
     CGRect headerMiddleFrame = CGRectMake(10 + (barButtonItemsSpace/2),
                                           0,
