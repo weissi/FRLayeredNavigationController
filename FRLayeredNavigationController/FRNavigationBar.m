@@ -2,6 +2,7 @@
  * This file is part of FRLayeredNavigationController.
  *
  * Copyright (c) 2012, Apurva Mehta <apurva.1618@gmail.com>
+ *               2013, Johannes Weiß <weiss@tux4u.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,6 +34,27 @@ static FRNavigationBar *_appearance = nil;
 
 @implementation FRNavigationBar
 
++ (NSDictionary *)defaultTextAttributesIO6AndOlder
+{
+    return @{UITextAttributeFont: [UIFont boldSystemFontOfSize:20.5],
+             UITextAttributeTextShadowColor: [UIColor whiteColor],
+             UITextAttributeTextColor:[UIColor colorWithRed:111.0f/255.0f
+                                                      green:118.0f/255.0f
+                                                       blue:126.0f/255.0f
+                                                      alpha:1.0f]};
+}
+
++ (NSDictionary *)defaultTextAttributesIO7AndNewer
+{
+    return @{UITextAttributeFont: [UIFont boldSystemFontOfSize:18],
+             UITextAttributeTextColor:[UIColor blackColor]};
+}
+
++ (NSDictionary *)defaultTextAttributes
+{
+    return [FRNavigationBar defaultTextAttributesIO7AndNewer];
+}
+
 + (FRNavigationBar *)appearance
 {
 
@@ -40,12 +62,7 @@ static FRNavigationBar *_appearance = nil;
         _appearance = [[FRNavigationBar alloc] init];
         _appearance.backgroundImage = nil;
 
-        _appearance.titleTextAttributes = @{UITextAttributeFont: [UIFont boldSystemFontOfSize:20.5],
-                                            UITextAttributeTextShadowColor: [UIColor whiteColor],
-                                            UITextAttributeTextColor:[UIColor colorWithRed:111.0f/255.0f
-                                                                                     green:118.0f/255.0f
-                                                                                      blue:126.0f/255.0f
-                                                                                     alpha:1.0f]};
+        _appearance.titleTextAttributes = [FRNavigationBar defaultTextAttributes];
     }
 
     return _appearance;

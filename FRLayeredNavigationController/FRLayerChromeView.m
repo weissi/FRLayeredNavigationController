@@ -29,18 +29,20 @@
 #import "FRLayerChromeView.h"
 #import "Utils.h"
 #import "FRNavigationBar.h"
+#import "FRiOSVersion.h"
 
 @interface FRLayerChromeView () {
     UIView *_savedBackgroundView;
 }
 
 @property (nonatomic, readonly, strong) UIView *savedBackgroundView;
+@property (nonatomic, assign, readonly) BOOL iOS7OrNewer;
 
 @end
 
 @implementation FRLayerChromeView
 
-- (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText
+- (id)initWithFrame:(CGRect)frame titleView:(UIView *)titleView title:(NSString *)titleText yOffset:(CGFloat)yOffset
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,7 +56,9 @@
                           barMetrics:UIBarMetricsDefault];
         [self addSubview:_toolbar];
 
-        self.title = titleText;
+        _title = titleText;
+        _yOffset = yOffset;
+        _iOS7OrNewer = [FRiOSVersion isIOS7OrNewer];
 
         if (titleView == nil) {
             UILabel *titleLabel = [[UILabel alloc] init];
@@ -137,12 +141,12 @@
 
     CGFloat barButtonItemsSpace = (self.leftBarButtonItem!=nil?48:0) + (self.rightBarButtonItem!=nil?48:0);
 
-    self.toolbar.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+    self.toolbar.frame = CGRectMake(0, self.yOffset, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds)-self.yOffset);
 
     CGRect headerMiddleFrame = CGRectMake(10 + (barButtonItemsSpace/2),
                                           0,
                                           CGRectGetWidth(self.bounds)-20-barButtonItemsSpace,
-                                          CGRectGetHeight(self.bounds));
+                                          CGRectGetHeight(self.bounds)-self.yOffset);
 
     CGSize titleFittingSize = [self.titleView sizeThatFits:headerMiddleFrame.size];
     CGRect titleFrame = CGRectMake(0 /* irrelevant, will be overriden by centering it */,
@@ -153,15 +157,42 @@
 
     self.titleView.frame = titleFrame;
     self.titleView.center = self.center;
+    self.titleView.frame = CGRectMake(CGRectGetMinX(self.titleView.frame),
+                                      CGRectGetMinY(self.titleView.frame)+(self.yOffset/2),
+                                      CGRectGetWidth(self.titleView.frame),
+                                      CGRectGetHeight(self.titleView.frame));
 }
 
-- (CGGradientRef)gradient
+- (CGGradientRef)gradientIOS6AndOlder
 {
     if (NULL == _savedGradient) {
         CGFloat colors[12] = {
             244.0f/255.0f, 245.0f/255.0f, 247.0f/255.0f, 1.0,
             223.0f/255.0f, 225.0f/255.0f, 230.0f/255.0f, 1.0,
             167.0f/244.0f, 171.0f/255.0f, 184.0f/255.0f, 1.0,
+        };
+        CGFloat locations[3] = { 0.05f, 0.45f, 0.95f };
+
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+
+        _savedGradient = CGGradientCreateWithColorComponents(colorSpace,
+                                                             colors,
+                                                             locations,
+                                                             3);
+
+        CGColorSpaceRelease(colorSpace);
+    }
+
+    return _savedGradient;
+}
+
+- (CGGradientRef)gradientIOS7AndNewer
+{
+    if (NULL == _savedGradient) {
+        CGFloat colors[12] = {
+            248.0f/255.0f, 248.0f/255.0f, 248.0f/255.0f, 0.97f,
+            248.0f/255.0f, 248.0f/255.0f, 248.0f/255.0f, 0.97f,
+            248.0f/255.0f, 248.0f/255.0f, 248.0f/255.0f, 0.97f,
         };
         CGFloat locations[3] = { 0.05f, 0.45f, 0.95f };
 
@@ -189,7 +220,7 @@
     return _savedBackgroundView;
 }
 
-- (void)drawRect:(__unused CGRect)rect
+- (void)drawRectIO6AndOlder:(__unused CGRect)rect
 {
     if (self.savedBackgroundView && self.savedBackgroundView.superview == nil) {
         [self insertSubview:self.savedBackgroundView atIndex:0];
@@ -206,10 +237,37 @@
         CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
                                   CGRectGetMaxY(self.bounds));
 
-        CGGradientRef gradient = [self gradient];
+        CGGradientRef gradient = [self gradientIOS6AndOlder];
 
         CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
     }
 }
+
+- (void)drawRectIO7AndNewer:(__unused CGRect)rect
+{
+    if (self.savedBackgroundView && self.savedBackgroundView.superview == nil) {
+        [self insertSubview:self.savedBackgroundView atIndex:0];
+    } else {
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+
+        CGPoint start = CGPointMake(CGRectGetMidX(self.bounds), 0);
+        CGPoint end = CGPointMake(CGRectGetMidX(self.bounds),
+                                  CGRectGetMaxY(self.bounds));
+
+        CGGradientRef gradient = [self gradientIOS7AndNewer];
+
+        CGContextDrawLinearGradient(ctx, gradient, start, end, 0);
+    }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    if (self.iOS7OrNewer) {
+        [self drawRectIO7AndNewer:rect];
+    } else {
+        [self drawRectIO6AndOlder:rect];
+    }
+}
+
 
 @end

@@ -30,10 +30,9 @@
 #import "FRLayerController.h"
 #import "FRLayerChromeView.h"
 #import "FRLayeredNavigationItem+Protected.h"
+#import "FRiOSVersion.h"
 
 #import <QuartzCore/QuartzCore.h>
-
-#define FRLayerChromeHeight ((CGFloat)44)
 
 @interface FRLayerController ()
 
@@ -44,6 +43,8 @@
 @property (nonatomic, strong) FRLayerChromeView *chromeView;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, weak) UIView *contentView;
+
+@property (nonatomic, assign, readonly) BOOL isIOS7OrNewer;
 
 @end
 
@@ -57,6 +58,7 @@
         _layeredNavigationItem = [[FRLayeredNavigationItem alloc] init];
         _layeredNavigationItem.layerController = self;
         _contentViewController = vc;
+        _isIOS7OrNewer = [FRiOSVersion isIOS7OrNewer];
         [_contentViewController addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
         _maximumWidth = maxWidth;
     }
@@ -82,6 +84,16 @@
 
 #pragma mark - internal methods
 
+- (CGFloat)layerChromeHeight
+{
+    return self.isIOS7OrNewer ? 64 : 44;
+}
+
+- (CGFloat)layerChromeOffset
+{
+    return self.isIOS7OrNewer ? 20 : 0;
+}
+
 - (void)doViewLayout
 {
     CGRect contentFrame = CGRectZero;
@@ -92,15 +104,15 @@
         CGRect chromeFrame = CGRectMake(0,
                                         0,
                                         CGRectGetWidth(self.view.bounds),
-                                        FRLayerChromeHeight);
+                                        [self layerChromeHeight]);
         borderFrame = CGRectMake(0,
-                                 FRLayerChromeHeight,
+                                 [self layerChromeHeight],
                                  CGRectGetWidth(self.view.bounds),
-                                 CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight);
+                                 CGRectGetHeight(self.view.bounds)-[self layerChromeHeight]);
         contentFrame = CGRectMake(borderSpacing,
-                                  FRLayerChromeHeight + borderSpacing,
+                                  [self layerChromeHeight] + borderSpacing,
                                   CGRectGetWidth(self.view.bounds)-(2*borderSpacing),
-                                  CGRectGetHeight(self.view.bounds)-FRLayerChromeHeight-(2*borderSpacing));
+                                  CGRectGetHeight(self.view.bounds)-[self layerChromeHeight]-(2*borderSpacing));
         self.chromeView.frame = chromeFrame;
     } else {
         borderFrame = CGRectMake(0,
@@ -143,7 +155,8 @@
         self.chromeView = [[FRLayerChromeView alloc] initWithFrame:CGRectZero
                                                          titleView:navItem.titleView
                                                              title:navItem.title == nil ?
-                           self.contentViewController.title : navItem.title];
+                           self.contentViewController.title : navItem.title
+                                                           yOffset:[self layerChromeOffset]];
 
         [self.view addSubview:self.chromeView];
     }
