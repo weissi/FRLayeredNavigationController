@@ -102,11 +102,16 @@ typedef enum {
 - (void)loadView
 {
     self.view = [[UIView alloc] init];
+    UIInterfaceOrientation currentOrientation = self.interfaceOrientation;
 
     for (FRLayerController *vc in self.layeredViewControllers) {
+        CGFloat itemWidth = vc.layeredNavigationItem.width;
+        if (currentOrientation == UIInterfaceOrientationIsLandscape(currentOrientation)) {
+            itemWidth = vc.layeredNavigationItem.landscapeWidth;
+        }
         vc.view.frame = CGRectMake(vc.layeredNavigationItem.currentViewPosition.x,
                                    vc.layeredNavigationItem.currentViewPosition.y,
-                                   vc.layeredNavigationItem.width,
+                                   itemWidth,
                                    CGRectGetHeight(self.view.bounds));
         vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:vc.view];
@@ -525,9 +530,14 @@ typedef enum {
         }
         f.origin = vc.layeredNavigationItem.currentViewPosition;
 
+        UIInterfaceOrientation currentOrientation = vc.interfaceOrientation;
         if (vc.maximumWidth) {
             f.size.width = CGRectGetWidth(self.view.bounds) - vc.layeredNavigationItem.initialViewPosition.x;
             vc.layeredNavigationItem.width = CGRectGetWidth(f);
+        } else if (UIInterfaceOrientationIsLandscape(currentOrientation)) {
+            f.size.width = vc.layeredNavigationItem.landscapeWidth;
+        } else if (!UIInterfaceOrientationIsLandscape(currentOrientation)) {
+            f.size.width = vc.layeredNavigationItem.width;
         }
 
         f.size.height = CGRectGetHeight(self.view.bounds);

@@ -45,6 +45,7 @@
     CGFloat _width;
     CGFloat _snappingDistance;
     CGFloat _nextItemDistance;
+    CGFloat _landscapeWidth;
     BOOL _hasChrome;
     BOOL _hasBorder;
     BOOL _displayShadow;
@@ -76,6 +77,12 @@
  * The layer's width in points.
  */
 @property (nonatomic, readwrite) CGFloat width;
+
+/**
+ * The layer's width in landscape mode, by default same value as width.
+ */
+
+@property (nonatomic, readwrite) CGFloat landscapeWidth;
 
 /**
  * The maximum distance (when the child layer is being pulled out) to the next layer in points.
