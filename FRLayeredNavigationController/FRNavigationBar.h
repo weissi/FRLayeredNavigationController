@@ -2,6 +2,7 @@
  * This file is part of FRLayeredNavigationController.
  *
  * Copyright (c) 2012, Apurva Mehta <apurva.1618@gmail.com>
+ *               2014, Johannes Weiß <weiss@tux4u.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,8 +27,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-
+/* Standard Library */
 #import <UIKit/UIKit.h>
 
 /**

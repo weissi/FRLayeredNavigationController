@@ -1,7 +1,7 @@
 /*
  * This file is part of FRLayeredNavigationController.
  *
- * Copyright (c) 2012, 2013, Johannes Weiß <weiss@tux4u.de>
+ * Copyright (c) 2012-2014, Johannes Weiß <weiss@tux4u.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,8 +26,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* Standard Library */
 #import <Foundation/Foundation.h>
-
 #import <UIKit/UIKit.h>
 
 @class FRLayerController;

@@ -1,7 +1,7 @@
 /*
  * This file is part of FRLayeredNavigationController.
  *
- * Copyright (c) 2012, 2013, Johannes Weiß <weiss@tux4u.de>
+ * Copyright (c) 2012-2014, Johannes Weiß <weiss@tux4u.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,14 +26,17 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* Standard Library */
+#import <QuartzCore/QuartzCore.h>
+#include <tgmath.h>
+
+/* Local Imports */
 #import "FRDLog.h"
 #import "FRLayeredNavigationController.h"
 #import "FRLayerController.h"
 #import "FRLayeredNavigationItem.h"
 #import "FRLayeredNavigationItem+Protected.h"
 #import "UIViewController+FRLayeredNavigationController.h"
-
-#import <QuartzCore/QuartzCore.h>
 
 #define FRLayeredNavigationControllerStandardDistance ((float)64.0f)
 #define FRLayeredNavigationControllerStandardWidth ((float)400.0f)
@@ -512,7 +515,7 @@ typedef enum {
         }
         [FRLayeredNavigationController viewController:vc xTranslation:xTranslation bounded:YES];
     }
-    return fabsf(xTranslation);
+    return fabs(xTranslation);
 }
 
 

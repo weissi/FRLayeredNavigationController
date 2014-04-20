@@ -1,7 +1,7 @@
 /*
  * This file is part of FRLayeredNavigationController.
  *
- * Copyright (c) 2012, 2013, Johannes Weiß <weiss@tux4u.de>
+ * Copyright (c) 2012-2014, Johannes Weiß <weiss@tux4u.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,15 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* Standard Library */
+#import <QuartzCore/QuartzCore.h>
+
+/* Local Imports */
 #import "FRDLog.h"
 #import "FRLayerController.h"
 #import "FRLayerChromeView.h"
 #import "FRLayeredNavigationItem+Protected.h"
 #import "FRiOSVersion.h"
-
-#import <QuartzCore/QuartzCore.h>
 
 @interface FRLayerController ()
 
