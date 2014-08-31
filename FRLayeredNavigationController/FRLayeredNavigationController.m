@@ -150,6 +150,8 @@ typedef enum {
     [self detachGestureRecognizer];
     self.firstTouchedView = nil;
     self.outOfBoundsViewController = nil;
+
+    [super viewWillUnload];
 }
 
 - (void)viewDidUnload

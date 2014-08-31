@@ -85,7 +85,7 @@
     _scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
 }
 
-- (void)viewWillAppear:(__unused BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     self.layeredNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                                     initWithImage:[UIImage imageNamed:@"back.png"]
@@ -99,6 +99,8 @@
                                                      target:self
                                                      action:@selector(hooray)];
     self.layeredNavigationItem.rightBarButtonItem.style = UIBarButtonItemStyleBordered;
+
+    [super viewWillAppear:animated];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {

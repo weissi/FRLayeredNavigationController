@@ -57,8 +57,7 @@ static FRNavigationBar *_appearance = nil;
 
 + (FRNavigationBar *)appearance
 {
-
-    if (!_appearance){
+    if (!_appearance) {
         _appearance = [[FRNavigationBar alloc] init];
         _appearance.backgroundImage = nil;
 
