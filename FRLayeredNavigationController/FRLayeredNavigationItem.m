@@ -46,6 +46,7 @@
 {
     if ((self = [super init])) {
         self->_width = -1;
+        self->_landscapeWidth = self->_width;
         self->_nextItemDistance = -1;
         self->_snappingDistance = -1;
         self->_hasChrome = YES;
@@ -75,6 +76,14 @@
 - (UIBarButtonItem *)rightBarButtonItem
 {
     return self.layerController.chromeView.rightBarButtonItem;
+}
+
+- (void)setWidth:(CGFloat)width
+{
+    if (self.landscapeWidth == self.width) {
+        self.landscapeWidth = width;
+    }
+    _width = width;
 }
 
 @end

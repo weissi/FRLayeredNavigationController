@@ -206,7 +206,7 @@
         svc.title = title;
         [self.layeredNavigationController pushViewController:svc
                                                    inFrontOf:self
-                                                maximumWidth:YES
+                                                maximumWidth:NO
                                                     animated:YES
                                                configuration:^(FRLayeredNavigationItem *item) {
                                                    UISegmentedControl *segControl = [[UISegmentedControl alloc]
@@ -216,10 +216,12 @@
                                                    segControl.selectedSegmentIndex = 0;
 
                                                    [segControl addTarget:svc
-                                                                  action:@selector(indexDidChangeForSegmentedControl:)
+                                                        action:@selector(indexDidChangeForSegmentedControl:)
                                                         forControlEvents:UIControlEventValueChanged];
 
                                                    item.titleView = segControl;
+                                                   item.landscapeWidth = 1000;
+                                                   item.width = 300;
                                                }];
     } else if (indexPath.row == 1) {
         /* push a content view controller */
