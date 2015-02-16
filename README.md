@@ -16,7 +16,7 @@ If you have further questions, feel free to [mail me](mailto:weiss@tux4u.de)!
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=JohannesWeiss&url=https://github.com/weissi/FRLayeredNavigationController&title=FRLayeredNavigationController&language=&tags=github&category=software)
 
-©2012-2014, [Johannes Weiß](mailto:weiss@tux4u.de) for
+©2012-2015, [Johannes Weiß](mailto:weiss@tux4u.de) for
 [factis research GmbH](http://www.factisresearch.com).
 
 
@@ -48,7 +48,7 @@ Features
    [screenshot](https://github.com/weissi/FRLayeredNavigationController/raw/master/FRLayeredNavigationControllerRotation.png).
  - *App Store* compatible (uses only Public API and was already approved by
    Apple)
- - iOS 7 Support (still supports iOS6 and older with old visuals)
+ - iOS 7 & 8 Support (still supports iOS6 and older with old visuals)
 
 
 License
