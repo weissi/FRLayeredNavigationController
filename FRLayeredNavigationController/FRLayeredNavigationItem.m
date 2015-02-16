@@ -59,22 +59,26 @@
 
 - (void)setLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem
 {
-    self.layerController.chromeView.leftBarButtonItem = leftBarButtonItem;
+    FRLayerController *layerController = self.layerController;
+    layerController.chromeView.leftBarButtonItem = leftBarButtonItem;
 }
 
 - (UIBarButtonItem *)leftBarButtonItem
 {
-    return self.layerController.chromeView.leftBarButtonItem;
+    FRLayerController *layerController = self.layerController;
+    return layerController.chromeView.leftBarButtonItem;
 }
 
 - (void)setRightBarButtonItem:(UIBarButtonItem *)rightBarButtonItem
 {
-    self.layerController.chromeView.rightBarButtonItem = rightBarButtonItem;
+    FRLayerController *layerController = self.layerController;
+    layerController.chromeView.rightBarButtonItem = rightBarButtonItem;
 }
 
 - (UIBarButtonItem *)rightBarButtonItem
 {
-    return self.layerController.chromeView.rightBarButtonItem;
+    FRLayerController *layerController = self.layerController;
+    return layerController.chromeView.rightBarButtonItem;
 }
 
 @end

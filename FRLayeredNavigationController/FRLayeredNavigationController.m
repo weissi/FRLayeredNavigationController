@@ -170,6 +170,8 @@ typedef enum {
 
 - (void)handleGesture:(UIPanGestureRecognizer *)gestureRecognizer
 {
+    UIViewController * const firstTouchedController = self.firstTouchedController;
+    id<FRLayeredNavigationControllerDelegate> delegate = self.delegate;
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStatePossible: {
             //NSLog(@"UIGestureRecognizerStatePossible");
@@ -189,8 +191,8 @@ typedef enum {
                 }
             }
 
-            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:willMoveController:)]) {
-                [self.delegate layeredNavigationController:self willMoveController:self.firstTouchedController];
+            if ([delegate respondsToSelector:@selector(layeredNavigationController:willMoveController:)]) {
+                [delegate layeredNavigationController:self willMoveController:firstTouchedController];
             }
             break;
         }
@@ -203,8 +205,8 @@ typedef enum {
             const UIViewController *startVc = [self.layeredViewControllers objectAtIndex:startVcIdx];
 
             [self moveViewControllersXTranslation:[gestureRecognizer translationInView:self.view].x];
-            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:movingViewController:)]) {
-                [self.delegate layeredNavigationController:self movingViewController:self.firstTouchedController];
+            if ([delegate respondsToSelector:@selector(layeredNavigationController:movingViewController:)]) {
+                [delegate layeredNavigationController:self movingViewController:firstTouchedController];
             }
             /*
             [self moveViewControllersStartIndex:startVcIdx
@@ -245,8 +247,8 @@ typedef enum {
                 [self moveToSnappingPointsWithGestureRecognizer:gestureRecognizer];
             }
                              completion:^(__unused BOOL finished) {
-            if ([self.delegate respondsToSelector:@selector(layeredNavigationController:didMoveController:)]) {
-                [self.delegate layeredNavigationController:self didMoveController:self.firstTouchedController];
+            if ([delegate respondsToSelector:@selector(layeredNavigationController:didMoveController:)]) {
+                [delegate layeredNavigationController:self didMoveController:self.firstTouchedController];
             }
 
             self.firstTouchedView = nil;
@@ -409,6 +411,8 @@ typedef enum {
     CGPoint parentOldPos = CGPointZero;
     BOOL descendentOfTouched = NO;
     FRLayerController *rootVC = [self.layeredViewControllers objectAtIndex:0];
+    const UIViewController * const outOfBoundsViewController = self.outOfBoundsViewController;
+    const UIView * const firstTouchedView = self.firstTouchedView;
 
     for (FRLayerController *me in [self.layeredViewControllers reverseObjectEnumerator]) {
         if (rootVC == me) {
@@ -449,10 +453,10 @@ typedef enum {
             xTranslation = newX - myPos.x;
         }
 
-        const BOOL isTouchedView = !descendentOfTouched && [self.firstTouchedView isDescendantOfView:me.view];
+        const BOOL isTouchedView = !descendentOfTouched && [firstTouchedView isDescendantOfView:me.view];
 
-        if (self.outOfBoundsViewController == nil ||
-            self.outOfBoundsViewController == me ||
+        if (outOfBoundsViewController == nil ||
+            outOfBoundsViewController == me ||
             xTranslationGesture < 0) {
             const BOOL boundedMove = !(isTouchedView && [self areViewControllersMaximallyCompressed]);
 
@@ -468,7 +472,7 @@ typedef enum {
             if (outOfBoundsMove) {
                 /* this move was out of bounds */
                 self.outOfBoundsViewController = me;
-            } else if(!outOfBoundsMove && self.outOfBoundsViewController == me) {
+            } else if(!outOfBoundsMove && outOfBoundsViewController == me) {
                 /* I have been moved out of bounds some time ago but now I'm back in the bounds :-), so:
                  * - no one can be out of bounds now
                  * - I have to be reset to my initial position
@@ -609,6 +613,7 @@ typedef enum {
 {
     const FRLayerController *rootVC = [self.layeredViewControllers objectAtIndex:0];
     const FRLayeredNavigationItem *rootNI = rootVC.layeredNavigationItem;
+    UIView *dropNotificationView = self.dropNotificationView;
 
     UILabel *lv = [[UILabel alloc] init];
     lv.text = @"X";
@@ -619,13 +624,14 @@ typedef enum {
                           100,
                           100);
     self.dropNotificationView = lv;
-    [self.view insertSubview:self.dropNotificationView atIndex:0];
+    [self.view insertSubview:dropNotificationView atIndex:0];
 }
 
 - (void)hideDropNotification
 {
-    if (self.dropNotificationView != nil) {
-        [self.dropNotificationView removeFromSuperview];
+    UIView *dropNotificationView = self.dropNotificationView;
+    if (dropNotificationView != nil) {
+        [dropNotificationView removeFromSuperview];
         self.dropNotificationView = nil;
     }
 }

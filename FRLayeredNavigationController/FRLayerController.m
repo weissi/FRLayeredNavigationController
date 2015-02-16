@@ -131,7 +131,8 @@
         self.borderView.frame = borderFrame;
     }
     if (self.layeredNavigationItem.autosizeContent) {
-        self.contentView.frame = contentFrame;
+        UIView * const contentView = self.contentView;
+        contentView.frame = contentFrame;
     }
 }
 
@@ -142,8 +143,8 @@
 {
     self.view = [[UIView alloc] init];
     self.view.backgroundColor = [UIColor clearColor];
-
-    const FRLayeredNavigationItem *navItem = self.layeredNavigationItem;
+    const FRLayeredNavigationItem * const navItem = self.layeredNavigationItem;
+    UIView * const contentView = self.contentView;
 
     if (navItem.hasBorder) {
         self.borderView = [[UIView alloc] init];
@@ -163,13 +164,13 @@
         [self.view addSubview:self.chromeView];
     }
 
-    if (self.contentView == nil && self.contentViewController.parentViewController == self) {
+    if (contentView == nil && self.contentViewController.parentViewController == self) {
         /* when loaded again after a low memory view removal */
         self.contentView = self.contentViewController.view;
     }
 
-    if (self.contentView != nil) {
-        [self.view addSubview:self.contentView];
+    if (contentView != nil) {
+        [self.view addSubview:contentView];
     }
 }
 
@@ -204,18 +205,20 @@
 - (void)willMoveToParentViewController:(UIViewController *)parent
 {
     [super willMoveToParentViewController:parent];
+    UIView *contentView = self.contentView;
 
     if (parent != nil) {
         /* will shortly attach to parent */
         [self addChildViewController:self.contentViewController];
 
-        self.contentView = self.contentViewController.view;
-        [self.view addSubview:self.contentView];
+        contentView = self.contentViewController.view;
+        self.contentView = contentView;
+        [self.view addSubview:contentView];
     } else {
         /* will shortly detach from parent view controller */
         [self.contentViewController willMoveToParentViewController:nil];
 
-        [self.contentView removeFromSuperview];
+        [contentView removeFromSuperview];
         self.contentView = nil;
     }
 }

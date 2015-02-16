@@ -73,7 +73,7 @@
     self.scrollView.clipsToBounds = YES;
     self.scrollView.delegate = self;
     [self.scrollView addSubview:self.imageView];
-    self.scrollView.zoomScale = .37;
+    self.scrollView.zoomScale = .37f;
 
     [self.view addSubview:self.scrollView];
 
