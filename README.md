@@ -23,7 +23,7 @@ If you have further questions, feel free to [mail me](mailto:weiss@tux4u.de)!
 Documentation
 =============
 
- - [The API Documentation](http://weissi.github.com/FRLayeredNavigationController/docs/html/index.html)
+ - [The API Documentation](http://weissi.github.io/FRLayeredNavigationController/docs/html/index.html)
  - [Blog Post](http://factisresearch.blogspot.de/2012/06/uis-for-hierachical-ipad-apps.html)
  - [EuroCopa Demo Project](https://github.com/weissi/EuroCopaInfo)
 
@@ -31,7 +31,7 @@ Documentation
 Features
 ========
 
- - The [API](http://weissi.github.com/FRLayeredNavigationController/docs/html/index.html)
+ - The [API](http://weissi.github.io/FRLayeredNavigationController/docs/html/index.html)
    feels very natural to iOS developers since it's very similar to the API of
    `UINavigationController`
  - FRLayeredNavigationController uses ARC (automatic reference counting) but you
